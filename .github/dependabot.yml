@@ -1,0 +1,15 @@
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+    #nuget updates
+  - package-ecostystem: "nuget"
+    directory: "Eucre/"
+    schedule:
+      interval: "daily"
+
+    #npm updates
+  - package-ecosystem: "npm"
+    directory: "Eucre/Client/"
+    schedule:
+      interval: "daily"
