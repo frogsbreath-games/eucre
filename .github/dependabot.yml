@@ -3,7 +3,7 @@
 version: 2
 updates:
     #nuget updates
-  - package-ecostystem: "nuget"
+  - package-ecosystem: "nuget"
     directory: "Eucre/"
     schedule:
       interval: "daily"
