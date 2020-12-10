@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 const Home = () => (
   <div>
-    <h1>Hello, world!</h1>
+    <h1>Eucre Home</h1>
   </div>
 );
 

@@ -43,7 +43,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
 
   private renderForecastsTable() {
     return (
-      <table className="table table-striped" aria-labelledby="tabelLabel">
+      <table className="" aria-labelledby="tabelLabel">
         <thead>
           <tr>
             <th>Date</th>
@@ -73,18 +73,12 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
     const nextStartDateIndex = (this.props.startDateIndex || 0) + 5;
 
     return (
-      <div className="d-flex justify-content-between">
-        <Link
-          className="btn btn-outline-secondary btn-sm"
-          to={`/fetch-data/${prevStartDateIndex}`}
-        >
+      <div className="">
+        <Link className="" to={`/fetch-data/${prevStartDateIndex}`}>
           Previous
         </Link>
         {this.props.isLoading && <span>Loading...</span>}
-        <Link
-          className="btn btn-outline-secondary btn-sm"
-          to={`/fetch-data/${nextStartDateIndex}`}
-        >
+        <Link className="" to={`/fetch-data/${nextStartDateIndex}`}>
           Next
         </Link>
       </div>

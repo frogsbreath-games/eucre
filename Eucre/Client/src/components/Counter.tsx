@@ -22,7 +22,7 @@ class Counter extends React.PureComponent<CounterProps> {
 
         <button
           type="button"
-          className="btn btn-primary btn-lg"
+          className=""
           onClick={() => {
             this.props.increment();
           }}
