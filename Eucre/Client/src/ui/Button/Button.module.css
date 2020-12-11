@@ -14,7 +14,7 @@
   --dark-green: #234d36;
 }
 
-.button {
+.greyButton {
   display: inline-block;
   padding: 10px 10px;
   font-size: 16px;
@@ -29,15 +29,44 @@
   box-shadow: 0 6px var(--black);
 }
 
-.button:disabled {
+.greyButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.button:hover {
+.greyButton:hover {
   filter: brightness(110%);
 }
 
-.button:active {
+.greyButton:active {
   transform: translateY(4px);
+}
+
+.blueButton {
+  composes: greyButton;
+  background-color: var(--blue);
+  box-shadow: 0 6px var(--dark-blue);
+}
+
+.blueButton:active {
+  box-shadow: 0 3px var(--dark-blue);
+}
+
+.greenButton {
+  composes: greyButton;
+  background-color: var(--green);
+  box-shadow: 0 6px var(--dark-green);
+}
+
+.greenButton:active {
+  box-shadow: 0 3px var(--dark-green);
+}
+.redButton {
+  composes: greyButton;
+  background-color: var(--red);
+  box-shadow: 0 6px var(--dark-red);
+}
+
+.redButton:active {
+  box-shadow: 0 3px var(--dark-red);
 }

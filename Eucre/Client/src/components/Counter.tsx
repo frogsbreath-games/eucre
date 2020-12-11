@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
+import { formatDiagnosticsWithColorAndContext } from "typescript";
 import { ApplicationState } from "../store";
 import * as CounterStore from "../store/Counter";
 import { Button } from "../ui";
@@ -22,6 +23,7 @@ class Counter extends React.PureComponent<CounterProps> {
         </p>
 
         <Button
+          variant="blue"
           type="button"
           onClick={() => {
             this.props.increment();
