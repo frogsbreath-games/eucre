@@ -1,5 +1,6 @@
 import { Action, Reducer } from "redux";
 import { AppThunkAction } from "./";
+import ApiClient from "../tools/ApiClient";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -15,6 +16,22 @@ export interface WeatherForecast {
   temperatureC: number;
   temperatureF: number;
   summary: string;
+}
+
+export interface IWeatherService {
+  getForecasts() : Promise<WeatherForecast[]>
+}
+
+export class WeatherService implements IWeatherService {
+  private readonly _client: ApiClient;
+
+  constructor(baseUrl?: string | undefined) {
+    this._client = new ApiClient(baseUrl);
+  }
+
+  public getForecasts() : Promise<WeatherForecast[]> {
+    return this._client.fetchJson<WeatherForecast[]>(`weatherForecast`);
+  }
 }
 
 // -----------------
@@ -53,8 +70,7 @@ export const actionCreators = {
       appState.weatherForecasts &&
       startDateIndex !== appState.weatherForecasts.startDateIndex
     ) {
-      fetch(`weatherforecast`)
-        .then((response) => response.json() as Promise<WeatherForecast[]>)
+      appState.services.weather.getForecasts()
         .then((data) => {
           dispatch({
             type: "RECEIVE_WEATHER_FORECASTS",
