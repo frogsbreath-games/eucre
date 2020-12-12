@@ -1,0 +1,39 @@
+:root {
+  --blue: #009ddc;
+  --light-blue: #6bbbdb;
+  --dark-blue: #004c6b;
+  --red: #c3423f;
+  --light-red: #dd5f5d;
+  --dark-red: #6d2726;
+  --tan: #c5afa4;
+  --dark-tan: #695f5a;
+  --grey: #c4c4c4;
+  --dark-grey: #757575;
+  --black: #3b3b3b;
+  --green: #58c087;
+  --dark-green: #234d36;
+}
+
+.navMenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--green);
+}
+
+.navItem {
+  float: left;
+}
+
+.navItem .link {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  text-decoration: none;
+}
+
+.navItem .link:hover {
+  background-color: var(--dark-green);
+}
