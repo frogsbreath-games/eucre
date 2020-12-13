@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Weather.Models;
+using Weather.Api.Models;
 
-namespace Weather.Controllers
+namespace Weather.Api.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("weatherForecast")]
 	public class WeatherForecastController : ControllerBase
 	{
 		private static readonly string[] Summaries = new[]

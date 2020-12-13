@@ -19,6 +19,7 @@ services:
     container_name: weather-service
     build:
       context: ./services/weather
+      dockerfile: Dockerfile
     ports:
       - 6080:80
       - 6443:443

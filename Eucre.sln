@@ -6,9 +6,12 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9764D93D-17DC-42E6-9E9C-B20BA39824FB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		services\weather\Dockerfile = services\weather\Dockerfile
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather", "services\weather\Weather.csproj", "{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Api", "services\weather\Weather.Api\Weather.Api.csproj", "{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Tests", "services\weather\Weather.Tests\Weather.Tests.csproj", "{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +23,10 @@ Global
 		{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
