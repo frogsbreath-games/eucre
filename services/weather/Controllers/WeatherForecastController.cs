@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Eucre.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Weather.Models;
 
-namespace Eucre.Controllers
+namespace Weather.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]

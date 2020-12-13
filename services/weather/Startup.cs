@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
-namespace Eucre
+namespace Weather
 {
 	public class Startup
 	{
@@ -19,12 +19,11 @@ namespace Eucre
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllersWithViews();
-
-			// In production, the React files will be served from this directory
-			services.AddSpaStaticFiles(configuration =>
+			services.AddCors();
+			services.AddControllers();
+			services.AddSwaggerGen(c =>
 			{
-				configuration.RootPath = "Client/build";
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Weather", Version = "v1" });
 			});
 		}
 
@@ -34,35 +33,21 @@ namespace Eucre
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
+				app.UseSwagger();
+				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Weather v1"));
 			}
 
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
-			app.UseSpaStaticFiles();
+
+			app.UseCors(options => options.AllowAnyOrigin());
 
 			app.UseRouting();
 
+			app.UseAuthorization();
+
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllerRoute(
-					name: "default",
-					pattern: "{controller}/{action=Index}/{id?}");
-			});
-
-			app.UseSpa(spa =>
-			{
-				spa.Options.SourcePath = "Client";
-
-				if (env.IsDevelopment())
-				{
-					spa.UseReactDevelopmentServer(npmScript: "start");
-				}
+				endpoints.MapControllers();
 			});
 		}
 	}

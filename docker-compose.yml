@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  client-app:
+    container_name: client-app
+    build:
+      context: ./client/app
+      dockerfile: Dockerfile
+    ports:
+      - 5080:80
+
+  weather-service:
+    container_name: weather-service
+    build:
+      context: ./services/weather
+    ports:
+      - 6080:80
+      - 6443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
