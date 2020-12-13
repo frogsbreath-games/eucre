@@ -37,3 +37,8 @@
 .navItem .link:hover {
   background-color: var(--dark-green);
 }
+
+.selected {
+  composes: link;
+  background-color: var(--dark-green);
+}

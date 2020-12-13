@@ -8,17 +8,38 @@ export default class NavMenu extends React.PureComponent<{}> {
         <div>
           <ul className={styles.navMenu}>
             <li className={styles.navItem}>
-              <a className={styles.link} href="/">
+              <a
+                className={
+                  window.location.pathname == "/"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/"
+              >
                 Eucre
               </a>
             </li>
             <li className={styles.navItem}>
-              <a className={styles.link} href="/counter">
+              <a
+                className={
+                  window.location.pathname == "/counter"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/counter"
+              >
                 Counter
               </a>
             </li>
             <li className={styles.navItem}>
-              <a className={styles.link} href="/fetch-data">
+              <a
+                className={
+                  window.location.pathname == "/fetch-data"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/fetch-data"
+              >
                 Fetch data
               </a>
             </li>
