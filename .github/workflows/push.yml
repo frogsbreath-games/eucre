@@ -8,8 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  client-tests:
-    # The type of runner that the job will run on
+  client-build-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +17,11 @@ jobs:
         run: docker-compose build client-tests
       - name: Run client-tests
         run: docker-compose run --rm client-tests
+
+  server-build-tests:
+    runs-on: unbuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build weather-service container
+        run: docker-compose build weather-service
