@@ -4,12 +4,12 @@ version: 2
 updates:
     #nuget updates
   - package-ecosystem: "nuget"
-    directory: "Eucre/"
+    directory: "services/weather/"
     schedule:
       interval: "daily"
 
     #npm updates
   - package-ecosystem: "npm"
-    directory: "Eucre/Client/"
+    directory: "client/app/"
     schedule:
       interval: "daily"
