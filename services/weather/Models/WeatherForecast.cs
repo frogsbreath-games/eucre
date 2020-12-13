@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eucre.Models
+namespace Weather.Models
 {
 	public class WeatherForecast
 	{
