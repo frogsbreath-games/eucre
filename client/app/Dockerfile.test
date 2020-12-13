@@ -1,0 +1,9 @@
+# Build npm
+FROM node:current-buster-slim as build
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install --silent
+COPY . .
+ARG WEATHER_URL=/weather/
+ENV CI=true
+CMD ["npm", "run", "test" ]

@@ -9,6 +9,12 @@ services:
     ports:
       - 5080:80
 
+  client-tests:
+    container_name: client-tests
+    build:
+      context: ./client/app
+      dockerfile: Dockerfile.test
+
   weather-service:
     container_name: weather-service
     build:
