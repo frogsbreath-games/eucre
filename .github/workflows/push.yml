@@ -17,4 +17,4 @@ jobs:
       - name: Build client-tests container
         run: docker-compose build client-tests
       - name: Run client-tests
-        run: docker-compose run -rm client-tests
+        run: docker-compose run --rm client-tests
