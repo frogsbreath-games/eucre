@@ -19,7 +19,7 @@ jobs:
         run: docker-compose run --rm client-tests
 
   server-build-tests:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
