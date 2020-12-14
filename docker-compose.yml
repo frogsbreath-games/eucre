@@ -1,10 +1,10 @@
 version: '3.7'
 
 services:
-  client-app:
-    container_name: client-app
+  web-app:
+    container_name: web-app
     build:
-      context: ./client/app
+      context: .
       dockerfile: Dockerfile
     ports:
       - 5080:80

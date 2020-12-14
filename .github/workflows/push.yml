@@ -8,6 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  build-web-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build web-app container
+        run: docker-compose build web-app
+
   client-build-tests:
     runs-on: ubuntu-latest
 

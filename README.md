@@ -8,13 +8,13 @@ Client + Server can be ran locally using docker compose
 ### Client & Server On Docker
 From root
 
-`> docker-compose build client-app weather-service`
+`> docker-compose build web-app weather-service`
 
 Then run
 
-`> docker-compose up client-app weather-service`
+`> docker-compose up web-app weather-service`
 
-Go to http://host.docker.internal:5080/ for the client app.
+Go to http://host.docker.internal:5080/ for the web app.
 
 Weather microservice is proxied through http://host.docker.internal:5080/weather/
 
