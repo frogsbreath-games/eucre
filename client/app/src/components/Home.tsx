@@ -5,7 +5,7 @@ import Card from "./Card/Card";
 const Home = () => (
   <div>
     <h1>Eucre</h1>
-    <Card />
+    <Card front={true} value={7} suit="Hearts" />
   </div>
 );
 
