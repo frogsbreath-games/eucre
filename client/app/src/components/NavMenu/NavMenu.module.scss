@@ -24,21 +24,21 @@
 
 .navItem {
   float: left;
-}
 
-.navItem .link {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 15px 20px;
-  text-decoration: none;
-}
+  .link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
 
-.navItem .link:hover {
-  background-color: var(--dark-green);
-}
+    &:hover {
+      background-color: var(--dark-green);
+    }
+  }
 
-.selected {
-  composes: link;
-  background-color: var(--dark-green);
+  .selected {
+    @extend .link;
+    background-color: var(--dark-green);
+  }
 }

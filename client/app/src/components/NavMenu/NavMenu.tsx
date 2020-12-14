@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./NavMenu.module.css";
+import styles from "./NavMenu.module.scss";
 
 export default class NavMenu extends React.PureComponent<{}> {
   public render() {
