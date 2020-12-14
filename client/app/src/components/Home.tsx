@@ -12,7 +12,7 @@ interface HomeState {
 class Home extends React.Component<{}, HomeState> {
   componentWillMount() {
     this.setState({
-      input: "",
+      input: "1",
       cardSuit: "Clubs",
       cardValue: 12,
       inputInt: 1,
@@ -20,6 +20,7 @@ class Home extends React.Component<{}, HomeState> {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleResetClick = this.handleResetClick.bind(this);
   }
 
   handleChange(inputValue: string) {
@@ -30,11 +31,20 @@ class Home extends React.Component<{}, HomeState> {
     this.setState({ cardSuit: selectValue });
   }
 
+  handleResetClick() {
+    this.setState({
+      input: "1",
+      cardSuit: "Clubs",
+      cardValue: 12,
+      inputInt: 1,
+    });
+  }
+
   render() {
     return (
       <div>
         <h1>Eucre</h1>
-        <Button>Empty Button</Button>
+        <Button onClick={this.handleResetClick}>Reset</Button>
         <Input
           type="number"
           value={this.state.input ? this.state.input : ""}
@@ -57,6 +67,7 @@ class Home extends React.Component<{}, HomeState> {
           value={this.state.inputInt}
           suit={this.state.cardSuit}
         />
+        <Card front={false} />
       </div>
     );
   }
