@@ -1,0 +1,8 @@
+.card {
+  padding: 10px;
+}
+
+.cardDisplayArea {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+}
