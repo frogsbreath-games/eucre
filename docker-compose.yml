@@ -20,8 +20,41 @@ services:
     build:
       context: ./services/weather
       dockerfile: Dockerfile
+    depends_on:
+      - mongodb
     ports:
       - 6080:80
       - 6443:443
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - storage
+
+  mongodb:
+    image: mongo:4.2.10
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - storage
+
+  mongodb-client:
+    image: mongoclient/mongoclient:4.0.0
+    container_name: mongodb-client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://mongo:27017
+    networks:
+      - storage
+
+volumes:
+  mongodb:
+
+networks:
+  storage:
+    driver: bridge
