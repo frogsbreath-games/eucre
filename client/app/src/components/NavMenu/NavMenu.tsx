@@ -22,18 +22,6 @@ export default class NavMenu extends React.PureComponent<{}> {
             <li className={styles.navItem}>
               <a
                 className={
-                  window.location.pathname == "/counter"
-                    ? styles.selected
-                    : styles.link
-                }
-                href="/counter"
-              >
-                Counter
-              </a>
-            </li>
-            <li className={styles.navItem}>
-              <a
-                className={
                   window.location.pathname == "/fetch-data"
                     ? styles.selected
                     : styles.link

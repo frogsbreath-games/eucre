@@ -7,15 +7,20 @@ interface ICardProps {
   id?: string;
   clickAction?: () => void;
   front?: boolean;
+  style?: React.CSSProperties;
 }
 
-export default class Cardextends extends React.PureComponent<ICardProps> {
+export default class Card extends React.PureComponent<ICardProps> {
   render() {
-    const { value, suit, id, front } = this.props;
+    const { value, suit, id, front, style } = this.props;
     var cardContent;
     if (front) {
       cardContent = (
-        <div className={styles["cardContent" + suit]} data-suit={suit}>
+        <div
+          className={styles["cardContent" + suit]}
+          data-suit={suit}
+          style={style}
+        >
           <div className={styles.cardHeader}>
             {value && displayCardValue(value)}
             <br />
