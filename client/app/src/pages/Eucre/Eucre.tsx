@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../store";
+import styles from "./Eucre.module.scss";
 import * as EucreStore from "../../store/Eucre";
 import Card from "../../components/Card/Card";
 
@@ -18,7 +19,7 @@ class Eucre extends React.PureComponent<EucreProps> {
     console.log(this.props.deck);
     return (
       <React.Fragment>
-        <div>
+        <div className={styles.cardDisplay}>
           {this.props.deck.map((card) => (
             <Card
               suit={card.suit}
