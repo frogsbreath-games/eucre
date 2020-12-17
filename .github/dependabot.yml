@@ -14,6 +14,18 @@ updates:
     schedule:
       interval: "daily"
 
+    #eucre-game-api nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/eucre-game/Games.Eucre.Api/"
+    schedule:
+      interval: "daily"
+
+    #eucre-game-tests nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/eucre-game/Games.Eucre.Tests/"
+    schedule:
+      interval: "daily"
+
     #client-app npm updates
   - package-ecosystem: "npm"
     directory: "client/app/"

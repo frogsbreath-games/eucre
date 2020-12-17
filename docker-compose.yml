@@ -30,6 +30,21 @@ services:
     networks:
       - storage
 
+  eucre-game:
+    container_name: eucre-game
+    build:
+      context: ./services/eucre-game
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 7080:80
+      - 7443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - storage
+
   mongodb:
     image: mongo:4.2.10
     container_name: mongodb

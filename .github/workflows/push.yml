@@ -33,3 +33,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build weather-service container
         run: docker-compose build weather-service
+      - name: Build eucre-game container
+        run: docker-compose build eucre-game

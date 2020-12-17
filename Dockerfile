@@ -6,7 +6,8 @@ RUN npm install --silent
 COPY client/app/. .
 ARG WEATHER_URL=/weather/
 ENV REACT_APP_WEATHER_URL=${WEATHER_URL}
-RUN echo ${REACT_APP_WEATHER_URL}
+ARG EUCRE_URL=/eucre/
+ENV REACT_APP_EUCRE_URL=${EUCRE_URL}
 RUN npm run build
 
 # Configure Nginx
