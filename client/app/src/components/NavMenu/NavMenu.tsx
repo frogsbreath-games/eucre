@@ -16,7 +16,7 @@ export default class NavMenu extends React.PureComponent<{}> {
                 }
                 href="/"
               >
-                Eucre
+                Home
               </a>
             </li>
             <li className={styles.navItem}>
@@ -41,6 +41,18 @@ export default class NavMenu extends React.PureComponent<{}> {
                 href="/fetch-data"
               >
                 Fetch data
+              </a>
+            </li>
+            <li className={styles.navItem}>
+              <a
+                className={
+                  window.location.pathname == "/eucre"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/eucre"
+              >
+                Eucre
               </a>
             </li>
           </ul>
