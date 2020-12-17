@@ -70,3 +70,7 @@
 .redButton:active {
   box-shadow: 0 3px var(--dark-red);
 }
+
+.input:disabled {
+  opacity: 0.75;
+}
