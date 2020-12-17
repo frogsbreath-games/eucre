@@ -21,12 +21,14 @@ class Eucre extends React.PureComponent<EucreProps> {
       <React.Fragment>
         <div className={styles.cardDisplay}>
           {this.props.deck.map((card) => (
-            <Card
-              suit={card.suit}
-              value={card.value}
-              key={card.suit + card.value}
-              front={true}
-            />
+            <div className={styles.card}>
+              <Card
+                suit={card.suit}
+                value={card.value}
+                key={card.suit + card.value}
+                front={true}
+              />
+            </div>
           ))}
         </div>
       </React.Fragment>
