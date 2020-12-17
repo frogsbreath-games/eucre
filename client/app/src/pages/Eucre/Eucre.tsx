@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../store";
 import * as EucreStore from "../../store/Eucre";
+import Card from "../../components/Card/Card";
 
 // At runtime, Redux will merge together...
 type EucreProps = EucreStore.EucreState & // ... state we've requested from the Redux store
@@ -17,7 +18,16 @@ class Eucre extends React.PureComponent<EucreProps> {
     console.log(this.props.deck);
     return (
       <React.Fragment>
-        <div></div>
+        <div>
+          {this.props.deck.map((card) => (
+            <Card
+              suit={card.suit}
+              value={card.value}
+              key={card.suit + card.value}
+              front={true}
+            />
+          ))}
+        </div>
       </React.Fragment>
     );
   }

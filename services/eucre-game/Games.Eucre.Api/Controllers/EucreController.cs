@@ -10,7 +10,7 @@ namespace Games.Eucre.Api.Controllers
 {
 	[ApiController]
 	[Route("api/eucre")]
-	//[Produces("application/json"), Consumes("application/json")]
+	[Produces("application/json"), Consumes("application/json")]
 	public class EucreController : ControllerBase
 	{
 		[HttpGet("deck")]
@@ -22,7 +22,7 @@ namespace Games.Eucre.Api.Controllers
 				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new Card
 				{
 					Value = index,
-					Suit = suit,
+					Suit = suit.ToString(),
 				}).ToArray());
 			}
 			return deck;

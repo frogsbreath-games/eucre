@@ -8,7 +8,7 @@ namespace Games.Eucre.Api.Models
 {
 	public class Card
 	{
-		public Suit Suit { get; set; }
+		public String Suit { get; set; }
 
 		public int Value { get; set; }
 
