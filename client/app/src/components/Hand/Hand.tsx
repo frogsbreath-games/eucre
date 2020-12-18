@@ -47,7 +47,7 @@ function cardStyle(index: number, count: number) {
 
 function handStyle(count: number) {
   return {
-    maxWidth: 75 * count + "px",
+    width: 75 * count + "px",
   };
 }
 
