@@ -11,13 +11,14 @@ interface HomeState {
   inputInt: number;
 }
 class Home extends React.Component<{}, HomeState> {
-  componentWillMount() {
-    this.setState({
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+    this.state = {
       input: "1",
       cardSuit: "Clubs",
       cardValue: 12,
       inputInt: 1,
-    });
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
