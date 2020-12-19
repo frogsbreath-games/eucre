@@ -8,17 +8,17 @@ using Weather.Api.Models;
 namespace Weather.Api.Controllers
 {
 	[ApiController]
-	[Route("weatherForecast")]
-	public class WeatherForecastController : ControllerBase
+	[Route("api/weather/forecasts")]
+	public class ForecastsController : ControllerBase
 	{
 		private static readonly string[] Summaries = new[]
 		{
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		};
 
-		private readonly ILogger<WeatherForecastController> _logger;
+		private readonly ILogger<ForecastsController> _logger;
 
-		public WeatherForecastController(ILogger<WeatherForecastController> logger)
+		public ForecastsController(ILogger<ForecastsController> logger)
 		{
 			_logger = logger;
 		}

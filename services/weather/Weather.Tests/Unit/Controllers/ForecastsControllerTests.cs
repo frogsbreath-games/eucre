@@ -7,13 +7,13 @@ using Xunit;
 
 namespace Weather.Tests.Unit.Controllers
 {
-	public class WeatherForecastControllerTests
+	public class ForecastsControllerTests
 	{
 		[Fact]
 		public void Get_ShouldReturnFive()
 		{
-			var controller = new WeatherForecastController(
-				new NullLogger<WeatherForecastController>());
+			var controller = new ForecastsController(
+				new NullLogger<ForecastsController>());
 
 			IEnumerable<WeatherForecast> forecasts = controller.Get();
 

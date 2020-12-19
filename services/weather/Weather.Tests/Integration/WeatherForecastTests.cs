@@ -22,7 +22,7 @@ namespace Weather.Tests.Integration
 			var client = _factory.CreateClient();
 
 			var response = await client.GetFromJsonAsync<WeatherForecast[]>(
-				"weatherForecast");
+				"api/weather/forecasts");
 
 			Assert.Equal(5, response.Length);
 		}
