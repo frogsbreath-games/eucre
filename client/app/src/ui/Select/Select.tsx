@@ -27,8 +27,8 @@ const Select: React.FunctionComponent<IProps> = ({
       onChange={(e) => onChange(e.target.value)}
       {...shared}
     >
-      {options.map((option) => (
-        <option value={option.value}>{option.label}</option>
+      {options.map((option, index) => (
+        <option key={index} value={option.value}>{option.label}</option>
       ))}
     </select>
   );
