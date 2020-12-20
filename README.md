@@ -25,7 +25,7 @@ Run commands for just `weather-service`
 
 `> docker-compose up weather-service`
 
-Weather microservice should be accessed at http://host.docker.internal:6080/
+Weather microservice should be accessed at http://host.docker.internal:6010/
 
 Run / Debug react-app from npm project
 

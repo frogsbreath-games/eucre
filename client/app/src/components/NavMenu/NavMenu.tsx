@@ -34,11 +34,11 @@ export default class NavMenu extends React.PureComponent<{}> {
             <li className={styles.navItem}>
               <a
                 className={
-                  window.location.pathname == "/eucre"
+                  window.location.pathname == "/eucre-game"
                     ? styles.selected
                     : styles.link
                 }
-                href="/eucre"
+                href="/eucre-game"
               >
                 Eucre
               </a>

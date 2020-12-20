@@ -23,8 +23,7 @@ services:
     depends_on:
       - mongodb
     ports:
-      - 6080:80
-      - 6443:443
+      - 6010:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
@@ -38,8 +37,7 @@ services:
     depends_on:
       - mongodb
     ports:
-      - 7080:80
-      - 7443:443
+      - 6020:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
