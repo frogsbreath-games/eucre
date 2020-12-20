@@ -1,5 +1,6 @@
 import * as React from "react";
 import NavMenu from "./NavMenu/NavMenu";
+import { Main } from "../ui";
 
 export default class Layout extends React.PureComponent<
   {},
@@ -9,7 +10,7 @@ export default class Layout extends React.PureComponent<
     return (
       <React.Fragment>
         <NavMenu />
-        <div>{this.props.children}</div>
+        <Main>{this.props.children}</Main>
       </React.Fragment>
     );
   }

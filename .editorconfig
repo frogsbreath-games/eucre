@@ -11,7 +11,7 @@ indent_style = space
 indent_size = 2
 
 # Front End
-[*.{js,jsx,ts,tsx,css}]
+[*.{js,jsx,ts,tsx,css,scss}]
 indent_style = space
 indent_size = 2
 
