@@ -4,6 +4,7 @@ import { ApplicationState } from "../../store";
 import styles from "./Eucre.module.scss";
 import * as EucreStore from "../../store/Eucre";
 import Card from "../../components/Card/Card";
+import Hand from "../../components/Hand/Hand";
 
 // At runtime, Redux will merge together...
 type EucreProps = EucreStore.EucreState & // ... state we've requested from the Redux store
@@ -19,17 +20,25 @@ class Eucre extends React.PureComponent<EucreProps> {
     console.log(this.props.deck);
     return (
       <React.Fragment>
-        <div className={styles.cardDisplay}>
-          {this.props.deck.map((card) => (
-            <div className={styles.card}>
-              <Card
-                suit={card.suit}
-                value={card.value}
-                key={card.suit + card.value}
-                front={true}
-              />
-            </div>
-          ))}
+        <div className={styles.page}>
+          <div className={styles.handArea}>
+            <Hand
+              hand={this.props.deck.slice(0, 5)}
+              onCardClick={() => undefined}
+            />
+          </div>
+          <div className={styles.cardDisplay}>
+            {this.props.deck.map((card) => (
+              <div className={styles.card}>
+                <Card
+                  suit={card.suit}
+                  value={card.value}
+                  key={card.suit + card.value}
+                  front={true}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </React.Fragment>
     );
