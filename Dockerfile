@@ -6,7 +6,7 @@ RUN npm install --silent
 COPY client/app/. .
 ARG WEATHER_URL=/api/weather/
 ENV REACT_APP_WEATHER_URL=${WEATHER_URL}
-ARG EUCRE_URL=/eucre/
+ARG EUCRE_URL=/api/eucre/
 ENV REACT_APP_EUCRE_URL=${EUCRE_URL}
 RUN npm run build
 
