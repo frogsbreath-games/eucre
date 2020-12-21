@@ -4,9 +4,9 @@ WORKDIR /usr/src/app
 COPY client/app/package*.json ./
 RUN npm install --silent
 COPY client/app/. .
-ARG WEATHER_URL=/api/weather/
+ARG WEATHER_URL=/
 ENV REACT_APP_WEATHER_URL=${WEATHER_URL}
-ARG EUCRE_URL=/api/eucre/
+ARG EUCRE_URL=/
 ENV REACT_APP_EUCRE_URL=${EUCRE_URL}
 RUN npm run build
 

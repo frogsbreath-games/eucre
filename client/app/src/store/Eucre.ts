@@ -7,9 +7,11 @@ export interface EucreState {
   isLoading: boolean;
 }
 
+export type Suit = 'Hearts' | 'Clubs' | 'Spades' | 'Diamonds';
+
 export interface Card {
   value: number;
-  suit: string;
+  suit: Suit;
 }
 
 export interface IEucreService {
@@ -20,7 +22,7 @@ export class EucreService implements IEucreService {
   private readonly _client: ApiClient;
 
   constructor(baseUrl?: string | undefined) {
-    this._client = new ApiClient(baseUrl);
+    this._client = new ApiClient(baseUrl, `api/eucre/`);
   }
 
   public getEucreDeck(): Promise<Card[]> {

@@ -26,7 +26,7 @@ export class WeatherService implements IWeatherService {
   private readonly _client: ApiClient;
 
   constructor(baseUrl?: string | undefined) {
-    this._client = new ApiClient(baseUrl);
+    this._client = new ApiClient(baseUrl, `api/weather/`);
   }
 
   public getForecasts() : Promise<WeatherForecast[]> {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text.Json.Serialization;
+using Games.Eucre.Api.Hubs;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,11 +22,17 @@ namespace Games.Eucre.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
-			services.AddControllers();
+			services.AddControllers().AddJsonOptions(c =>
+			{
+				c.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			});
+
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Games.Eucre.Api", Version = "v1" });
 			});
+
+			services.AddSignalR();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +53,7 @@ namespace Games.Eucre.Api
 
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapHub<GameplayHub>("hub/eucre/game");
 				endpoints.MapControllers();
 			});
 		}

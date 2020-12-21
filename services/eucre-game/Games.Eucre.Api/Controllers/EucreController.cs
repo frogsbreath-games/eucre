@@ -21,7 +21,7 @@ namespace Games.Eucre.Api.Controllers
 				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new Card
 				{
 					Value = index,
-					Suit = suit.ToString(),
+					Suit = suit,
 				}).ToArray());
 			}
 			return deck;
