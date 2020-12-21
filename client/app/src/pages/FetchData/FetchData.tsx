@@ -2,8 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
-import { ApplicationState } from "../../store";
-import * as WeatherForecastsStore from "../../store/WeatherForecasts";
+import { ApplicationState } from "app/store";
+import * as WeatherForecastsStore from "app/store/WeatherForecasts";
 
 // At runtime, Redux will merge together...
 type WeatherForecastProps = WeatherForecastsStore.WeatherForecastsState & // ... state we've requested from the Redux store

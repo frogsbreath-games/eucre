@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import Card from "../../components/Card/Card";
-import { Button, Input, Select } from "../../ui";
+import Card from "app/components/Card/Card";
+import { Button, Input, Select } from "app/ui";
 import styles from "./Home.module.css";
 
 interface HomeState {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import NavMenu from "./NavMenu/NavMenu";
-import { Main } from "../ui";
+import { Main } from "app/ui";
 
 export default class Layout extends React.PureComponent<
   {},

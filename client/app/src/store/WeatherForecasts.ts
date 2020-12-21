@@ -1,6 +1,6 @@
 import { Action, Reducer } from "redux";
 import { AppThunkAction } from "./";
-import ApiClient from "../tools/ApiClient";
+import ApiClient from "app/tools/ApiClient";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.

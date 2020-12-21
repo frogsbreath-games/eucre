@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { ApplicationState } from "../../store";
+import { ApplicationState } from "app/store";
 import styles from "./Eucre.module.scss";
-import * as EucreStore from "../../store/Eucre";
-import Card from "../../components/Card/Card";
-import Hand from "../../components/Hand/Hand";
+import * as EucreStore from "app/store/Eucre";
+import Card from "app/components/Card/Card";
+import Hand from "app/components/Hand/Hand";
 
 // At runtime, Redux will merge together...
 type EucreProps = EucreStore.EucreState & // ... state we've requested from the Redux store

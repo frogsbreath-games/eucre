@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { formatDiagnosticsWithColorAndContext } from "typescript";
-import { ApplicationState } from "../../store";
-import * as CounterStore from "../../store/Counter";
-import { Button } from "../../ui";
+import { ApplicationState } from "app/store";
+import * as CounterStore from "app/store/Counter";
+import { Button } from "app/ui";
 
 type CounterProps = CounterStore.CounterState &
   typeof CounterStore.actionCreators &

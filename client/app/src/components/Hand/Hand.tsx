@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Hand.module.scss";
 import Card from "../Card/Card";
-import * as CardStore from "../../store/Eucre";
+import * as CardStore from "app/store/Eucre";
 
 interface IHandProps {
   hand: CardStore.Card[];
