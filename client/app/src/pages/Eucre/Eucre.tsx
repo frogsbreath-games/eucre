@@ -5,6 +5,7 @@ import styles from "./Eucre.module.scss";
 import * as EucreStore from "app/store/Eucre";
 import Card from "app/components/Card/Card";
 import Hand from "app/components/Hand/Hand";
+import { Button } from "app/ui";
 
 // At runtime, Redux will merge together...
 type EucreProps = EucreStore.EucreState & // ... state we've requested from the Redux store
@@ -13,6 +14,7 @@ type EucreProps = EucreStore.EucreState & // ... state we've requested from the 
 class Eucre extends React.PureComponent<EucreProps> {
   // This method is called when the component is first added to the document
   public componentDidMount() {
+    this.props.enterGame();
     this.ensureDataFetched();
   }
 
@@ -40,6 +42,15 @@ class Eucre extends React.PureComponent<EucreProps> {
             ))}
           </div>
         </div>
+        <Button
+          variant="blue"
+          type="button"
+          onClick={() => {
+            this.props.shuffle();
+          }}
+        >
+          Shuffle
+        </Button>
       </React.Fragment>
     );
   }

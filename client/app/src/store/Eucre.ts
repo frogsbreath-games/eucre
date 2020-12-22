@@ -1,6 +1,7 @@
 import { Action, Reducer } from "redux";
-import { AppThunkAction } from "./";
+import { ApplicationState, AppThunkAction } from "./";
 import ApiClient from "app/tools/ApiClient";
+import { setupSignalRConnection } from "app/utils/setupSignalRConnection";
 
 export interface EucreState {
   deck: Card[];
@@ -16,6 +17,7 @@ export interface Card {
 
 export interface IEucreService {
   getEucreDeck(): Promise<Card[]>;
+  shuffleDeck(): Promise<boolean>;
 }
 
 export class EucreService implements IEucreService {
@@ -27,6 +29,10 @@ export class EucreService implements IEucreService {
 
   public getEucreDeck(): Promise<Card[]> {
     return this._client.fetchJson<Card[]>(`deck`);
+  }
+
+  public shuffleDeck(): Promise<boolean> {
+    return this._client.fetchJson<boolean>(`shuffle`, { method: "post" });
   }
 }
 
@@ -52,6 +58,23 @@ type KnownAction = RequestDeckAction | ReceiveDeckAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
+  enterGame: (): AppThunkAction<KnownAction> => (
+    dispatch,
+    getState
+  ) => {
+    const connectionHub = process.env.REACT_APP_EUCRE_URL
+      ? process.env.REACT_APP_EUCRE_URL + 'hub/eucre/game'
+      : '/hub/eucre/game';
+
+    const setupEventsHub = setupSignalRConnection<KnownAction, ApplicationState>(connectionHub, {
+      UpdateGame: (state: EucreState) => ({
+        type: "RECEIVE_EUCRE_DECK",
+        deck: state.deck
+      })
+    });
+
+    setupEventsHub(dispatch, getState);
+  },
   requestEucreCards: (): AppThunkAction<KnownAction> => (
     dispatch,
     getState
@@ -64,6 +87,21 @@ export const actionCreators = {
           type: "RECEIVE_EUCRE_DECK",
           deck: data,
         });
+      });
+      dispatch({
+        type: "REQUEST_EUCRE_DECK",
+      });
+    }
+  },
+  shuffle: (): AppThunkAction<KnownAction> => (
+    dispatch,
+    getState
+  ) => {
+    // Only load data if it's something we don't already have (and are not already loading)
+    const appState = getState();
+    if (appState && appState.eucre) {
+      appState.services.eucre.shuffleDeck().then((data) => {
+        console.log("shuffled");
       });
       dispatch({
         type: "REQUEST_EUCRE_DECK",

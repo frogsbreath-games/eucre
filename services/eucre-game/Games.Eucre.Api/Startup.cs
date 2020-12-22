@@ -45,7 +45,18 @@ namespace Games.Eucre.Api
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games.Eucre.Api v1"));
 			}
 
-			app.UseCors(options => options.AllowAnyOrigin());
+			app.UseCors(options =>
+			{
+				options
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowCredentials()
+					.WithOrigins(
+						"http://localhost:3000",
+						"http://localhost:3001",
+						"http://localhost:5080",
+						"http://host.docker.internal:5080");
+			});
 
 			app.UseRouting();
 
