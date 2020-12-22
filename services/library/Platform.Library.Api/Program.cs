@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Games.Eucre.Api
+namespace Platform.Library.Api
 {
 	public class Program
 	{

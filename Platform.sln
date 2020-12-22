@@ -14,9 +14,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Api", "services\wea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Tests", "services\weather\Weather.Tests\Weather.Tests.csproj", "{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Games.Eucre.Api", "services\eucre-game\Games.Eucre.Api\Games.Eucre.Api.csproj", "{6D844744-777C-40E1-9E5E-2F557C3FB103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Eucre.Api", "services\eucre-game\Games.Eucre.Api\Games.Eucre.Api.csproj", "{6D844744-777C-40E1-9E5E-2F557C3FB103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Games.Eucre.Tests", "services\eucre-game\Games.Eucre.Tests\Games.Eucre.Tests.csproj", "{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Eucre.Tests", "services\eucre-game\Games.Eucre.Tests\Games.Eucre.Tests.csproj", "{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Library.Api", "services\library\Platform.Library.Api\Platform.Library.Api.csproj", "{E694D332-DF65-4340-8193-DE978F361FC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Lobby.Api", "services\lobby\Platform.Lobby.Api\Platform.Lobby.Api.csproj", "{9CDD7154-B6F9-411A-A336-FAED97191F83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Profile.Api", "services\profile\Platform.Profile.Api\Platform.Profile.Api.csproj", "{A708BD1A-1304-4DEF-861E-4D3774E4DD08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +46,18 @@ Global
 		{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E694D332-DF65-4340-8193-DE978F361FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E694D332-DF65-4340-8193-DE978F361FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E694D332-DF65-4340-8193-DE978F361FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E694D332-DF65-4340-8193-DE978F361FC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CDD7154-B6F9-411A-A336-FAED97191F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CDD7154-B6F9-411A-A336-FAED97191F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CDD7154-B6F9-411A-A336-FAED97191F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CDD7154-B6F9-411A-A336-FAED97191F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
