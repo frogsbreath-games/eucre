@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import Card from "app/components/Card/Card";
+import { Card } from "app/games/eucre/components";
 import { Button, Input, Select } from "app/ui";
 import styles from "./Home.module.css";
 

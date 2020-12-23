@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
 import Counter from "./pages/Counter/Counter";
 import FetchData from "./pages/FetchData/FetchData";
-import Eucre from "./pages/Eucre/Eucre";
+import EucrePage from "./pages/EucrePage/EucrePage";
 
 import "./custom.css";
 
@@ -13,6 +13,6 @@ export default () => (
     <Route exact path="/" component={Home} />
     <Route path="/counter" component={Counter} />
     <Route path="/fetch-data/:startDateIndex?" component={FetchData} />
-    <Route path="/games/eucre" component={Eucre} />
+    <Route path="/games/eucre" component={EucrePage} />
   </Layout>
 );

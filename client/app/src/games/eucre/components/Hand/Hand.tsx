@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Hand.module.scss";
 import Card from "../Card/Card";
-import * as CardStore from "app/store/Eucre";
+import * as Types from "app/games/eucre/types";
 
 interface IHandProps {
-  hand: CardStore.Card[];
+  hand: Types.Card[];
   onCardClick: () => void;
 }
 

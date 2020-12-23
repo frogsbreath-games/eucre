@@ -2,25 +2,15 @@ import { Action, Reducer } from "redux";
 import { ApplicationState, AppThunkAction } from "./";
 import ApiClient from "app/tools/ApiClient";
 import { setupSignalRConnection } from "app/utils/setupSignalRConnection";
+import { Types as EucreTypes } from "app/games/eucre";
 
 export interface EucreState {
-  game: Game;
+  game: EucreTypes.Game;
   isLoading: boolean;
 }
 
-export interface Game {
-  deck: Card[];
-}
-
-export type Suit = 'Hearts' | 'Clubs' | 'Spades' | 'Diamonds';
-
-export interface Card {
-  value: number;
-  suit: Suit;
-}
-
 export interface IEucreService {
-  getEucreGame(): Promise<Game>;
+  getEucreGame(): Promise<EucreTypes.Game>;
   shuffleDeck(): Promise<boolean>;
 }
 
@@ -31,8 +21,8 @@ export class EucreService implements IEucreService {
     this._client = new ApiClient(baseUrl, `api/eucre/`);
   }
 
-  public getEucreGame(): Promise<Game> {
-    return this._client.fetchJson<Game>(`game`);
+  public getEucreGame(): Promise<EucreTypes.Game> {
+    return this._client.fetchJson<EucreTypes.Game>(`game`);
   }
 
   public shuffleDeck(): Promise<boolean> {
@@ -50,7 +40,7 @@ interface RequestGameAction {
 
 interface ReceiveGameAction {
   type: "RECEIVE_EUCRE_GAME";
-  game: Game;
+  game: EucreTypes.Game;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -71,7 +61,7 @@ export const actionCreators = {
       : '/hub/eucre/game';
 
     const setupEventsHub = setupSignalRConnection<KnownAction, ApplicationState>(connectionHub, {
-      UpdateGame: (game: Game) => ({
+      UpdateGame: (game: EucreTypes.Game) => ({
         type: "RECEIVE_EUCRE_GAME",
         game: game
       })
