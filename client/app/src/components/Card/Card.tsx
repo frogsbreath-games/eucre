@@ -16,11 +16,7 @@ export default class Card extends React.PureComponent<ICardProps> {
     var cardContent;
     if (front) {
       cardContent = (
-        <div
-          className={styles["cardContent" + suit]}
-          data-suit={suit}
-          style={style}
-        >
+        <div className={styles["cardContent" + suit]} style={style}>
           <div className={styles.cardHeader}>
             {value && displayCardValue(value)}
             <br />
