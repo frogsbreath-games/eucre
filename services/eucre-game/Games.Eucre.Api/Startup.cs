@@ -32,7 +32,10 @@ namespace Games.Eucre.Api
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Games.Eucre.Api", Version = "v1" });
 			});
 
-			services.AddSignalR();
+			services.AddSignalR().AddJsonProtocol(c =>
+			{
+				c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
