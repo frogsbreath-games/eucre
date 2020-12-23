@@ -1,5 +1,4 @@
 import * as React from "react";
-import { convertCompilerOptionsFromJson } from "typescript";
 import styles from "./Table.module.css";
 
 interface Column {
