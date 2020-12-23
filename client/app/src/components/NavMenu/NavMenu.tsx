@@ -1,5 +1,6 @@
 import * as React from "react";
 import styles from "./NavMenu.module.scss";
+import LogoutButton from "./LogoutButton/LogoutButton";
 
 export default class NavMenu extends React.PureComponent<{}> {
   public render() {
@@ -42,6 +43,9 @@ export default class NavMenu extends React.PureComponent<{}> {
               >
                 Eucre
               </a>
+            </li>
+            <li className={styles.navItem}>
+              <LogoutButton />
             </li>
           </ul>
         </div>
