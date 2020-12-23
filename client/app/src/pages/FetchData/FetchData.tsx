@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { ApplicationState } from "app/store";
 import * as WeatherForecastsStore from "app/store/WeatherForecasts";
+import { DataTable } from "app/ui";
 
 // At runtime, Redux will merge together...
 type WeatherForecastProps = WeatherForecastsStore.WeatherForecastsState & // ... state we've requested from the Redux store
@@ -43,28 +44,17 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
 
   private renderForecastsTable() {
     return (
-      <table className="" aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.forecasts.map(
-            (forecast: WeatherForecastsStore.WeatherForecast) => (
-              <tr key={forecast.date}>
-                <td>{forecast.date}</td>
-                <td>{forecast.temperatureC}</td>
-                <td>{forecast.temperatureF}</td>
-                <td>{forecast.summary}</td>
-              </tr>
-            )
-          )}
-        </tbody>
-      </table>
+      <div>
+        <DataTable
+          columns={[
+            { key: "date", name: "Date" },
+            { key: "temperatureC", name: "Temp. (C)" },
+            { key: "temperatureF", name: "Temp. (F)" },
+            { key: "summary", name: "Summary" },
+          ]}
+          data={this.props.forecasts}
+        />
+      </div>
     );
   }
 
