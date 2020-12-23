@@ -4,8 +4,12 @@ import ApiClient from "app/tools/ApiClient";
 import { setupSignalRConnection } from "app/utils/setupSignalRConnection";
 
 export interface EucreState {
-  deck: Card[];
+  game: Game;
   isLoading: boolean;
+}
+
+export interface Game {
+  deck: Card[];
 }
 
 export type Suit = 'Hearts' | 'Clubs' | 'Spades' | 'Diamonds';
@@ -16,7 +20,7 @@ export interface Card {
 }
 
 export interface IEucreService {
-  getEucreDeck(): Promise<Card[]>;
+  getEucreGame(): Promise<Game>;
   shuffleDeck(): Promise<boolean>;
 }
 
@@ -27,8 +31,8 @@ export class EucreService implements IEucreService {
     this._client = new ApiClient(baseUrl, `api/eucre/`);
   }
 
-  public getEucreDeck(): Promise<Card[]> {
-    return this._client.fetchJson<Card[]>(`deck`);
+  public getEucreGame(): Promise<Game> {
+    return this._client.fetchJson<Game>(`game`);
   }
 
   public shuffleDeck(): Promise<boolean> {
@@ -40,18 +44,18 @@ export class EucreService implements IEucreService {
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestDeckAction {
-  type: "REQUEST_EUCRE_DECK";
+interface RequestGameAction {
+  type: "REQUEST_EUCRE_GAME";
 }
 
-interface ReceiveDeckAction {
-  type: "RECEIVE_EUCRE_DECK";
-  deck: Card[];
+interface ReceiveGameAction {
+  type: "RECEIVE_EUCRE_GAME";
+  game: Game;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestDeckAction | ReceiveDeckAction;
+type KnownAction = RequestGameAction | ReceiveGameAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -67,9 +71,9 @@ export const actionCreators = {
       : '/hub/eucre/game';
 
     const setupEventsHub = setupSignalRConnection<KnownAction, ApplicationState>(connectionHub, {
-      UpdateGame: (state: EucreState) => ({
-        type: "RECEIVE_EUCRE_DECK",
-        deck: state.deck
+      UpdateGame: (game: Game) => ({
+        type: "RECEIVE_EUCRE_GAME",
+        game: game
       })
     });
 
@@ -82,14 +86,14 @@ export const actionCreators = {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.getEucreDeck().then((data) => {
+      appState.services.eucre.getEucreGame().then((data) => {
         dispatch({
-          type: "RECEIVE_EUCRE_DECK",
-          deck: data,
+          type: "RECEIVE_EUCRE_GAME",
+          game: data,
         });
       });
       dispatch({
-        type: "REQUEST_EUCRE_DECK",
+        type: "REQUEST_EUCRE_GAME",
       });
     }
   },
@@ -104,7 +108,7 @@ export const actionCreators = {
         console.log("shuffled");
       });
       dispatch({
-        type: "REQUEST_EUCRE_DECK",
+        type: "REQUEST_EUCRE_GAME",
       });
     }
   },
@@ -114,7 +118,9 @@ export const actionCreators = {
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
 const unloadedState: EucreState = {
-  deck: [],
+  game: {
+    deck: []
+  },
   isLoading: false,
 };
 
@@ -128,14 +134,14 @@ export const reducer: Reducer<EucreState> = (
 
   const action = incomingAction as KnownAction;
   switch (action.type) {
-    case "REQUEST_EUCRE_DECK":
+    case "REQUEST_EUCRE_GAME":
       return {
-        deck: state.deck,
+        game: state.game,
         isLoading: true,
       };
-    case "RECEIVE_EUCRE_DECK":
+    case "RECEIVE_EUCRE_GAME":
       return {
-        deck: action.deck,
+        game: action.game,
         isLoading: false,
       };
     default:

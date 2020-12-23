@@ -2,7 +2,7 @@
 
 namespace Games.Eucre.Api.Models
 {
-	public class Card
+	public class CardModel
 	{
 		public Suit Suit { get; set; }
 

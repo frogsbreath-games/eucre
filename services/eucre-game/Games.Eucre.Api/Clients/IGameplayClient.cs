@@ -5,6 +5,6 @@ namespace Games.Eucre.Api.Clients
 {
 	public interface IGameplayClient
 	{
-		Task UpdateGame(GameState state);
+		Task UpdateGame(GameModel state);
 	}
 }

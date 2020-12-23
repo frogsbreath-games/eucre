@@ -19,18 +19,18 @@ class Eucre extends React.PureComponent<EucreProps> {
   }
 
   public render() {
-    console.log(this.props.deck);
+    console.log(this.props.game);
     return (
       <React.Fragment>
         <div className={styles.page}>
           <div className={styles.handArea}>
             <Hand
-              hand={this.props.deck.slice(0, 5)}
+              hand={this.props.game.deck.slice(0, 5)}
               onCardClick={() => undefined}
             />
           </div>
           <div className={styles.cardDisplay}>
-            {this.props.deck.map((card) => (
+            {this.props.game.deck.map((card) => (
               <div className={styles.card}>
                 <Card
                   suit={card.suit}

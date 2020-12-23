@@ -14,22 +14,21 @@ namespace Games.Eucre.Api.Controllers
 	[ApiController]
 	[Route("api/eucre")]
 	[Produces("application/json"), Consumes("application/json")]
-	public class EucreController : ControllerBase
+	public class GameController : ControllerBase
 	{
 		private readonly IHubContext<GameplayHub, IGameplayClient> _hubContext;
 
-		public EucreController(IHubContext<GameplayHub, IGameplayClient> hubContext)
+		public GameController(IHubContext<GameplayHub, IGameplayClient> hubContext)
 		{
 			_hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
 		}
 
-		[HttpGet("deck")]
-		public IEnumerable<Card> GetEucreDeck()
+		protected IEnumerable<CardModel> GetDeck()
 		{
-			List<Card> deck = new List<Card>();
+			List<CardModel> deck = new List<CardModel>();
 			foreach (Suit suit in Enum.GetValues(typeof(Suit)))
 			{
-				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new Card
+				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new CardModel
 				{
 					Value = index,
 					Suit = suit,
@@ -38,16 +37,25 @@ namespace Games.Eucre.Api.Controllers
 			return deck;
 		}
 
+		[HttpGet("game")]
+		public GameModel GetEucreGame()
+		{
+			return new GameModel
+			{
+				Deck = GetDeck().ToList()
+			};
+		}
+
 		[HttpPost("shuffle")]
 		public async Task<bool> Shuffle()
 		{
-			var cards = GetEucreDeck();
+			var cards = GetDeck();
 
 			var rand = new Random();
 
 			cards = cards.OrderBy(x => rand.Next(0, 52));
 
-			var gameState = new GameState { Deck = cards.ToList() };
+			var gameState = new GameModel { Deck = cards.ToList() };
 
 			await _hubContext.Clients.All.UpdateGame(gameState);
 
