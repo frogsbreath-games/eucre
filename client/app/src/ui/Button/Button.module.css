@@ -74,3 +74,12 @@
 .input:disabled {
   opacity: 0.75;
 }
+
+.flatButton {
+  composes: greyButton;
+  background-color: var(--green);
+  box-shadow: none;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: none;
+}

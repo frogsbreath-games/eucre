@@ -22,12 +22,12 @@ export default () => {
   console.log(isAuthenticated);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Layout>
+        <div>Loading...</div>
+      </Layout>
+    );
   }
-
-  const layoutProps = {
-    isAuthenticated: isAuthenticated,
-  };
 
   return (
     <Layout>

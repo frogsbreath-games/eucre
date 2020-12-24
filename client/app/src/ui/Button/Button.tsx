@@ -1,10 +1,10 @@
 import * as React from "react";
 import styles from "./Button.module.css";
 
-type Color = "red" | "blue" | "green" | "grey";
+type Variant = "red" | "blue" | "green" | "grey" | "flat";
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Color;
+  variant?: Variant;
 }
 
 const Button: React.FC<IProps> = ({ variant, children, ...props }) => (
