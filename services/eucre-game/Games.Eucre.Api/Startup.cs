@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
 
 namespace Games.Eucre.Api
 {
@@ -36,6 +39,15 @@ namespace Games.Eucre.Api
 			{
 				c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			});
+
+			services.AddScoped<IMongoClient, MongoClient>(provider =>
+				new MongoClient(Configuration.GetConnectionString("MongoDb")));
+
+			var camelCase = new ConventionPack { new CamelCaseElementNameConvention() };
+			var enumString = new ConventionPack { new EnumRepresentationConvention(BsonType.String) };
+
+			ConventionRegistry.Register(nameof(camelCase), camelCase, x => true);
+			ConventionRegistry.Register(nameof(enumString), enumString, x => true);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
