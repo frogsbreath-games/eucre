@@ -1,4 +1,5 @@
 # Eucre
+
 🚧 Under Construction 🚧
 
 ## To Run
@@ -6,26 +7,29 @@
 Client + Server can be ran locally using docker compose
 
 ### Client & Server On Docker
+
 From root
 
-`> docker-compose build web-app weather-service`
+`> docker-compose build web-app eucre-game weather-service`
 
 Then run
 
-`> docker-compose up web-app weather-service`
+`> docker-compose up web-app eucre-game weather-service`
 
-Go to http://host.docker.internal:5080/ for the web app.
+Go to http://localhost:5080/ for the web app.
 
-Weather microservice is proxied through http://host.docker.internal:5080/weather/
+Microservice api endpoints are proxied through http://localhost:5080/api/_
+Microservice signalr hubs are proxied through http://localhost:5080/hub/_
 
 ### Client Local Debug & Server On Docker
-Run commands for just `weather-service`
 
-`> docker-compose build weather-service`
+Run commands for just `eucre-game` or `weather-service`
 
-`> docker-compose up weather-service`
+`> docker-compose build eucre-game`
 
-Weather microservice should be accessed at http://host.docker.internal:6010/
+`> docker-compose up eucre-game`
+
+Weather microservice should be accessed at http://localhost:6020/
 
 Run / Debug react-app from npm project
 
@@ -36,9 +40,11 @@ Client app is likely set to `http://localhost:3000`
 `client/app/.env` should contain correct reference to weather-service
 
 ### Server Only Debug
+
 Debug from VS Studio or run
 
-`services/weather> dotnet run`
+`services/eucre-game> dotnet run`
 
 ### Other
+
 Make changes to `client/app/.env` or override the Dockerfile build ARGs 🤷‍♂️
