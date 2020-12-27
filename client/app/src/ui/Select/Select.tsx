@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./Select.module.css";
+import styles from "./Select.module.scss";
 
 interface SelectOption {
   label: string;

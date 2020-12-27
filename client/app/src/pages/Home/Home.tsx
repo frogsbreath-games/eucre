@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Card } from "app/games/eucre/components";
 import { Button, Input, Select } from "app/ui";
-import styles from "./Home.module.css";
+import styles from "./Home.module.scss";
 
 interface HomeState {
   cardSuit?: string;

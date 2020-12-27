@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./DataTable.module.css";
+import styles from "./DataTable.module.scss";
 
 interface Column {
   name: string;

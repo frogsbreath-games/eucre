@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 type Variant = "red" | "blue" | "green" | "grey" | "flat";
 
