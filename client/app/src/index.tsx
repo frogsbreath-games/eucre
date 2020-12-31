@@ -19,6 +19,7 @@ const store = configureStore(history);
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const audience = process.env.REACT_APP_EUCRE_AUDIENCE;
 
 const onRedirectCallback = (appState: any) => {
   history.push(
@@ -32,6 +33,7 @@ ReactDOM.render(
     clientId={clientId ? clientId : ""}
     redirectUri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
+    audience={audience ? audience : ""}
   >
     <Provider store={store}>
       <ConnectedRouter history={history}>

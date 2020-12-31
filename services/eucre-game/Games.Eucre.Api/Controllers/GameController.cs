@@ -6,6 +6,7 @@ using Games.Eucre.Api.Clients;
 using Games.Eucre.Api.Enums;
 using Games.Eucre.Api.Hubs;
 using Games.Eucre.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -38,6 +39,7 @@ namespace Games.Eucre.Api.Controllers
 		}
 
 		[HttpGet("game")]
+		[Authorize]
 		public GameModel GetEucreGame()
 		{
 			return new GameModel
