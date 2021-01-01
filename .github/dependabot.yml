@@ -26,6 +26,42 @@ updates:
     schedule:
       interval: "daily"
 
+    #library-api nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/library/Platform.Library.Api/"
+    schedule:
+      interval: "daily"
+
+    #library-tests nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/library/Platform.Library.Tests/"
+    schedule:
+      interval: "daily"
+
+    #lobby-api nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/lobby/Platform.Lobby.Api/"
+    schedule:
+      interval: "daily"
+
+    #lobby-tests nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/lobby/Platform.Lobby.Tests/"
+    schedule:
+      interval: "daily"
+
+    #profile-api nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/profile/Platform.Profile.Api/"
+    schedule:
+      interval: "daily"
+
+    #profile-tests nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/profile/Platform.Profile.Tests/"
+    schedule:
+      interval: "daily"
+
     #client-app npm updates
   - package-ecosystem: "npm"
     directory: "client/app/"

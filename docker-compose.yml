@@ -43,6 +43,48 @@ services:
     networks:
       - storage
 
+  library-service:
+    container_name: library-service
+    build:
+      context: ./services/library
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 6030:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - storage
+
+  lobby-service:
+    container_name: lobby-service
+    build:
+      context: ./services/lobby
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 6040:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - storage
+
+  profile-service:
+    container_name: profile-service
+    build:
+      context: ./services/profile
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    ports:
+      - 6050:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - storage
+
   mongodb:
     image: mongo:4.2.10
     container_name: mongodb

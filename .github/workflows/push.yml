@@ -35,3 +35,9 @@ jobs:
         run: docker-compose build weather-service
       - name: Build eucre-game container
         run: docker-compose build eucre-game
+      - name: Build library-service container
+        run: docker-compose build library-service
+      - name: Build lobby-service container
+        run: docker-compose build lobby-service
+      - name: Build profile-service container
+        run: docker-compose build profile-service
