@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9764D93D-17DC-42E6-9E9C-B20BA39824FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9764D93D-17DC-42E6-9E9C-B20BA39824FB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		services\weather\Dockerfile = services\weather\Dockerfile
@@ -18,11 +18,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Eucre.Api", "services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Games.Eucre.Tests", "services\eucre-game\Games.Eucre.Tests\Games.Eucre.Tests.csproj", "{7D7E93FF-C9A9-49FC-8290-EC7F2881146D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Library.Api", "services\library\Platform.Library.Api\Platform.Library.Api.csproj", "{E694D332-DF65-4340-8193-DE978F361FC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Library.Api", "services\library\Platform.Library.Api\Platform.Library.Api.csproj", "{E694D332-DF65-4340-8193-DE978F361FC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Lobby.Api", "services\lobby\Platform.Lobby.Api\Platform.Lobby.Api.csproj", "{9CDD7154-B6F9-411A-A336-FAED97191F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Lobby.Api", "services\lobby\Platform.Lobby.Api\Platform.Lobby.Api.csproj", "{9CDD7154-B6F9-411A-A336-FAED97191F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Profile.Api", "services\profile\Platform.Profile.Api\Platform.Profile.Api.csproj", "{A708BD1A-1304-4DEF-861E-4D3774E4DD08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Profile.Api", "services\profile\Platform.Profile.Api\Platform.Profile.Api.csproj", "{A708BD1A-1304-4DEF-861E-4D3774E4DD08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Library.Tests", "services\library\Platform.Library.Tests\Platform.Library.Tests.csproj", "{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Lobby.Tests", "services\lobby\Platform.Lobby.Tests\Platform.Lobby.Tests.csproj", "{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Profile.Tests", "services\profile\Platform.Profile.Tests\Platform.Profile.Tests.csproj", "{F9722301-33B5-45B3-9F06-1634CF6AB93C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +64,18 @@ Global
 		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A708BD1A-1304-4DEF-861E-4D3774E4DD08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
