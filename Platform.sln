@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9764D93D-17DC-42E6-9E9C-B20BA39824FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9764D93D-17DC-42E6-9E9C-B20BA39824FB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		services\weather\Dockerfile = services\weather\Dockerfile
-		services\eucre-game\Dockerfile = services\eucre-game\Dockerfile
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.Api", "services\weather\Weather.Api\Weather.Api.csproj", "{B39FADD4-E38E-43DC-8B2F-D0AF646A040B}"
@@ -29,6 +27,31 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Lobby.Tests", "services\lobby\Platform.Lobby.Tests\Platform.Lobby.Tests.csproj", "{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Profile.Tests", "services\profile\Platform.Profile.Tests\Platform.Profile.Tests.csproj", "{F9722301-33B5-45B3-9F06-1634CF6AB93C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games.Eucre", "Games.Eucre", "{27020763-7F5B-42A9-8BB5-787185E2BBB5}"
+	ProjectSection(SolutionItems) = preProject
+		services\eucre-game\Dockerfile = services\eucre-game\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Library", "Platform.Library", "{9D7F439E-53C0-48AC-8744-069DAF220ADF}"
+	ProjectSection(SolutionItems) = preProject
+		services\library\Dockerfile = services\library\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Lobby", "Platform.Lobby", "{BF852D78-5020-4BBA-8759-341A7597FF16}"
+	ProjectSection(SolutionItems) = preProject
+		services\lobby\Dockerfile = services\lobby\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Profile", "Platform.Profile", "{C764F88E-4A73-4080-8658-570578A00DDD}"
+	ProjectSection(SolutionItems) = preProject
+		services\profile\Dockerfile = services\profile\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Weather", "Weather", "{D9050312-2B5F-4C2E-9068-3E532CBFE15E}"
+	ProjectSection(SolutionItems) = preProject
+		services\weather\Dockerfile = services\weather\Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +102,18 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B39FADD4-E38E-43DC-8B2F-D0AF646A040B} = {D9050312-2B5F-4C2E-9068-3E532CBFE15E}
+		{F412A6AC-9179-4C0D-9AB5-BB48C4162E7A} = {D9050312-2B5F-4C2E-9068-3E532CBFE15E}
+		{6D844744-777C-40E1-9E5E-2F557C3FB103} = {27020763-7F5B-42A9-8BB5-787185E2BBB5}
+		{7D7E93FF-C9A9-49FC-8290-EC7F2881146D} = {27020763-7F5B-42A9-8BB5-787185E2BBB5}
+		{E694D332-DF65-4340-8193-DE978F361FC9} = {9D7F439E-53C0-48AC-8744-069DAF220ADF}
+		{9CDD7154-B6F9-411A-A336-FAED97191F83} = {BF852D78-5020-4BBA-8759-341A7597FF16}
+		{A708BD1A-1304-4DEF-861E-4D3774E4DD08} = {C764F88E-4A73-4080-8658-570578A00DDD}
+		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83} = {9D7F439E-53C0-48AC-8744-069DAF220ADF}
+		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED} = {BF852D78-5020-4BBA-8759-341A7597FF16}
+		{F9722301-33B5-45B3-9F06-1634CF6AB93C} = {C764F88E-4A73-4080-8658-570578A00DDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F28ABC32-9C3D-4FED-B07E-1620227F63EA}
