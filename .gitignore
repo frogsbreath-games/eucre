@@ -231,4 +231,8 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+# Client .env
 **/.env
+
+# Microservice App settings
+services/**/appsettings.Development.json
