@@ -22,6 +22,7 @@ class Game extends React.PureComponent<GameProps> {
     console.log(this.props.game);
     return (
       <React.Fragment>
+        <h4>{this.props.game.description}</h4>
         <div className={styles.handArea}>
           <Hand
             hand={this.props.game.deck.slice(0, 5)}

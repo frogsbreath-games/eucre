@@ -44,6 +44,7 @@ namespace Games.Eucre.Api.Controllers
 		{
 			return new GameModel
 			{
+				Description = "New Game",
 				Deck = GetDeck().ToList()
 			};
 		}
@@ -57,7 +58,11 @@ namespace Games.Eucre.Api.Controllers
 
 			cards = cards.OrderBy(x => rand.Next(0, 52));
 
-			var gameState = new GameModel { Deck = cards.ToList() };
+			var gameState = new GameModel
+			{
+				Description = $"{User.Identity?.Name ?? "Anonymous"} shuffled the game!",
+				Deck = cards.ToList()
+			};
 
 			await _hubContext.Clients.All.UpdateGame(gameState);
 

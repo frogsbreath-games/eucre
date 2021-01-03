@@ -117,6 +117,7 @@ export const actionCreators = {
 
 const unloadedState: EucreState = {
   game: {
+    description: ``,
     deck: [],
   },
   isLoading: false,

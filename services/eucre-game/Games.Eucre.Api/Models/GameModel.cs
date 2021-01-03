@@ -5,6 +5,7 @@ namespace Games.Eucre.Api.Models
 {
 	public class GameModel
 	{
+		public string Description { get; set; } = string.Empty;
 		//Todo
 		public List<CardModel> Deck { get; set; } = new List<CardModel>();
 		public int CurrentPlayerNumber { get; set; }
