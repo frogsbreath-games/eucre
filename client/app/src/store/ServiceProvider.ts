@@ -9,7 +9,10 @@ export interface ServiceProviderState {
 
 const unloadedState: ServiceProviderState = {
   weather: new WeatherService(process.env.REACT_APP_WEATHER_URL),
-  eucre: new EucreService(process.env.REACT_APP_EUCRE_URL),
+  eucre: new EucreService(
+    process.env.REACT_APP_EUCRE_URL,
+    process.env.REACT_APP_EUCRE_AUDIENCE
+  ),
 };
 
 export const reducer: Reducer<ServiceProviderState> = (

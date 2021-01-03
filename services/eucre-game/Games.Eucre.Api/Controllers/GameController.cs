@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Games.Eucre.Api.Controllers
 {
+	[Authorize]
 	[ApiController]
 	[Route("api/eucre")]
 	[Produces("application/json"), Consumes("application/json")]
@@ -39,7 +40,6 @@ namespace Games.Eucre.Api.Controllers
 		}
 
 		[HttpGet("game")]
-		[Authorize]
 		public GameModel GetEucreGame()
 		{
 			return new GameModel

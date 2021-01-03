@@ -1,11 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Games.Eucre.Api.Auth;
 using Games.Eucre.Api.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -66,6 +68,21 @@ namespace Games.Eucre.Api
 					{
 						NameClaimType = ClaimTypes.NameIdentifier
 					};
+
+					options.Events = new JwtBearerEvents
+					{
+						OnMessageReceived = context =>
+						{
+							var accessToken = context.Request.Query["access_token"];
+
+							var path = context.HttpContext.Request.Path;
+
+							if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hub"))
+								context.Token = accessToken;
+
+							return Task.CompletedTask;
+						}
+					};
 				});
 
 			services.AddAuthorization(options =>
@@ -74,6 +91,8 @@ namespace Games.Eucre.Api
 			});
 
 			services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
+			services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

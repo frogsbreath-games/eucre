@@ -1,7 +1,7 @@
 import { Action, Reducer } from "redux";
-import { ApplicationState, AppThunkAction } from "./";
+import { AppThunkAction } from "./";
 import ApiClient from "app/tools/ApiClient";
-import { setupSignalRConnection } from "app/utils/setupSignalRConnection";
+import HubClient from "app/tools/HubClient";
 import { Types as EucreTypes } from "app/games/eucre";
 
 export interface EucreState {
@@ -12,21 +12,38 @@ export interface EucreState {
 export interface IEucreService {
   getEucreGame(): Promise<EucreTypes.Game>;
   shuffleDeck(): Promise<boolean>;
+  connectToGameHub<TAction>(
+    dispatch: (action: TAction) => void,
+    actionEventMap: {
+      [Key: string]: (...args: any[]) => TAction;
+    }
+  ): void;
 }
 
 export class EucreService implements IEucreService {
-  private readonly _client: ApiClient;
+  private readonly _apiClient: ApiClient;
+  private readonly _hubClient: HubClient;
 
-  constructor(baseUrl?: string | undefined) {
-    this._client = new ApiClient(baseUrl, `api/eucre/`);
+  constructor(baseUrl: string | undefined, tokenAudience: string | undefined) {
+    this._apiClient = new ApiClient([baseUrl, `api/eucre/`], tokenAudience);
+    this._hubClient = new HubClient([baseUrl, `hub/eucre/`], tokenAudience);
   }
 
   public getEucreGame(): Promise<EucreTypes.Game> {
-    return this._client.fetchJson<EucreTypes.Game>(`game`);
+    return this._apiClient.fetchJson<EucreTypes.Game>(`game`);
   }
 
   public shuffleDeck(): Promise<boolean> {
-    return this._client.fetchJson<boolean>(`shuffle`, { method: "post" });
+    return this._apiClient.fetchJson<boolean>(`shuffle`, { method: "post" });
+  }
+
+  public connectToGameHub<TAction>(
+    dispatch: (action: TAction) => void,
+    actionEventMap: {
+      [Key: string]: (...args: any[]) => TAction;
+    }
+  ) {
+    this._hubClient.setupHub(`game`, actionEventMap, dispatch);
   }
 }
 
@@ -52,22 +69,16 @@ type KnownAction = RequestGameAction | ReceiveGameAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-  enterGame: (): AppThunkAction<KnownAction> => (
-    dispatch,
-    getState
-  ) => {
-    const connectionHub = process.env.REACT_APP_EUCRE_URL
-      ? process.env.REACT_APP_EUCRE_URL + 'hub/eucre/game'
-      : '/hub/eucre/game';
-
-    const setupEventsHub = setupSignalRConnection<KnownAction, ApplicationState>(connectionHub, {
-      UpdateGame: (game: EucreTypes.Game) => ({
-        type: "RECEIVE_EUCRE_GAME",
-        game: game
-      })
-    });
-
-    setupEventsHub(dispatch, getState);
+  enterGame: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    const appState = getState();
+    if (appState && appState.eucre) {
+      appState.services.eucre.connectToGameHub<KnownAction>(dispatch, {
+        updateGame: (game: EucreTypes.Game) => ({
+          type: "RECEIVE_EUCRE_GAME",
+          game: game,
+        }),
+      });
+    }
   },
   requestEucreCards: (): AppThunkAction<KnownAction> => (
     dispatch,
@@ -87,10 +98,7 @@ export const actionCreators = {
       });
     }
   },
-  shuffle: (): AppThunkAction<KnownAction> => (
-    dispatch,
-    getState
-  ) => {
+  shuffle: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.eucre) {
@@ -109,7 +117,7 @@ export const actionCreators = {
 
 const unloadedState: EucreState = {
   game: {
-    deck: []
+    deck: [],
   },
   isLoading: false,
 };

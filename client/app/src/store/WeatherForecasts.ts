@@ -19,17 +19,17 @@ export interface WeatherForecast {
 }
 
 export interface IWeatherService {
-  getForecasts() : Promise<WeatherForecast[]>
+  getForecasts(): Promise<WeatherForecast[]>;
 }
 
 export class WeatherService implements IWeatherService {
   private readonly _client: ApiClient;
 
   constructor(baseUrl?: string | undefined) {
-    this._client = new ApiClient(baseUrl, `api/weather/`);
+    this._client = new ApiClient([baseUrl, `api/weather/`]);
   }
 
-  public getForecasts() : Promise<WeatherForecast[]> {
+  public getForecasts(): Promise<WeatherForecast[]> {
     return this._client.fetchJson<WeatherForecast[]>(`forecasts`);
   }
 }
@@ -70,14 +70,13 @@ export const actionCreators = {
       appState.weatherForecasts &&
       startDateIndex !== appState.weatherForecasts.startDateIndex
     ) {
-      appState.services.weather.getForecasts()
-        .then((data) => {
-          dispatch({
-            type: "RECEIVE_WEATHER_FORECASTS",
-            startDateIndex: startDateIndex,
-            forecasts: data,
-          });
+      appState.services.weather.getForecasts().then((data) => {
+        dispatch({
+          type: "RECEIVE_WEATHER_FORECASTS",
+          startDateIndex: startDateIndex,
+          forecasts: data,
         });
+      });
 
       dispatch({
         type: "REQUEST_WEATHER_FORECASTS",

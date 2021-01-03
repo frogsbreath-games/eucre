@@ -23,18 +23,17 @@ const startSignalRConnection = async (connection: HubConnection) => {
 // Set up a SignalR connection to the specified hub URL, and actionEventMap.
 // actionEventMap should be an object mapping event names, to eventHandlers that will
 // be dispatched with the message body.
-export const setupSignalRConnection = <TAction, TState>(
+export const setupSignalRConnection = <TAction>(
     connectionHub: string,
     actionEventMap: { [Key: string]: (...args: any[]) => TAction },
-    getAccessToken?: (state: TState) => string | Promise<string>
+    getAccessToken?: () => string | Promise<string>
   ) => (
-    dispatch: (action: TAction) => void,
-    getState: () => TState
+    dispatch: (action: TAction) => void
   ) => {
   const options = {
     logMessageContent: isDev,
     logger: isDev ? LogLevel.Warning : LogLevel.Error,
-    accessTokenFactory: getAccessToken ? () => getAccessToken(getState()) : undefined
+    accessTokenFactory: getAccessToken ? () => getAccessToken() : undefined
   };
   // create the connection instance
   // withAutomaticReconnect will automatically try to reconnect
