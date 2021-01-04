@@ -2,10 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Card } from "app/games/eucre/components";
 import { Button, Input, Select } from "app/ui";
+import * as Types from "app/games/eucre/types";
 import styles from "./Home.module.scss";
 
 interface HomeState {
-  cardSuit?: string;
+  cardSuit: Types.Suit;
   cardValue?: number;
   input: string;
   inputInt: number;
@@ -29,7 +30,7 @@ class Home extends React.Component<{}, HomeState> {
     this.setState({ input: inputValue, inputInt: parseInt(inputValue) });
   }
 
-  handleSelectChange(selectValue: string) {
+  handleSelectChange(selectValue: Types.Suit) {
     this.setState({ cardSuit: selectValue });
   }
 

@@ -7,6 +7,8 @@ import configureStore from "./store/configureStore";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // Create browser history to use in the Redux store
 const baseUrl = document
@@ -37,7 +39,9 @@ ReactDOM.render(
   >
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App />
+        <DndProvider backend={HTML5Backend}>
+          <App />
+        </DndProvider>
       </ConnectedRouter>
     </Provider>
   </Auth0Provider>,

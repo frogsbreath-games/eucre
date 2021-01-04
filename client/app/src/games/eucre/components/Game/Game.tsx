@@ -7,16 +7,25 @@ import Card from "../Card/Card";
 import Hand from "../Hand/Hand";
 import Stack from "../Stack/Stack";
 import { Button } from "app/ui";
+import * as Types from "app/games/eucre/types";
 
 // At runtime, Redux will merge together...
 type GameProps = EucreStore.EucreState & // ... state we've requested from the Redux store
   typeof EucreStore.actionCreators; // ... plus action creators we've requested
 
 class Game extends React.PureComponent<GameProps> {
+  constructor(props: GameProps) {
+    super(props);
+    this.handleStackDrop = this.handleStackDrop.bind(this);
+  }
   // This method is called when the component is first added to the document
   public componentDidMount() {
     this.props.enterGame();
     this.ensureDataFetched();
+  }
+
+  public handleStackDrop(card: Types.Card) {
+    this.props.playCard(card);
   }
 
   public render() {
@@ -27,9 +36,12 @@ class Game extends React.PureComponent<GameProps> {
         <div className={styles.handArea}>
           <Hand
             hand={this.props.game.deck.slice(0, 5)}
-            onCardClick={() => undefined}
+            cardAction={this.handleStackDrop}
           />
-          <Stack label="Stack" cards={[]} />
+          <div>
+            <label>Drag a card onto me!</label>
+            <Stack cards={this.props.game.pile} />
+          </div>
         </div>
         <div className={styles.cardDisplay}>
           {this.props.game.deck.map((card) => (
@@ -39,6 +51,7 @@ class Game extends React.PureComponent<GameProps> {
                 value={card.value}
                 key={card.suit + card.value}
                 front={true}
+                dropAction={this.handleStackDrop}
               />
             </div>
           ))}

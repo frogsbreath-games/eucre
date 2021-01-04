@@ -1,37 +1,72 @@
 import * as React from "react";
 import styles from "./Card.module.scss";
+import { useDrag, DragSourceMonitor } from "react-dnd";
+import { DragTypes } from "../../dnd-types/DragTypes";
+import * as Types from "app/games/eucre/types";
 
 interface ICardProps {
   value?: number;
-  suit?: string;
+  suit?: Types.Suit;
   id?: string;
-  clickAction?: () => void;
+  dropAction?: (card: Types.Card) => void;
   front?: boolean;
   style?: React.CSSProperties;
 }
 
-export default class Card extends React.PureComponent<ICardProps> {
-  render() {
-    const { value, suit, id, front, style } = this.props;
-    var cardContent;
-    if (front) {
-      cardContent = (
-        <div className={styles["cardContent" + suit]} style={style}>
-          <div className={styles.cardHeader}>
-            {value && displayCardValue(value)}
-            <br />
-            <span className={styles.icon}></span>
-          </div>
-          <div className={styles.cardInner}>{gameCardInner(value)}</div>
-        </div>
-      );
-    } else {
-      cardContent = <div className={styles.cardBack}></div>;
-    }
+const Card: React.FC<ICardProps> = ({
+  value,
+  suit,
+  id,
+  dropAction,
+  front,
+  style,
+}) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: DragTypes.CARD, value: value, suit: suit },
+    end: (
+      item: { type: string; value?: number; suit?: string } | undefined,
+      monitor: DragSourceMonitor
+    ) => {
+      const dropResult = monitor.getDropResult();
+      if (item && dropResult) {
+        dropAction &&
+          dropAction({ value: value ? value : 1, suit: suit ? suit : "Clubs" });
+        console.log(
+          `You dropped ${
+            item.value ? item.value.toString() + " of " + item.suit : ""
+          } into the ${dropResult.name}!`
+        );
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
-    return <div className={styles.card}>{cardContent}</div>;
+  const display = isDragging ? "none" : "";
+
+  var cardContent;
+  if (front) {
+    cardContent = (
+      <div className={styles["cardContent" + suit]} style={style}>
+        <div className={styles.cardHeader}>
+          {value && displayCardValue(value)}
+          <br />
+          <span className={styles.icon}></span>
+        </div>
+        <div className={styles.cardInner}>{gameCardInner(value)}</div>
+      </div>
+    );
+  } else {
+    cardContent = <div className={styles.cardBack}></div>;
   }
-}
+
+  return (
+    <div ref={drag} className={styles.card} style={{ display }}>
+      {cardContent}
+    </div>
+  );
+};
 
 function gameCardInner(value?: number) {
   switch (value) {
@@ -97,3 +132,5 @@ function displayCardValue(value: number) {
       return value;
   }
 }
+
+export default Card;

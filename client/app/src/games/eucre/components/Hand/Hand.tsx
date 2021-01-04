@@ -5,10 +5,10 @@ import * as Types from "app/games/eucre/types";
 
 interface IHandProps {
   hand: Types.Card[];
-  onCardClick: () => void;
+  cardAction?: (card: Types.Card) => void;
 }
 
-const Hand: React.FunctionComponent<IHandProps> = ({ hand, onCardClick }) => {
+const Hand: React.FunctionComponent<IHandProps> = ({ hand, cardAction }) => {
   return (
     <div className={styles.handContainer} style={handStyle(hand.length)}>
       {hand.map((card, index) => (
@@ -17,7 +17,7 @@ const Hand: React.FunctionComponent<IHandProps> = ({ hand, onCardClick }) => {
             key={card.suit + card.value}
             value={card.value}
             suit={card.suit}
-            clickAction={onCardClick}
+            dropAction={cardAction}
             front={true}
           />
         </div>

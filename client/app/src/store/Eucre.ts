@@ -51,6 +51,11 @@ interface RequestGameAction {
   type: "REQUEST_EUCRE_GAME";
 }
 
+interface PlayCardAction {
+  type: "PLAY_CARD_ACTION";
+  card: EucreTypes.Card;
+}
+
 interface ReceiveGameAction {
   type: "RECEIVE_EUCRE_GAME";
   game: EucreTypes.Game;
@@ -58,7 +63,7 @@ interface ReceiveGameAction {
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestGameAction | ReceiveGameAction;
+type KnownAction = RequestGameAction | ReceiveGameAction | PlayCardAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -108,6 +113,14 @@ export const actionCreators = {
       });
     }
   },
+  playCard: (card: EucreTypes.Card): AppThunkAction<KnownAction> => (
+    dispatch,
+    getState
+  ) =>
+    dispatch({
+      type: "PLAY_CARD_ACTION",
+      card: card,
+    }),
 };
 
 // ----------------
@@ -117,6 +130,7 @@ const unloadedState: EucreState = {
   game: {
     description: ``,
     deck: [],
+    pile: [],
   },
   isLoading: false,
 };
@@ -139,6 +153,18 @@ export const reducer: Reducer<EucreState> = (
     case "RECEIVE_EUCRE_GAME":
       return {
         game: action.game,
+        isLoading: false,
+      };
+    case "PLAY_CARD_ACTION":
+      return {
+        game: {
+          ...state.game,
+          pile: state.game.pile.concat(action.card),
+          deck: state.game.deck.filter(
+            (card) =>
+              card.suit + card.value !== action.card.suit + action.card.value
+          ),
+        },
         isLoading: false,
       };
     default:
