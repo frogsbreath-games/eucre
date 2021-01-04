@@ -1,5 +1,9 @@
 import { getApiToken } from "app/utils/getAuthToken";
-import { setupSignalRConnection } from "app/utils/setupSignalRConnection";
+import {
+  buildHubConnection,
+  configureHubEventHandlers,
+  startHubConnection,
+} from "app/utils/signalr";
 import { HubConnection } from "@microsoft/signalr";
 
 export default class HubClient {
@@ -29,20 +33,18 @@ export default class HubClient {
     this._connections = new Map<string, HubConnection>();
   }
 
-  public setupHub<TAction>(
+  public setupHub(
     relativePath: string,
-    actionEventMap: {
-      [Key: string]: (...args: any[]) => TAction;
-    },
-    dispatch: (action: TAction) => void
+    eventHandlers: Array<[string, (...args: any[]) => void]>
   ): HubConnection {
-    const setup = setupSignalRConnection<TAction>(
+    const connection = buildHubConnection(
       this._baseUrl + relativePath,
-      actionEventMap,
       this._getToken
     );
 
-    const connection = setup(dispatch);
+    startHubConnection(connection);
+
+    configureHubEventHandlers(connection, eventHandlers);
 
     this._connections.set(relativePath, connection);
 

@@ -12,12 +12,11 @@ export interface EucreState {
 export interface IEucreService {
   getEucreGame(): Promise<EucreTypes.Game>;
   shuffleDeck(): Promise<boolean>;
-  connectToGameHub<TAction>(
-    dispatch: (action: TAction) => void,
-    actionEventMap: {
-      [Key: string]: (...args: any[]) => TAction;
-    }
-  ): void;
+  connectToGameHub(handlers: EucreEventHandlers): void;
+}
+
+export interface EucreEventHandlers {
+  updateGame: (game: EucreTypes.Game) => void;
 }
 
 export class EucreService implements IEucreService {
@@ -37,13 +36,10 @@ export class EucreService implements IEucreService {
     return this._apiClient.fetchJson<boolean>(`shuffle`, { method: "post" });
   }
 
-  public connectToGameHub<TAction>(
-    dispatch: (action: TAction) => void,
-    actionEventMap: {
-      [Key: string]: (...args: any[]) => TAction;
-    }
-  ) {
-    this._hubClient.setupHub(`game`, actionEventMap, dispatch);
+  public connectToGameHub(handlers: EucreEventHandlers) {
+    this._hubClient.setupHub(`game`, [
+      [`updateGame`, handlers.updateGame]
+    ]);
   }
 }
 
@@ -72,11 +68,13 @@ export const actionCreators = {
   enterGame: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.connectToGameHub<KnownAction>(dispatch, {
-        updateGame: (game: EucreTypes.Game) => ({
-          type: "RECEIVE_EUCRE_GAME",
-          game: game,
-        }),
+      appState.services.eucre.connectToGameHub({
+        updateGame: (game: EucreTypes.Game) => {
+          dispatch({
+            type: "RECEIVE_EUCRE_GAME",
+            game: game,
+          });
+        },
       });
     }
   },
