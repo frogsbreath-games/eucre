@@ -68,5 +68,26 @@ namespace Games.Eucre.Api.Controllers
 
 			return true;
 		}
+
+		[HttpPost("play")]
+		public async Task<bool> Play(CardModel card)
+		{
+			var cards = GetDeck();
+
+			var rand = new Random();
+
+			cards = cards.OrderBy(x => rand.Next(0, 52));
+
+			var gameState = new GameModel
+			{
+				Description = $"{User.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}",
+				Deck = cards.ToList(),
+				Pile = new List<CardModel> { card }
+			};
+
+			await _hubContext.Clients.All.UpdateGame(gameState);
+
+			return true;
+		}
 	}
 }

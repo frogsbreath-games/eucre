@@ -12,6 +12,7 @@ export interface EucreState {
 export interface IEucreService {
   getEucreGame(): Promise<EucreTypes.Game>;
   shuffleDeck(): Promise<boolean>;
+  playCard(card: EucreTypes.Card): Promise<boolean>;
   connectToGameHub(handlers: EucreEventHandlers): void;
 }
 
@@ -36,10 +37,18 @@ export class EucreService implements IEucreService {
     return this._apiClient.post<boolean>(`shuffle`, { body: null });
   }
 
+  public playCard(card: EucreTypes.Card): Promise<boolean> {
+    return this._apiClient.post<boolean>(`play`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(card),
+    });
+  }
+
   public connectToGameHub(handlers: EucreEventHandlers) {
-    this._hubClient.setupHub(`game`, [
-      [`updateGame`, handlers.updateGame]
-    ]);
+    this._hubClient.setupHub(`game`, [[`updateGame`, handlers.updateGame]]);
   }
 }
 
@@ -113,14 +122,18 @@ export const actionCreators = {
       });
     }
   },
-  playCard: (card: EucreTypes.Card): AppThunkAction<KnownAction> => (
+
+  play: (card: EucreTypes.Card): AppThunkAction<KnownAction> => (
     dispatch,
     getState
-  ) =>
-    dispatch({
-      type: "PLAY_CARD_ACTION",
-      card: card,
-    }),
+  ) => {
+    const appState = getState();
+    if (appState && appState.eucre) {
+      appState.services.eucre.playCard(card).then((data) => {
+        console.log("played");
+      });
+    }
+  },
 };
 
 // ----------------
@@ -153,18 +166,6 @@ export const reducer: Reducer<EucreState> = (
     case "RECEIVE_EUCRE_GAME":
       return {
         game: action.game,
-        isLoading: false,
-      };
-    case "PLAY_CARD_ACTION":
-      return {
-        game: {
-          ...state.game,
-          pile: state.game.pile.concat(action.card),
-          deck: state.game.deck.filter(
-            (card) =>
-              card.suit + card.value !== action.card.suit + action.card.value
-          ),
-        },
         isLoading: false,
       };
     default:

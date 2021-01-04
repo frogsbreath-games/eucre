@@ -6,11 +6,9 @@ interface BaseRequestInit {
   headers?: Headers | string[][] | Record<string, string>;
 }
 
-interface GetRequestInit extends BaseRequestInit {
-}
+interface GetRequestInit extends BaseRequestInit {}
 
-interface DeleteRequestInit extends BaseRequestInit {
-}
+interface DeleteRequestInit extends BaseRequestInit {}
 
 interface PostRequestInit extends BaseRequestInit {
   body?: BodyInit | null;
@@ -86,7 +84,7 @@ export default class ApiClient {
   ): Promise<TResponseJson> {
     return this.fetch<TResponseJson>(
       relativePath,
-      (init ? init : {}) && { method: `get` },
+      { ...init, method: `get` },
       onrejected
     );
   }
@@ -98,7 +96,7 @@ export default class ApiClient {
   ): Promise<TResponseJson> {
     return this.fetch<TResponseJson>(
       relativePath,
-      (init ? init : {}) && { method: `delete` },
+      { ...init, method: `delete` },
       onrejected
     );
   }
@@ -110,7 +108,7 @@ export default class ApiClient {
   ): Promise<TResponseJson> {
     return this.fetch<TResponseJson>(
       relativePath,
-      (init ? init : {}) && { method: `post` },
+      { ...init, method: `post` },
       onrejected
     );
   }
@@ -122,7 +120,7 @@ export default class ApiClient {
   ): Promise<TResponseJson> {
     return this.fetch<TResponseJson>(
       relativePath,
-      (init ? init : {}) && { method: `patch` },
+      { ...init, method: `patch` },
       onrejected
     );
   }
@@ -134,7 +132,7 @@ export default class ApiClient {
   ): Promise<TResponseJson> {
     return this.fetch<TResponseJson>(
       relativePath,
-      (init ? init : {}) && { method: `put` },
+      { ...init, method: `put` },
       onrejected
     );
   }

@@ -25,7 +25,7 @@ class Game extends React.PureComponent<GameProps> {
   }
 
   public handleStackDrop(card: Types.Card) {
-    this.props.playCard(card);
+    this.props.play(card);
   }
 
   public render() {
