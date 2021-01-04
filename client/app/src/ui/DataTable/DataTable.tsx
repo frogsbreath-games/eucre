@@ -12,17 +12,21 @@ interface IProps {
 }
 
 const DataTable: React.FC<IProps> = ({ columns, data }) => (
-  <table>
+  <table className={styles.table}>
     <thead>
-      <tr>
+      <tr className={styles.tr}>
         {columns.map((column, index) => (
-          <th key={index}>{column.name}</th>
+          <th className={styles.th} key={index}>
+            {column.name}
+          </th>
         ))}
       </tr>
       {data.map((row, index) => (
-        <tr key={index}>
+        <tr className={styles.tr} key={index}>
           {columns.map((field, index) => (
-            <td key={index}>{row[field.key]}</td>
+            <td className={styles.td} key={index}>
+              {row[field.key]}
+            </td>
           ))}
         </tr>
       ))}
