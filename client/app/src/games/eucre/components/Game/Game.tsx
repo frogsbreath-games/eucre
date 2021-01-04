@@ -5,6 +5,7 @@ import styles from "./Game.module.scss";
 import * as EucreStore from "app/store/Eucre";
 import Card from "../Card/Card";
 import Hand from "../Hand/Hand";
+import Stack from "../Stack/Stack";
 import { Button } from "app/ui";
 
 // At runtime, Redux will merge together...
@@ -28,6 +29,7 @@ class Game extends React.PureComponent<GameProps> {
             hand={this.props.game.deck.slice(0, 5)}
             onCardClick={() => undefined}
           />
+          <Stack label="Stack" cards={[]} />
         </div>
         <div className={styles.cardDisplay}>
           {this.props.game.deck.map((card) => (
