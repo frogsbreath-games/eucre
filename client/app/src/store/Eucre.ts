@@ -29,11 +29,11 @@ export class EucreService implements IEucreService {
   }
 
   public getEucreGame(): Promise<EucreTypes.Game> {
-    return this._apiClient.fetchJson<EucreTypes.Game>(`game`);
+    return this._apiClient.get<EucreTypes.Game>(`game`);
   }
 
   public shuffleDeck(): Promise<boolean> {
-    return this._apiClient.fetchJson<boolean>(`shuffle`, { method: "post" });
+    return this._apiClient.post<boolean>(`shuffle`, { body: null });
   }
 
   public connectToGameHub(handlers: EucreEventHandlers) {

@@ -30,7 +30,7 @@ export class WeatherService implements IWeatherService {
   }
 
   public getForecasts(): Promise<WeatherForecast[]> {
-    return this._client.fetchJson<WeatherForecast[]>(`forecasts`);
+    return this._client.get<WeatherForecast[]>(`forecasts`);
   }
 }
 
