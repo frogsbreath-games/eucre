@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Counter from "./pages/Counter/Counter";
 import FetchData from "./pages/FetchData/FetchData";
 import EucrePage from "./pages/EucrePage/EucrePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 import "./custom.css";
@@ -17,9 +18,8 @@ const ProtectedRoute: React.FC<RouteProps> = (props) => (
 );
 
 export default () => {
-  const { isLoading, isAuthenticated } = useAuth0();
-
-  console.log(isAuthenticated);
+  const { isLoading, user } = useAuth0();
+  console.log(user);
 
   if (isLoading) {
     return (
@@ -38,6 +38,7 @@ export default () => {
         component={FetchData}
       />
       <ProtectedRoute path="/games/eucre" component={EucrePage} />
+      <ProtectedRoute path="/games/profile" component={ProfilePage} />
     </Layout>
   );
 };

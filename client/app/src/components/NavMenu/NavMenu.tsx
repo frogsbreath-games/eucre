@@ -44,6 +44,18 @@ export default class NavMenu extends React.PureComponent<{}> {
                 Eucre
               </a>
             </li>
+            <li className={styles.navItem}>
+              <a
+                className={
+                  window.location.pathname == "/games/profile"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/games/profile"
+              >
+                Profile
+              </a>
+            </li>
             <li className={styles.navButton}>
               <NavButton />
             </li>

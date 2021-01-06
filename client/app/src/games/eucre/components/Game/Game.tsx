@@ -44,12 +44,12 @@ class Game extends React.PureComponent<GameProps> {
           </div>
         </div>
         <div className={styles.cardDisplay}>
-          {this.props.game.deck.map((card) => (
-            <div className={styles.card}>
+          {this.props.game.deck.map((card, index) => (
+            <div key={index} className={styles.card}>
               <Card
                 suit={card.suit}
                 value={card.value}
-                key={card.suit + card.value}
+                key={index}
                 front={true}
                 dropAction={this.handleStackDrop}
               />
