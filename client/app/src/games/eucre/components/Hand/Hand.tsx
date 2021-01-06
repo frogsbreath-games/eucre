@@ -12,7 +12,11 @@ const Hand: React.FunctionComponent<IHandProps> = ({ hand, cardAction }) => {
   return (
     <div className={styles.handContainer} style={handStyle(hand.length)}>
       {hand.map((card, index) => (
-        <div className={styles.card} style={cardStyle(index, hand.length)}>
+        <div
+          key={index}
+          className={styles.card}
+          style={cardStyle(index, hand.length)}
+        >
           <Card
             key={card.suit + card.value}
             value={card.value}

@@ -24,7 +24,7 @@ const Stack: React.FC<IProps> = ({ cards }) => {
       <div className={styles.body}>
         {cards &&
           cards.slice(Math.max(cards.length - 5, 0)).map((card, index) => (
-            <div className={styles.card}>
+            <div key={index} className={styles.card}>
               <Card key={index} front={true} {...card} />
             </div>
           ))}
