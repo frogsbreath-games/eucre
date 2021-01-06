@@ -44,6 +44,7 @@ namespace Games.Eucre.Api.Controllers
 		{
 			return new GameModel
 			{
+				BoardStatus = BoardStatus.GameStarting,
 				Description = "New Game",
 				Deck = GetDeck().ToList()
 			};
@@ -60,6 +61,7 @@ namespace Games.Eucre.Api.Controllers
 
 			var gameState = new GameModel
 			{
+				BoardStatus = BoardStatus.Shuffling,
 				Description = $"{User.Identity?.Name ?? "Anonymous"} shuffled the game!",
 				Deck = cards.ToList()
 			};
@@ -80,6 +82,7 @@ namespace Games.Eucre.Api.Controllers
 
 			var gameState = new GameModel
 			{
+				BoardStatus = BoardStatus.Playing,
 				Description = $"{User.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}",
 				Deck = cards.ToList(),
 				Pile = new List<CardModel> { card }

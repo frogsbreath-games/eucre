@@ -1,1 +1,1 @@
-export type Suit = 'Hearts' | 'Clubs' | 'Spades' | 'Diamonds';
+export type Suit = "Hearts" | "Clubs" | "Spades" | "Diamonds";
