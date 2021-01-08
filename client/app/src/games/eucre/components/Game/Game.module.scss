@@ -7,8 +7,60 @@
   padding: 10px;
 }
 
-.handArea {
+.controlPanel {
+  grid-area: control;
   display: grid;
   justify-content: center;
-  grid-template-columns: 1fr 1fr;
+  align-content: center;
+}
+
+.descriptionPanel {
+  grid-area: description;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.gameBody {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 30% 40% 30%;
+  grid-template-areas:
+    "description north ."
+    "west play east"
+    ". south control";
+}
+
+.northPlayer {
+  grid-area: north;
+  display: grid;
+  justify-content: center;
+  transform: rotate(180deg);
+}
+
+.eastPlayer {
+  grid-area: east;
+  transform: rotate(-90deg);
+  display: grid;
+  justify-content: center;
+}
+
+.southPlayer {
+  grid-area: south;
+  display: grid;
+  justify-content: center;
+}
+
+.westPlayer {
+  grid-area: west;
+  transform: rotate(90deg);
+  display: grid;
+  justify-content: center;
+}
+
+.play {
+  grid-area: play;
+  background-color: grey;
+  display: grid;
+  justify-content: center;
+  align-content: center;
 }

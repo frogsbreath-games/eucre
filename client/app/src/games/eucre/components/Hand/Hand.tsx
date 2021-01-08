@@ -4,11 +4,16 @@ import Card from "../Card/Card";
 import * as Types from "app/games/eucre/types";
 
 interface IHandProps {
+  revealed?: boolean;
   hand: Types.Card[];
   cardAction?: (card: Types.Card) => void;
 }
 
-const Hand: React.FunctionComponent<IHandProps> = ({ hand, cardAction }) => {
+const Hand: React.FunctionComponent<IHandProps> = ({
+  hand,
+  cardAction,
+  revealed,
+}) => {
   return (
     <div className={styles.handContainer} style={handStyle(hand.length)}>
       {hand.map((card, index) => (
@@ -22,7 +27,7 @@ const Hand: React.FunctionComponent<IHandProps> = ({ hand, cardAction }) => {
             value={card.value}
             suit={card.suit}
             dropAction={cardAction}
-            front={true}
+            front={revealed ? true : false}
           />
         </div>
       ))}

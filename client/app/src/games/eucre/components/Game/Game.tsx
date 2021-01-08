@@ -32,39 +32,52 @@ class Game extends React.PureComponent<GameProps> {
     console.log(this.props.game);
     return (
       <React.Fragment>
-        <h4>{this.props.game.description}</h4>
-        <div className={styles.handArea}>
-          <Hand
-            hand={this.props.game.deck.slice(0, 5)}
-            cardAction={this.handleStackDrop}
-          />
-          <div>
+        <div className={styles.gameBody}>
+          <div className={styles.descriptionPanel}>
+            <h4>{this.props.game.description}</h4>
+          </div>
+          <div className={styles.controlPanel}>
+            <Button
+              style={{ width: 150, height: 50 }}
+              variant="blue"
+              type="button"
+              onClick={() => {
+                this.props.shuffle();
+              }}
+            >
+              Shuffle
+            </Button>
+          </div>
+          <div className={styles.northPlayer}>
+            <Hand
+              hand={this.props.game.deck.slice(0, 5)}
+              cardAction={this.handleStackDrop}
+            />
+          </div>
+          <div className={styles.play}>
             <label>Drag a card onto me!</label>
             <Stack cards={this.props.game.pile} />
           </div>
+          <div className={styles.eastPlayer}>
+            <Hand
+              hand={this.props.game.deck.slice(6, 11)}
+              cardAction={this.handleStackDrop}
+            />
+          </div>
+          <div className={styles.southPlayer}>
+            <Hand
+              hand={this.props.game.deck.slice(12, 17)}
+              cardAction={this.handleStackDrop}
+              revealed={true}
+            />
+          </div>
+          <div className={styles.westPlayer}>
+            <Hand
+              hand={this.props.game.deck.slice(18, 23)}
+              cardAction={this.handleStackDrop}
+            />
+          </div>
         </div>
-        <div className={styles.cardDisplay}>
-          {this.props.game.deck.map((card, index) => (
-            <div key={index} className={styles.card}>
-              <Card
-                suit={card.suit}
-                value={card.value}
-                key={index}
-                front={true}
-                dropAction={this.handleStackDrop}
-              />
-            </div>
-          ))}
-        </div>
-        <Button
-          variant="blue"
-          type="button"
-          onClick={() => {
-            this.props.shuffle();
-          }}
-        >
-          Shuffle
-        </Button>
       </React.Fragment>
     );
   }
