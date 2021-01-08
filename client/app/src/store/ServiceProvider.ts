@@ -1,6 +1,9 @@
 import { Action, Reducer } from "redux";
 import { IWeatherService, WeatherService } from "./WeatherForecasts";
-import { IEucreService, EucreService } from "./Eucre";
+import {
+  IGameplayService as IEucreService,
+  GameplayService as EucreService,
+} from "app/games/eucre/services";
 
 export interface ServiceProviderState {
   weather: IWeatherService;

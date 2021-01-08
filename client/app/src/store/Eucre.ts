@@ -1,55 +1,10 @@
 import { Action, Reducer } from "redux";
 import { AppThunkAction } from "./";
-import ApiClient from "app/tools/ApiClient";
-import HubClient from "app/tools/HubClient";
 import { Types as EucreTypes } from "app/games/eucre";
 
 export interface EucreState {
   game: EucreTypes.Game;
   isLoading: boolean;
-}
-
-export interface IEucreService {
-  getEucreGame(): Promise<EucreTypes.Game>;
-  shuffleDeck(): Promise<boolean>;
-  playCard(card: EucreTypes.Card): Promise<boolean>;
-  connectToGameHub(handlers: EucreEventHandlers): void;
-}
-
-export interface EucreEventHandlers {
-  updateGame: (game: EucreTypes.Game) => void;
-}
-
-export class EucreService implements IEucreService {
-  private readonly _apiClient: ApiClient;
-  private readonly _hubClient: HubClient;
-
-  constructor(baseUrl: string | undefined, tokenAudience: string | undefined) {
-    this._apiClient = new ApiClient([baseUrl, `api/eucre/`], tokenAudience);
-    this._hubClient = new HubClient([baseUrl, `hub/eucre/`], tokenAudience);
-  }
-
-  public getEucreGame(): Promise<EucreTypes.Game> {
-    return this._apiClient.get<EucreTypes.Game>(`game`);
-  }
-
-  public shuffleDeck(): Promise<boolean> {
-    return this._apiClient.post<boolean>(`shuffle`, { body: null });
-  }
-
-  public playCard(card: EucreTypes.Card): Promise<boolean> {
-    return this._apiClient.post<boolean>(`play`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(card),
-    });
-  }
-
-  public connectToGameHub(handlers: EucreEventHandlers) {
-    this._hubClient.setupHub(`game`, [[`updateGame`, handlers.updateGame]]);
-  }
 }
 
 // -----------------
