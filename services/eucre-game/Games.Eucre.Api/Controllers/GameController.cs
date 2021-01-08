@@ -6,6 +6,7 @@ using Games.Eucre.Api.Clients;
 using Games.Eucre.Api.Enums;
 using Games.Eucre.Api.Hubs;
 using Games.Eucre.Api.Models;
+using Games.Eucre.Api.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -19,10 +20,14 @@ namespace Games.Eucre.Api.Controllers
 	public class GameController : ControllerBase
 	{
 		private readonly IHubContext<GameplayHub, IGameplayClient> _hubContext;
+		private readonly RandomAccessor _randomAccessor;
 
-		public GameController(IHubContext<GameplayHub, IGameplayClient> hubContext)
+		public GameController(
+			IHubContext<GameplayHub, IGameplayClient> hubContext,
+			RandomAccessor randomAccessor)
 		{
 			_hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
+			_randomAccessor = randomAccessor ?? throw new ArgumentNullException(nameof(randomAccessor));
 		}
 
 		protected IEnumerable<CardModel> GetDeck()
@@ -55,7 +60,7 @@ namespace Games.Eucre.Api.Controllers
 		{
 			var cards = GetDeck();
 
-			var rand = new Random();
+			var rand = _randomAccessor.Random;
 
 			cards = cards.OrderBy(x => rand.Next(0, 52));
 
@@ -76,7 +81,7 @@ namespace Games.Eucre.Api.Controllers
 		{
 			var cards = GetDeck();
 
-			var rand = new Random();
+			var rand = _randomAccessor.Random;
 
 			cards = cards.OrderBy(x => rand.Next(0, 52));
 
