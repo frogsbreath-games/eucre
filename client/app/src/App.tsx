@@ -6,6 +6,7 @@ import Counter from "./pages/Counter/Counter";
 import FetchData from "./pages/FetchData/FetchData";
 import EucrePage from "./pages/EucrePage/EucrePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import LobbyPage from "./pages/LobbyPage/LobbyPage";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 import "./custom.css";
@@ -39,6 +40,7 @@ export default () => {
       />
       <ProtectedRoute path="/games/eucre" component={EucrePage} />
       <ProtectedRoute path="/games/profile" component={ProfilePage} />
+      <ProtectedRoute path="/games/lobby" component={LobbyPage} />
     </Layout>
   );
 };

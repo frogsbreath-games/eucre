@@ -2,6 +2,7 @@ import * as WeatherForecasts from "./WeatherForecasts";
 import * as Counter from "./Counter";
 import * as ServiceProvider from "./ServiceProvider";
 import * as Eucre from "./Eucre";
+import * as Lobby from "./Lobby";
 
 // The top-level state object
 export interface ApplicationState {
@@ -9,6 +10,7 @@ export interface ApplicationState {
   counter: Counter.CounterState | undefined;
   weatherForecasts: WeatherForecasts.WeatherForecastsState | undefined;
   eucre: Eucre.EucreState | undefined;
+  lobby: Lobby.LobbyState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -19,6 +21,7 @@ export const reducers = {
   counter: Counter.reducer,
   weatherForecasts: WeatherForecasts.reducer,
   eucre: Eucre.reducer,
+  lobby: Lobby.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

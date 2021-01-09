@@ -32,7 +32,7 @@ namespace Platform.Lobby.Api.Controllers
 				Code = "",
 				Players = new List<PlayerModel> { new PlayerModel { Id= User.Identity?.Name, Role=Enums.Role.Owner } },
 				Visibility=Enums.Visibility.Public,
-				State=Enums.Status.InLobby
+				Status=Enums.Status.InLobby
 			};
 		}
 

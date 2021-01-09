@@ -8,9 +8,8 @@ namespace Platform.Lobby.Api.Models
 		public string Code { get; set; }
 		public string Name { get; set; }
 		public Visibility Visibility { get; set; }
-		public Status State { get; set; }
+		public Status Status { get; set; }
 		public List<PlayerModel> Players { get; set; }
-
-
+		public List<ChatModel> LobbyMessages { get; set; }
 	}
 }

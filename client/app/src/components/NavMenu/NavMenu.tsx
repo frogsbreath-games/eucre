@@ -47,6 +47,18 @@ export default class NavMenu extends React.PureComponent<{}> {
             <li className={styles.navItem}>
               <a
                 className={
+                  window.location.pathname == "/games/lobby"
+                    ? styles.selected
+                    : styles.link
+                }
+                href="/games/lobby"
+              >
+                Lobby
+              </a>
+            </li>
+            <li className={styles.navItem}>
+              <a
+                className={
                   window.location.pathname == "/games/profile"
                     ? styles.selected
                     : styles.link
