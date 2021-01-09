@@ -126,7 +126,7 @@ namespace Platform.Lobby.Api
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapHub<LobbyHub>("hub/lobby");
+				endpoints.MapHub<LobbyHub>("hub/lobby/chatroom");
 				endpoints.MapControllers();
 			});
 		}

@@ -30,19 +30,19 @@ namespace Platform.Lobby.Api.Controllers
 			return new LobbyModel
 			{
 				Code = "",
-				Players = new List<PlayerModel> { new PlayerModel { Id= User.Identity?.Name, Role=Enums.Role.Owner } },
-				Visibility=Enums.Visibility.Public,
-				Status=Enums.Status.InLobby
+				Players = new List<PlayerModel> { new PlayerModel { Id = User.Identity?.Name, Role = Enums.Role.Owner } },
+				Visibility = Enums.Visibility.Public,
+				Status = Enums.Status.InLobby
 			};
 		}
 
 		[HttpPost("chat")]
-		public async Task<bool> Play(string message)
+		public async Task<bool> SentChat(ChatModel message)
 		{
 			var chat = new ChatModel
 			{
 				AuthorID = User?.Identity?.Name,
-				Message = message,
+				Message = message.Message,
 				TimeStamp = DateTimeOffset.UtcNow
 			};
 

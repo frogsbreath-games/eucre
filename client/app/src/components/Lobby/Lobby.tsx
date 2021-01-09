@@ -8,15 +8,30 @@ import * as LobbyStore from "app/store/Lobby";
 type LobbyProps = LobbyStore.LobbyState & // ... state we've requested from the Redux store
   typeof LobbyStore.actionCreators; // ... plus action creators we've requested
 
-class Lobby extends React.PureComponent<LobbyProps> {
+type State = { input: string };
+class Lobby extends React.PureComponent<LobbyProps, State> {
   constructor(props: LobbyProps) {
     super(props);
+    this.state = { input: "" };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.chat = this.chat.bind(this);
   }
   // This method is called when the component is first added to the document
   public componentDidMount() {
     this.props.enterLobby();
     this.props.requestLobby();
+  }
+
+  public handleKeyPress(event: React.KeyboardEvent) {
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) {
+      this.chat(this.state.input);
+    }
+  }
+
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ input: event.target.value });
   }
 
   public chat(message: string) {
@@ -27,7 +42,17 @@ class Lobby extends React.PureComponent<LobbyProps> {
     console.log(this.props.room);
     return (
       <React.Fragment>
-        <div></div>
+        <div>
+          <h3>{this.props.chatMessage.message}</h3>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Message something..."
+            value={this.state.input}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+          />
+        </div>
       </React.Fragment>
     );
   }

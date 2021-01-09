@@ -5,7 +5,7 @@ import { ChatMessage } from "app/types/ChatMessage";
 
 export interface LobbyState {
   room: Lobby;
-  chat: ChatMessage;
+  chatMessage: ChatMessage;
   isLoading: boolean;
 }
 
@@ -74,6 +74,7 @@ export const actionCreators = {
     if (appState && appState.lobby) {
       appState.services.lobby.sendChat(message).then((data: boolean) => {
         console.log("chatted");
+        console.log(data);
       });
     }
   },
@@ -84,7 +85,7 @@ export const actionCreators = {
 
 const unloadedState: LobbyState = {
   room: {},
-  chat: {},
+  chatMessage: {},
   isLoading: false,
 };
 
@@ -101,19 +102,19 @@ export const reducer: Reducer<LobbyState> = (
     case "REQUEST_LOBBY":
       return {
         room: state.room,
-        chat: state.chat,
+        chatMessage: state.chatMessage,
         isLoading: true,
       };
     case "RECIEVE_LOBBY":
       return {
         room: action.lobby,
-        chat: state.chat,
+        chatMessage: state.chatMessage,
         isLoading: false,
       };
     case "CHAT_SENT":
       return {
         room: state.room,
-        chat: action.message,
+        chatMessage: action.message,
         isLoading: false,
       };
     default:

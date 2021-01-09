@@ -14,7 +14,6 @@ export class LobbyService implements ILobbyService {
   }
 
   public getLobby(): Promise<Lobby> {
-    debugger;
     return this._apiClient.get<Lobby>(`lobby`);
   }
 
@@ -24,11 +23,11 @@ export class LobbyService implements ILobbyService {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: message,
+      body: JSON.stringify({ message: message }),
     });
   }
 
   public connectToLobbyHub(handlers: LobbyEventHandlers) {
-    this._hubClient.setupHub(``, [[`chatSent`, handlers.chatSent]]);
+    this._hubClient.setupHub(`chatroom`, [[`chatSent`, handlers.chatSent]]);
   }
 }
