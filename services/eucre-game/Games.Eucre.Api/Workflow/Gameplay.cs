@@ -11,55 +11,67 @@ namespace Games.Eucre.Api.Workflow
 	{
 		public static GameModel CreateGame()
 		{
-			return new GameModel
-			{
-				BoardStatus = BoardStatus.GameStarting,
-				Description = "New Game",
-				Deck = GetDeck().ToList()
-			};
+			return BuildGame(BoardStatus.GameStarting, "New Game", GetDeck());
 		}
 
-		private static IEnumerable<CardModel> GetDeck()
+		private static CardModel[] GetDeck()
 		{
 			List<CardModel> deck = new List<CardModel>();
 			foreach (Suit suit in Enum.GetValues(typeof(Suit)))
 			{
-				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new CardModel
-				{
-					Value = index,
-					Suit = suit,
-				}).ToArray());
+				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new CardModel(suit, index)).ToArray());
 			}
-			return deck;
+			return deck.ToArray();
+		}
+
+		private static GameModel BuildGame(
+			BoardStatus status,
+			string description,
+			CardModel[] cards)
+		{
+			return new GameModel
+			{
+				BoardStatus = status,
+				Description = description,
+				Deck = cards.ToList(),
+				PlayerHand = new HandModel(cards[..5].ToList()),
+				PartnerHand = new HandModel(cards[5..10].ToList()),
+				LeftOpponentHand = new HandModel(cards[10..15].ToList()),
+				RightOpponentHand = new HandModel(cards[15..20].ToList())
+			};
 		}
 
 		public static GameModel Randomize(GameModel game, IPrincipal user, Random random)
 		{
-			var cards = GetDeck();
-
-			cards = cards.OrderBy(x => random.Next(0, 52));
-
-			return new GameModel
-			{
-				BoardStatus = BoardStatus.Shuffling,
-				Description = $"{user.Identity?.Name ?? "Anonymous"} shuffled the game!",
-				Deck = cards.ToList()
-			};
+			return BuildGame(
+				BoardStatus.Shuffling,
+				$"{user.Identity?.Name ?? "Anonymous"} shuffled the game!",
+				GetDeck().OrderBy(x => random.Next(0, 52)).ToArray());
 		}
 
 		public static GameModel PlayCard(GameModel game, CardModel card, IPrincipal user, Random random)
 		{
-			var cards = GetDeck();
-
-			cards = cards.OrderBy(x => random.Next(0, 52));
-
-			return new GameModel
+			if (game is null)
 			{
-				BoardStatus = BoardStatus.Playing,
-				Description = $"{user.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}",
-				Deck = cards.ToList(),
-				Pile = new List<CardModel> { card }
-			};
+				throw new ArgumentNullException(nameof(game));
+			}
+
+			if (card is null)
+			{
+				throw new ArgumentNullException(nameof(card));
+			}
+
+			game.Deck.Remove(card);
+			game.PlayerHand.Cards.Remove(card);
+			game.PartnerHand.Cards.Remove(card);
+			game.LeftOpponentHand.Cards.Remove(card);
+			game.RightOpponentHand.Cards.Remove(card);
+			game.Pile.Add(card);
+
+			game.BoardStatus = BoardStatus.Playing;
+			game.Description = $"{user.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}";
+
+			return game;
 		}
 	}
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Games.Eucre.Api.Enums;
 using Games.Eucre.Api.Models;
 using Games.Eucre.Api.Services;
 using Games.Eucre.Api.Utilities;
@@ -27,20 +24,6 @@ namespace Games.Eucre.Api.Controllers
 		{
 			_randomAccessor = randomAccessor ?? throw new ArgumentNullException(nameof(randomAccessor));
 			_gameUpdater = gameUpdater ?? throw new ArgumentNullException(nameof(gameUpdater));
-		}
-
-		protected IEnumerable<CardModel> GetDeck()
-		{
-			List<CardModel> deck = new List<CardModel>();
-			foreach (Suit suit in Enum.GetValues(typeof(Suit)))
-			{
-				deck.AddRange(Enumerable.Range(9, 5).Prepend(1).Select(index => new CardModel
-				{
-					Value = index,
-					Suit = suit,
-				}).ToArray());
-			}
-			return deck;
 		}
 
 		[HttpGet]
@@ -78,8 +61,10 @@ namespace Games.Eucre.Api.Controllers
 		{
 			GameModel? maybeGame = await _gameUpdater.GetGameModel();
 
-			if (maybeGame is not GameModel game)
+			if (maybeGame is null)
 				return false;
+
+			GameModel game = maybeGame;
 
 			game = Gameplay.PlayCard(game, card, User, _randomAccessor.Random);
 

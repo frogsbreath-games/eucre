@@ -50,7 +50,7 @@ class Game extends React.PureComponent<GameProps> {
           </div>
           <div className={styles.northPlayer}>
             <Hand
-              hand={this.props.game.deck.slice(0, 5)}
+              hand={this.props.game.partnerHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>
@@ -60,20 +60,20 @@ class Game extends React.PureComponent<GameProps> {
           </div>
           <div className={styles.eastPlayer}>
             <Hand
-              hand={this.props.game.deck.slice(6, 11)}
+              hand={this.props.game.leftOpponentHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>
           <div className={styles.southPlayer}>
             <Hand
-              hand={this.props.game.deck.slice(12, 17)}
+              hand={this.props.game.playerHand.cards}
               cardAction={this.handleStackDrop}
               revealed={true}
             />
           </div>
           <div className={styles.westPlayer}>
             <Hand
-              hand={this.props.game.deck.slice(18, 23)}
+              hand={this.props.game.rightOpponentHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>

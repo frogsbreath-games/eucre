@@ -100,6 +100,10 @@ const unloadedState: EucreState = {
     description: ``,
     deck: [],
     pile: [],
+    playerHand: { cards: [] },
+    partnerHand: { cards: [] },
+    leftOpponentHand: { cards: [] },
+    rightOpponentHand: { cards: [] }
   },
   isLoading: false,
 };

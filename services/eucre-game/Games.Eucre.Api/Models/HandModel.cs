@@ -2,8 +2,5 @@
 
 namespace Games.Eucre.Api.Models
 {
-	public class HandModel
-	{
-		public List<CardModel> Cards { get; set; } = new List<CardModel>();
-	}
+	public record HandModel(List<CardModel> Cards);
 }

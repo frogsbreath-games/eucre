@@ -7,7 +7,6 @@ namespace Games.Eucre.Api.Models
 	{
 		public BoardStatus BoardStatus { get; set; }
 		public string Description { get; set; } = string.Empty;
-		//Todo
 		public List<CardModel> Deck { get; set; } = new List<CardModel>();
 		public int CurrentPlayerNumber { get; set; }
 		public int TeamScore { get; set; }
@@ -18,7 +17,10 @@ namespace Games.Eucre.Api.Models
 		public Suit? Trump { get; set; }
 		public CardModel? PickupCard { get; set; }
 		public int? LeadPlayer { get; set; }
-		public HandModel? Hand { get; set; }
+		public HandModel PlayerHand { get; set; } = new HandModel(new List<CardModel>());
+		public HandModel PartnerHand { get; set; } = new HandModel(new List<CardModel>());
+		public HandModel LeftOpponentHand { get; set; } = new HandModel(new List<CardModel>());
+		public HandModel RightOpponentHand { get; set; } = new HandModel(new List<CardModel>());
 		public List<CardModel> Pile { get; set; } = new List<CardModel>();
 	}
 }
