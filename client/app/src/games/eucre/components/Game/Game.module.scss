@@ -34,12 +34,12 @@
   grid-area: north;
   display: grid;
   justify-content: center;
-  transform: rotate(180deg);
+  transform: rotate(180deg) scale(0.8);
 }
 
 .eastPlayer {
   grid-area: east;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(0.8);
   display: grid;
   justify-content: center;
 }
@@ -48,19 +48,24 @@
   grid-area: south;
   display: grid;
   justify-content: center;
+  transform: scale(1.5);
 }
 
 .westPlayer {
   grid-area: west;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(0.8);
   display: grid;
   justify-content: center;
 }
 
 .play {
   grid-area: play;
-  background-color: grey;
+  background-color: #a1c1e1;
   display: grid;
   justify-content: center;
   align-content: center;
+}
+
+body {
+  background: #d1e1f1;
 }
