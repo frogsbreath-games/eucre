@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Games.Eucre.Api.Auth;
 using Games.Eucre.Api.Hubs;
+using Games.Eucre.Api.Services;
 using Games.Eucre.Api.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -96,6 +97,7 @@ namespace Games.Eucre.Api
 			services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
 			services.AddScoped<RandomAccessor>();
+			services.AddSingleton<GameUpdater>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

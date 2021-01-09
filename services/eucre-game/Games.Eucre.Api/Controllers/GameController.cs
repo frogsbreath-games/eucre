@@ -2,32 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Games.Eucre.Api.Clients;
 using Games.Eucre.Api.Enums;
-using Games.Eucre.Api.Hubs;
 using Games.Eucre.Api.Models;
+using Games.Eucre.Api.Services;
 using Games.Eucre.Api.Utilities;
+using Games.Eucre.Api.Workflow;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 
 namespace Games.Eucre.Api.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("api/eucre")]
+	[Route("api/eucre/game")]
 	[Produces("application/json"), Consumes("application/json")]
 	public class GameController : ControllerBase
 	{
-		private readonly IHubContext<GameplayHub, IGameplayClient> _hubContext;
 		private readonly RandomAccessor _randomAccessor;
+		private readonly GameUpdater _gameUpdater;
 
 		public GameController(
-			IHubContext<GameplayHub, IGameplayClient> hubContext,
-			RandomAccessor randomAccessor)
+			RandomAccessor randomAccessor,
+			GameUpdater gameUpdater)
 		{
-			_hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
 			_randomAccessor = randomAccessor ?? throw new ArgumentNullException(nameof(randomAccessor));
+			_gameUpdater = gameUpdater ?? throw new ArgumentNullException(nameof(gameUpdater));
 		}
 
 		protected IEnumerable<CardModel> GetDeck()
@@ -44,34 +43,32 @@ namespace Games.Eucre.Api.Controllers
 			return deck;
 		}
 
-		[HttpGet("game")]
-		public GameModel GetEucreGame()
+		[HttpGet]
+		public async Task<GameModel> GetEucreGame()
 		{
-			return new GameModel
-			{
-				BoardStatus = BoardStatus.GameStarting,
-				Description = "New Game",
-				Deck = GetDeck().ToList()
-			};
+			GameModel? maybeGame = await _gameUpdater.GetGameModel();
+
+			if (maybeGame is GameModel game)
+				return game;
+
+			game = Gameplay.CreateGame();
+
+			await _gameUpdater.SaveGame(game);
+
+			return game;
 		}
 
 		[HttpPost("shuffle")]
 		public async Task<bool> Shuffle()
 		{
-			var cards = GetDeck();
+			GameModel? maybeGame = await _gameUpdater.GetGameModel();
 
-			var rand = _randomAccessor.Random;
+			if (maybeGame is not GameModel game)
+				return false;
 
-			cards = cards.OrderBy(x => rand.Next(0, 52));
+			game = Gameplay.Randomize(game, User, _randomAccessor.Random);
 
-			var gameState = new GameModel
-			{
-				BoardStatus = BoardStatus.Shuffling,
-				Description = $"{User.Identity?.Name ?? "Anonymous"} shuffled the game!",
-				Deck = cards.ToList()
-			};
-
-			await _hubContext.Clients.All.UpdateGame(gameState);
+			await _gameUpdater.SaveGame(game);
 
 			return true;
 		}
@@ -79,21 +76,14 @@ namespace Games.Eucre.Api.Controllers
 		[HttpPost("play")]
 		public async Task<bool> Play(CardModel card)
 		{
-			var cards = GetDeck();
+			GameModel? maybeGame = await _gameUpdater.GetGameModel();
 
-			var rand = _randomAccessor.Random;
+			if (maybeGame is not GameModel game)
+				return false;
 
-			cards = cards.OrderBy(x => rand.Next(0, 52));
+			game = Gameplay.PlayCard(game, card, User, _randomAccessor.Random);
 
-			var gameState = new GameModel
-			{
-				BoardStatus = BoardStatus.Playing,
-				Description = $"{User.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}",
-				Deck = cards.ToList(),
-				Pile = new List<CardModel> { card }
-			};
-
-			await _hubContext.Clients.All.UpdateGame(gameState);
+			await _gameUpdater.SaveGame(game);
 
 			return true;
 		}

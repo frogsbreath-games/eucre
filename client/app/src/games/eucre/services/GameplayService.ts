@@ -19,11 +19,11 @@ export class GameplayService implements IGameplayService {
   }
 
   public shuffleDeck(): Promise<boolean> {
-    return this._apiClient.post<boolean>(`shuffle`, { body: null });
+    return this._apiClient.post<boolean>(`game/shuffle`, { body: null });
   }
 
   public playCard(card: Card): Promise<boolean> {
-    return this._apiClient.post<boolean>(`play`, {
+    return this._apiClient.post<boolean>(`game/play`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
