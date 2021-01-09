@@ -54,7 +54,7 @@ export const actionCreators = {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.getEucreGame().then((data) => {
+      appState.services.eucre.getEucreGame().then((data: EucreTypes.Game) => {
         dispatch({
           type: "RECEIVE_EUCRE_GAME",
           game: data,
@@ -69,7 +69,7 @@ export const actionCreators = {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.shuffleDeck().then((data) => {
+      appState.services.eucre.shuffleDeck().then((data: boolean) => {
         console.log("shuffled");
       });
       dispatch({
@@ -84,7 +84,7 @@ export const actionCreators = {
   ) => {
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.playCard(card).then((data) => {
+      appState.services.eucre.playCard(card).then((data: boolean) => {
         console.log("played");
       });
     }
