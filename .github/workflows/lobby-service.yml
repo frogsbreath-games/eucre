@@ -1,10 +1,12 @@
 name: Lobby Service
 on:
   push:
+    branches:
+      - "**"
     paths:
-      - '.github/workflows/lobby-service.yml'
-      - 'docker-compose.yml'
-      - 'services/lobby-service/*'
+      - ".github/workflows/lobby-service.yml"
+      - "docker-compose.yml"
+      - "services/lobby-service/*"
   pull_request:
     branches: [master]
 
