@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/eucre-game.yml"
       - "docker-compose.yml"
-      - "services/eucre-game/*"
+      - "services/eucre-game/**"
   pull_request:
     branches: [master]
 
