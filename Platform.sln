@@ -37,6 +37,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Library", "Platform.Library", "{9D7F439E-53C0-48AC-8744-069DAF220ADF}"
 	ProjectSection(SolutionItems) = preProject
 		services\library\Dockerfile = services\library\Dockerfile
+		.github\workflows\library-service.yml = .github\workflows\library-service.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Lobby", "Platform.Lobby", "{BF852D78-5020-4BBA-8759-341A7597FF16}"
@@ -48,11 +49,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Profile", "Platform.Profile", "{C764F88E-4A73-4080-8658-570578A00DDD}"
 	ProjectSection(SolutionItems) = preProject
 		services\profile\Dockerfile = services\profile\Dockerfile
+		.github\workflows\profile-service.yml = .github\workflows\profile-service.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Weather", "Weather", "{D9050312-2B5F-4C2E-9068-3E532CBFE15E}"
 	ProjectSection(SolutionItems) = preProject
 		services\weather\Dockerfile = services\weather\Dockerfile
+		.github\workflows\weather-service.yml = .github\workflows\weather-service.yml
 	EndProjectSection
 EndProject
 Global

@@ -1,0 +1,34 @@
+name: Web App
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/web-app.yml"
+      - "docker-compose.yml"
+      - "Dockerfile"
+      - "client/**"
+      - "proxy/**"
+  pull_request:
+    branches: [master]
+
+  workflow_dispatch:
+
+jobs:
+  docker-build-web-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build web-app container
+        run: docker-compose build web-app
+
+  docker-run-client-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build client-tests container
+        run: docker-compose build client-tests
+      - name: Run client-tests
+        run: docker-compose run --rm client-tests

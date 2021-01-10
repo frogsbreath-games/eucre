@@ -1,0 +1,22 @@
+name: Profile Service
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/profile-service.yml"
+      - "docker-compose.yml"
+      - "services/profile-service/**"
+  pull_request:
+    branches: [master]
+
+  workflow_dispatch:
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build profile-service container
+        run: docker-compose build profile-service
