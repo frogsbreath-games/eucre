@@ -2,8 +2,9 @@ name: Eucre Game
 on:
   push:
     paths:
-      - 'docker-compose.yml'
-      - 'services/eucre-game/*'
+      - ".github/workflows/eucre-game.yml"
+      - "docker-compose.yml"
+      - "services/eucre-game/*"
   pull_request:
     branches: [master]
 
