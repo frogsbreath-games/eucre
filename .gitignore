@@ -236,3 +236,6 @@ _Pvt_Extensions
 
 # Microservice App settings
 services/**/appsettings.Development.json
+
+# Temp until legacy branch is merged in
+.legacy/*
