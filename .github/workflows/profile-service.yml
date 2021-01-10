@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/profile-service.yml"
       - "docker-compose.yml"
-      - "services/profile-service/**"
+      - "services/profile/**"
   pull_request:
     branches: [master]
 

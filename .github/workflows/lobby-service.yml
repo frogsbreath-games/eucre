@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/lobby-service.yml"
       - "docker-compose.yml"
-      - "services/lobby-service/**"
+      - "services/lobby/**"
   pull_request:
     branches: [master]
 
