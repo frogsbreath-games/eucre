@@ -42,7 +42,7 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
     console.log(this.props.room);
     return (
       <React.Fragment>
-        <div>
+        <div className={styles.lobby}>
           <h3>{this.props.chatMessage.message}</h3>
           <input
             className={styles.input}
