@@ -22,15 +22,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Lobby.Api", "servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Profile.Api", "services\profile\Platform.Profile.Api\Platform.Profile.Api.csproj", "{A708BD1A-1304-4DEF-861E-4D3774E4DD08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Library.Tests", "services\library\Platform.Library.Tests\Platform.Library.Tests.csproj", "{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Library.Tests", "services\library\Platform.Library.Tests\Platform.Library.Tests.csproj", "{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Lobby.Tests", "services\lobby\Platform.Lobby.Tests\Platform.Lobby.Tests.csproj", "{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Lobby.Tests", "services\lobby\Platform.Lobby.Tests\Platform.Lobby.Tests.csproj", "{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Profile.Tests", "services\profile\Platform.Profile.Tests\Platform.Profile.Tests.csproj", "{F9722301-33B5-45B3-9F06-1634CF6AB93C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Profile.Tests", "services\profile\Platform.Profile.Tests\Platform.Profile.Tests.csproj", "{F9722301-33B5-45B3-9F06-1634CF6AB93C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games.Eucre", "Games.Eucre", "{27020763-7F5B-42A9-8BB5-787185E2BBB5}"
 	ProjectSection(SolutionItems) = preProject
 		services\eucre-game\Dockerfile = services\eucre-game\Dockerfile
+		.github\workflows\eucre-game.yml = .github\workflows\eucre-game.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Library", "Platform.Library", "{9D7F439E-53C0-48AC-8744-069DAF220ADF}"
@@ -41,6 +42,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Lobby", "Platform.Lobby", "{BF852D78-5020-4BBA-8759-341A7597FF16}"
 	ProjectSection(SolutionItems) = preProject
 		services\lobby\Dockerfile = services\lobby\Dockerfile
+		.github\workflows\lobby-service.yml = .github\workflows\lobby-service.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform.Profile", "Platform.Profile", "{C764F88E-4A73-4080-8658-570578A00DDD}"

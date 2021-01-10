@@ -34,14 +34,6 @@ jobs:
       - name: Build weather-service container
         run: docker-compose build weather-service
 
-  build-eucre-game:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build eucre-game container
-        run: docker-compose build eucre-game
-
   build-library-service:
     runs-on: ubuntu-latest
 
@@ -49,14 +41,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build library-service container
         run: docker-compose build library-service
-
-  build-lobby-service:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build lobby-service container
-        run: docker-compose build lobby-service
 
   build-profile-service:
     runs-on: ubuntu-latest
