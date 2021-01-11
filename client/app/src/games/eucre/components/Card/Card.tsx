@@ -8,43 +8,11 @@ interface ICardProps {
   value?: number;
   suit?: Types.Suit;
   id?: string;
-  dropAction?: (card: Types.Card) => void;
   front?: boolean;
   style?: React.CSSProperties;
 }
 
-const Card: React.FC<ICardProps> = ({
-  value,
-  suit,
-  id,
-  dropAction,
-  front,
-  style,
-}) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: DragTypes.CARD, value: value, suit: suit },
-    end: (
-      item: { type: string; value?: number; suit?: string } | undefined,
-      monitor: DragSourceMonitor
-    ) => {
-      const dropResult = monitor.getDropResult();
-      if (item && dropResult) {
-        dropAction &&
-          dropAction({ value: value ? value : 1, suit: suit ? suit : "Clubs" });
-        console.log(
-          `You dropped ${
-            item.value ? item.value.toString() + " of " + item.suit : ""
-          } into the ${dropResult.name}!`
-        );
-      }
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
-  const display = isDragging ? "none" : "";
-
+const Card: React.FC<ICardProps> = ({ value, suit, id, front, style }) => {
   var cardContent;
   if (front) {
     cardContent = (
@@ -61,11 +29,7 @@ const Card: React.FC<ICardProps> = ({
     cardContent = <div className={styles.cardBack}></div>;
   }
 
-  return (
-    <div ref={drag} className={styles.card} style={{ display }}>
-      {cardContent}
-    </div>
-  );
+  return <div className={styles.card}>{cardContent}</div>;
 };
 
 function gameCardInner(value?: number) {

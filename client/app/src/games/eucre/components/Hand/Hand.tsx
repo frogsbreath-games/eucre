@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./Hand.module.scss";
 import Card from "../Card/Card";
+import Droppable from "../Droppable/Droppable";
 import * as Types from "app/games/eucre/types";
+import { DragTypes } from "../../dnd-types/DragTypes";
 
 interface IHandProps {
   revealed?: boolean;
@@ -22,13 +24,17 @@ const Hand: React.FunctionComponent<IHandProps> = ({
           className={styles.card}
           style={cardStyle(index, hand.length)}
         >
-          <Card
-            key={card.suit + card.value}
-            value={card.value}
-            suit={card.suit}
-            dropAction={cardAction}
-            front={revealed ? true : false}
-          />
+          <Droppable
+            dropAction={cardAction ? () => cardAction(card) : undefined}
+            dragType={DragTypes.CARD}
+          >
+            <Card
+              key={card.suit + card.value}
+              value={card.value}
+              suit={card.suit}
+              front={revealed ? true : false}
+            />
+          </Droppable>
         </div>
       ))}
     </div>
