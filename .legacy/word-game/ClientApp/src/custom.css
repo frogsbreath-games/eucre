@@ -1,0 +1,26 @@
+/* Provide sufficient contrast against white background */
+@import url('https://fonts.googleapis.com/css?family=Carrois+Gothic|Carrois+Gothic+SC&display=swap');
+
+* {
+    font-family: "Carrois Gothic", sans-serif;
+}
+
+
+h1,h2,h3 {
+  font-family: "Carrois Gothic SC", sans-serif;
+  font-weight: 700;
+}
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}

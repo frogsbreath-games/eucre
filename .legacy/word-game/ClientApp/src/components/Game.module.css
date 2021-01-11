@@ -1,0 +1,490 @@
+:root {
+  --blue: #009ddc;
+  --light-blue: #6bbbdb;
+  --dark-blue: #004c6b;
+  --red: #c3423f;
+  --light-red: #dd5f5d;
+  --dark-red: #6d2726;
+  --tan: #c5afa4;
+  --dark-tan: #695f5a;
+  --grey: #c4c4c4;
+  --dark-grey: #757575;
+  --black: #3b3b3b;
+  --green: #58c087;
+  --dark-green: #234d36;
+}
+
+.submit {
+  composes: submit from "../styles/utility.module.css";
+}
+
+.confirm {
+  composes: confirm from "../styles/utility.module.css";
+}
+
+.cancel {
+  composes: cancel from "../styles/utility.module.css";
+}
+
+.input {
+  composes: input from "../styles/utility.module.css";
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.banner {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  justify-content: stretch;
+}
+
+.tile {
+  text-transform: capitalize;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.instructions {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 2px white;
+  background: white;
+  box-shadow: 0 6px;
+}
+
+.blueTile {
+  composes: tile;
+  background-color: var(--light-blue);
+  box-shadow: 0 6px var(--dark-blue);
+}
+
+.redTile {
+  composes: tile;
+  background-color: var(--light-red);
+  box-shadow: 0 6px var(--dark-red);
+}
+
+.teamLabel {
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 5px 10px 5px;
+  margin: 10px;
+}
+
+.blueTeamLabel {
+  composes: teamLabel;
+  background-color: var(--blue);
+}
+
+.redTeamLabel {
+  composes: teamLabel;
+  background-color: var(--red);
+}
+
+.character {
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+  margin-top: -5px;
+}
+
+.playerIcon {
+  height: 75px;
+  width: 75px;
+  background-color: #bbb;
+  border-radius: 20%;
+  border: solid 2px white;
+  position: relative;
+  display: grid;
+  z-index: 1;
+  margin-top: -5px;
+}
+
+.bluePlayerIcon {
+  composes: playerIcon;
+  background-color: var(--blue);
+}
+.redPlayerIcon {
+  composes: playerIcon;
+  background-color: var(--red);
+}
+
+.vote {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  border: solid;
+  position: relative;
+  z-index: 1;
+  margin: 3px;
+  display: inline-block;
+}
+
+.blink {
+  animation: blink-animation 0.7s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.pulse {
+  animation: pulsing 1s 1;
+}
+
+.pulsing {
+  animation: pulsing 1s infinite;
+}
+
+@keyframes pulsing {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+.glow {
+  animation: glowing 2s infinite;
+}
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 -10px white;
+  }
+  40% {
+    box-shadow: 0 0 20px white;
+  }
+  60% {
+    box-shadow: 0 0 20px white;
+  }
+  100% {
+    box-shadow: 0 0 -10px white;
+  }
+}
+
+.blueVote {
+  composes: vote;
+  background-color: var(--light-blue);
+  border-color: var(--dark-blue);
+}
+
+.redVote {
+  composes: vote;
+  background-color: var(--light-red);
+  border-color: var(--dark-red);
+}
+
+.badge {
+  width: 25px;
+  opacity: 0.5;
+  justify-self: center;
+  align-self: center;
+  fill: white;
+}
+
+.tracker {
+  display: grid;
+  padding-top: 10px;
+  grid-template-columns: 0% 100%;
+  margin-right: 10px;
+}
+
+.tracker > h4 {
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  border: solid 2px white;
+}
+
+.blueHeader {
+  background-color: var(--light-blue);
+}
+
+.redHeader {
+  background-color: var(--light-red);
+}
+
+.lightLabel {
+  /*background-color: rgba(255, 255, 255, 0.75);*/
+  padding: 5px;
+  border-radius: 5px;
+  /*box-shadow: 0 1px 3px rgba(255, 255, 255, 0.24),
+    0 1px 3px rgba(255, 255, 255, 0.36);*/
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(25%, 1fr));
+  grid-template-rows: repeat(6, minmax(10%, 1fr));
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  background-image: url("../assets/BookCover.svg");
+  background-repeat: no-repeat;
+  background-clip: padding-box;
+  background-size: contain;
+  width: 100%;
+  padding: 4% 10% 10% 6%;
+}
+
+.wordTile {
+  transition: transform 1s;
+}
+
+.wordTileWord {
+  font-weight: bold;
+  text-shadow: 0 0 0.05rem rgba(255, 255, 255, 0.9),
+    0 0 0.3rem rgba(255, 255, 255, 0.6);
+}
+
+.wordTile:hover {
+  filter: brightness(110%);
+}
+
+/* Eye icon styles */
+
+.reveal {
+  width: 100%;
+  opacity: 0.5;
+}
+
+.redReveal {
+  text-align: center;
+  composes: reveal;
+  fill: var(--dark-red);
+}
+
+.blueReveal {
+  text-align: center;
+  composes: reveal;
+  fill: var(--dark-blue);
+}
+.neutralReveal {
+  text-align: center;
+  composes: reveal;
+  fill: var(--dark-tan);
+}
+
+.blackReveal {
+  text-align: center;
+  composes: reveal;
+  fill: white;
+  width: 50%;
+}
+
+/* Centering absolute positioned items */
+
+.center {
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.absoluteCenter {
+  composes: center;
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  margin-top: -20%;
+  margin-left: -40%;
+  z-index: 100;
+}
+
+.tileContainer {
+  position: relative;
+}
+
+/* Tile outer styles */
+
+.neutralTileOuter polygon {
+  fill: var(--dark-tan);
+}
+
+.redTileOuter polygon {
+  fill: var(--dark-red);
+}
+
+.blueTileOuter polygon {
+  fill: var(--dark-blue);
+}
+
+.blackTileOuter polygon {
+  fill: var(--black);
+}
+
+.unknownTileOuter polygon {
+  fill: var(--dark-grey);
+}
+
+/* Tile inner styles */
+.tileInner {
+  position: absolute;
+  width: 90%;
+  z-index: 10;
+  left: 5%;
+  top: 5%;
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+}
+
+.redTileInner {
+  composes: tileInner;
+}
+
+.redTileInner polygon {
+  fill: var(--red);
+}
+
+.blueTileInner {
+  composes: tileInner;
+}
+
+.blueTileInner polygon {
+  fill: var(--blue);
+}
+
+.neutralTileInner {
+  composes: tileInner;
+}
+
+.neutralTileInner polygon {
+  fill: var(--tan);
+}
+
+.unknownTileInner {
+  composes: tileInner;
+}
+
+.unknownTileInner polygon {
+  fill: var(--grey);
+}
+
+.blackTileInner {
+  composes: tileInner;
+}
+
+.blackTileInner polygon {
+  fill: var(--dark-grey);
+}
+
+.gameBody {
+  border-top: solid 3px var(--black);
+  display: grid;
+  grid-template-columns: 4fr 6fr 4fr;
+  grid-template-areas: "left main right";
+}
+
+.leftSection {
+  grid-area: left;
+  border-right: 4px solid var(--black);
+  padding: 10px;
+  background: #4a4a4a;
+}
+
+.rightSection {
+  grid-area: right;
+  border-left: 4px solid var(--black);
+  padding: 10px;
+  background: #4a4a4a;
+}
+
+.main {
+  grid-area: main;
+  padding: 10px 30px;
+  background: radial-gradient(var(--grey), var(--dark-grey));
+}
+
+.chat {
+  grid-area: chat;
+  display: grid;
+  grid-template-areas:
+    "messages"
+    "chatInput";
+}
+
+.eventWindow {
+  composes: eventWindow from "../styles/utility.module.css";
+  min-height: calc(100vh - 215px);
+  max-height: calc(100vh - 215px);
+  grid-area: messages;
+}
+
+.chatInput {
+  grid-area: chatInput;
+  width: 95%;
+}
+
+.messageInput {
+  composes: input;
+  width: 100%;
+}
+
+.red {
+  composes: redColor from "../styles/utility.module.css";
+}
+
+.blue {
+  composes: blueColor from "../styles/utility.module.css";
+}
+
+.submitHint {
+  composes: submit;
+  justify-self: center;
+  margin: 10px;
+  width: 80%;
+}
+
+@media (max-width: 700px) {
+  .gameBody {
+    border-top: solid 3px var(--black);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "main"
+      "left"
+      "right";
+  }
+  .board {
+    padding: 4% 10% 10% 6%;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+  }
+
+  .wordTileWord {
+    font-size: 0.8rem;
+  }
+
+  .vote {
+    height: 10px;
+    width: 10px;
+  }
+
+  .chat {
+    grid-template-areas:
+      "chatInput"
+      "messages";
+  }
+
+  .eventWindow {
+    flex-direction: column;
+  }
+
+  .replace {
+    font-size: 0.9rem;
+  }
+}
