@@ -23,7 +23,7 @@ interface ChatSentAction {
 }
 
 interface ReceiveLobbyAction {
-  type: "RECIEVE_LOBBY";
+  type: "RECEIVE_LOBBY";
   lobby: Lobby;
 }
 
@@ -56,7 +56,7 @@ export const actionCreators = {
       appState.services.lobby.getLobby().then((data: Lobby) => {
         console.log("Lobby Requested");
         dispatch({
-          type: "RECIEVE_LOBBY",
+          type: "RECEIVE_LOBBY",
           lobby: data,
         });
       });
@@ -105,7 +105,7 @@ export const reducer: Reducer<LobbyState> = (
         chatMessage: state.chatMessage,
         isLoading: true,
       };
-    case "RECIEVE_LOBBY":
+    case "RECEIVE_LOBBY":
       return {
         room: action.lobby,
         chatMessage: state.chatMessage,

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { ApplicationState } from "app/store";
 import styles from "./Lobby.module.scss";
 import * as LobbyStore from "app/store/Lobby";
+import { Input } from "app/ui";
 
 // At runtime, Redux will merge together...
 type LobbyProps = LobbyStore.LobbyState & // ... state we've requested from the Redux store
@@ -24,14 +25,14 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
   }
 
   public handleKeyPress(event: React.KeyboardEvent) {
-    var keyCode = event.keyCode || event.which;
-    if (keyCode === 13) {
+    var keyCode = event.code;
+    if (keyCode === "Enter") {
       this.chat(this.state.input);
     }
   }
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ input: event.target.value });
+  handleChange(input: string) {
+    this.setState({ input: input });
   }
 
   public chat(message: string) {
@@ -40,12 +41,16 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
 
   public render() {
     console.log(this.props.room);
+    console.log(this.props.chatMessage);
     return (
       <React.Fragment>
         <div className={styles.lobby}>
-          <h3>{this.props.chatMessage.message}</h3>
-          <input
-            className={styles.input}
+          {this.props.chatMessage.message && (
+            <div>
+              <span>{this.props.chatMessage.message}</span>
+            </div>
+          )}
+          <Input
             type="text"
             placeholder="Message something..."
             value={this.state.input}
