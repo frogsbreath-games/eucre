@@ -56,7 +56,10 @@ function cardStyle(index: number, count: number) {
 
 function handStyle(count: number) {
   return {
-    width: 75 * count + "px",
+    // TODO Fix dynamic width
+    // width changing on hand components is making parent div change size causing board jump
+    // width: 75 * count + "px",
+    width: "175px",
   };
 }
 
