@@ -9,10 +9,16 @@ import {
   LobbyService as LobbyService,
 } from "app/services";
 
+import {
+  IProfileService as IProfileService,
+  ProfileService as ProfileService,
+} from "app/services";
+
 export interface ServiceProviderState {
   weather: IWeatherService;
   eucre: IEucreService;
   lobby: ILobbyService;
+  profile: IProfileService;
 }
 
 const unloadedState: ServiceProviderState = {
@@ -23,6 +29,10 @@ const unloadedState: ServiceProviderState = {
   ),
   lobby: new LobbyService(
     process.env.REACT_APP_LOBBY_URL,
+    process.env.REACT_APP_EUCRE_AUDIENCE
+  ),
+  profile: new ProfileService(
+    process.env.REACT_APP_PROFILE_URL,
     process.env.REACT_APP_EUCRE_AUDIENCE
   ),
 };

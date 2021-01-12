@@ -54,7 +54,7 @@ export const actionCreators = {
     const appState = getState();
     if (appState && appState.lobby) {
       appState.services.lobby.getLobby().then((data: Lobby) => {
-        console.log("Lobby Requested");
+        console.log("Lobby Recieved");
         dispatch({
           type: "RECEIVE_LOBBY",
           lobby: data,
