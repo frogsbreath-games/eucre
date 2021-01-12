@@ -4,7 +4,7 @@ import { ApplicationState } from "app/store";
 import styles from "./Game.module.scss";
 import * as EucreStore from "app/store/Eucre";
 import Card from "../Card/Card";
-import DropZone from "../DropZone/DropZone";
+import DropWrapper from "../DropWrapper/DropWrapper";
 import { DragTypes } from "../../dnd-types/DragTypes";
 import Hand from "../Hand/Hand";
 import Stack from "../Stack/Stack";
@@ -58,9 +58,9 @@ class Game extends React.PureComponent<GameProps> {
           </div>
           <div className={styles.play}>
             <label>Drag a card onto me!</label>
-            <DropZone name="pile" accept={DragTypes.CARD}>
+            <DropWrapper name="pile" accept={DragTypes.CARD}>
               <Stack cards={this.props.game.pile} />
-            </DropZone>
+            </DropWrapper>
           </div>
           <div className={styles.eastPlayer}>
             <Hand

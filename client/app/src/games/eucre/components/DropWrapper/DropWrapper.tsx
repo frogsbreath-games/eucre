@@ -6,7 +6,7 @@ interface IProps {
   accept: string; // dnd-type of objects accepting into this drop ref
 }
 
-const DropZone: React.FC<IProps> = ({ name, accept, children }) => {
+const DropWrapper: React.FC<IProps> = ({ name, accept, children }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: accept,
     drop: () => ({ name: name }),
@@ -19,4 +19,4 @@ const DropZone: React.FC<IProps> = ({ name, accept, children }) => {
   return <div ref={drop}>{children}</div>;
 };
 
-export default DropZone;
+export default DropWrapper;

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Hand.module.scss";
 import Card from "../Card/Card";
-import Droppable from "../Droppable/Droppable";
+import DragWrapper from "../Droppable/DragWrapper";
 import * as Types from "app/games/eucre/types";
 import { DragTypes } from "../../dnd-types/DragTypes";
 
@@ -24,7 +24,7 @@ const Hand: React.FunctionComponent<IHandProps> = ({
           className={styles.card}
           style={cardStyle(index, hand.length)}
         >
-          <Droppable
+          <DragWrapper
             dropAction={cardAction ? () => cardAction(card) : undefined}
             dragType={DragTypes.CARD}
           >
@@ -34,7 +34,7 @@ const Hand: React.FunctionComponent<IHandProps> = ({
               suit={card.suit}
               front={revealed ? true : false}
             />
-          </Droppable>
+          </DragWrapper>
         </div>
       ))}
     </div>

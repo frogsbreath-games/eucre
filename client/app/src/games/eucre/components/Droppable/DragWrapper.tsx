@@ -6,7 +6,7 @@ interface IProps {
   dragType: string; //dnd-type of object being dragged
 }
 
-const Droppable: React.FC<IProps> = ({ dropAction, dragType, children }) => {
+const DragWrapper: React.FC<IProps> = ({ dropAction, dragType, children }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { type: dragType },
     end: (item: { type: string } | undefined, monitor: DragSourceMonitor) => {
@@ -28,4 +28,4 @@ const Droppable: React.FC<IProps> = ({ dropAction, dragType, children }) => {
   );
 };
 
-export default Droppable;
+export default DragWrapper;
