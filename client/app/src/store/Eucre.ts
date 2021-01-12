@@ -38,7 +38,7 @@ export const actionCreators = {
     const appState = getState();
     if (appState && appState.eucre) {
       appState.services.eucre.connectToGameHub({
-        updateGame: (game: EucreTypes.Game) => {
+        gameUpdated: (game: EucreTypes.Game) => {
           dispatch({
             type: "RECEIVE_EUCRE_GAME",
             game: game,

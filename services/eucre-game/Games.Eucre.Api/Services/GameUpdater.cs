@@ -26,7 +26,7 @@ namespace Games.Eucre.Api.Services
 		public async Task SaveGame(GameModel game)
 		{
 			_game = game;
-			await _hubContext.Clients.All.UpdateGame(_game);
+			await _hubContext.Clients.All.GameUpdated(_game);
 		}
 	}
 }

@@ -33,6 +33,6 @@ export class GameplayService implements IGameplayService {
   }
 
   public connectToGameHub(handlers: GameplayEventHandlers) {
-    this._hubClient.setupHub(`game`, [[`updateGame`, handlers.updateGame]]);
+    this._hubClient.setupHub(`game`, [[`gameUpdated`, handlers.gameUpdated]]);
   }
 }
