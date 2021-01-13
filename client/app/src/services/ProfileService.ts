@@ -13,7 +13,13 @@ export class ProfileService implements IProfileService {
     return this._apiClient.get<Profile>(``);
   }
 
-  public addProfile(): Promise<boolean> {
-    return this._apiClient.post<boolean>(``);
+  public addProfile(profile: Profile): Promise<boolean> {
+    return this._apiClient.post<boolean>(``, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profile),
+    });
   }
 }

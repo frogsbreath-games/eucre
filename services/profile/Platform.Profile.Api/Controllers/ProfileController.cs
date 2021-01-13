@@ -26,11 +26,12 @@ namespace Platform.Profile.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<bool> AddProfile()
+		public async Task<bool> AddProfile(ProfileModel profile)
 		{
 			await _service.AddProfile(new ProfileModel
 			{
-				Auth0Id = User.Identity?.Name
+				Auth0Id = User.Identity?.Name,
+				Username = profile.Username
 			}
 			);
 			return true;
