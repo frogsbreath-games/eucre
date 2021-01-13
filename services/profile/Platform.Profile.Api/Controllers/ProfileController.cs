@@ -25,6 +25,12 @@ namespace Platform.Profile.Api.Controllers
 			return await _service.GetProfileById(User.Identity?.Name);
 		}
 
+		[HttpGet("{id}")]
+		public async Task<ProfileModel> GetProfileById([FromRoute] string id)
+		{
+			return await _service.GetProfileById(id);
+		}
+
 		[HttpPost]
 		public async Task<bool> AddProfile(ProfileModel profile)
 		{
