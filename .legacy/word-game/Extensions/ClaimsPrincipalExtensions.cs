@@ -11,17 +11,17 @@ namespace WordGame.API.Extensions
 	{
 		public static Guid GetPlayerId(this ClaimsPrincipal principal)
 		{
-			return Guid.Parse(principal.Claims.SingleOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+			return Guid.Parse(principal.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier).Value);
 		}
 
 		public static Player GetPlayer(this ClaimsPrincipal principal, Game game)
 		{
-			return game.Players.SingleOrDefault(p => p.Id == principal.GetPlayerId());
+			return game.Players.Single(p => p.Id == principal.GetPlayerId());
 		}
 
 		public static string GetGameCode(this ClaimsPrincipal principal)
 		{
-			return principal.Claims.SingleOrDefault(x => x.Type == "Game").Value;
+			return principal.Claims.Single(x => x.Type == "Game").Value;
 		}
 
 	}

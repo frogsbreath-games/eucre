@@ -18,14 +18,14 @@ namespace WordGame.API.Hubs
 			_gameRepository = gameRepository;
 		}
 
-		protected override string GroupName => Context.User.GetGameCode();
+		protected override string GroupName => Context.User!.GetGameCode();
 
 		public async Task SendMessage(string message)
 		{
-			var game = await _gameRepository.GetGameByCode(Context.User.GetGameCode());
+			var game = await _gameRepository.GetGameByCode(Context.User!.GetGameCode());
 
 			await Clients.Group(GroupName).GameEvent(
-				GameEvent.PlayerMessage(Context.User.GetPlayer(game),
+				GameEvent.PlayerMessage(Context.User!.GetPlayer(game),
 				DateTime.Now,
 				message));
 		}

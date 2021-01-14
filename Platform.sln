@@ -58,6 +58,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Weather", "Weather", "{D905
 		.github\workflows\weather-service.yml = .github\workflows\weather-service.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordGame.API", ".legacy\word-game\WordGame.API.csproj", "{9EB34444-1209-46CD-B6E7-C888183F7C71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Legacy", "_Legacy", "{B6EF09D8-B20D-4CAD-915C-7615F392D37B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,10 @@ Global
 		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9722301-33B5-45B3-9F06-1634CF6AB93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB34444-1209-46CD-B6E7-C888183F7C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB34444-1209-46CD-B6E7-C888183F7C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB34444-1209-46CD-B6E7-C888183F7C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB34444-1209-46CD-B6E7-C888183F7C71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +127,7 @@ Global
 		{6C8BF01E-39BF-4E80-BF0E-F8A8A6C07A83} = {9D7F439E-53C0-48AC-8744-069DAF220ADF}
 		{B8E475BC-1509-4FF3-A120-F7FCDAADB5ED} = {BF852D78-5020-4BBA-8759-341A7597FF16}
 		{F9722301-33B5-45B3-9F06-1634CF6AB93C} = {C764F88E-4A73-4080-8658-570578A00DDD}
+		{9EB34444-1209-46CD-B6E7-C888183F7C71} = {B6EF09D8-B20D-4CAD-915C-7615F392D37B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F28ABC32-9C3D-4FED-B07E-1620227F63EA}
