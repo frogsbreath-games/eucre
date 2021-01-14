@@ -25,8 +25,9 @@ namespace Platform.Profile.Api.Data.Repositories
 
 		public async Task<ProfileModel> GetProfileById(string code)
 		{
+			//Temporary First will return back to single or default
 			return await _profiles.Find(x => x.Auth0Id == code)
-				.SingleOrDefaultAsync();
+				.FirstOrDefaultAsync();
 		}
 	}
 }

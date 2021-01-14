@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Platform.Profile.Api.Data.Repositories;
 using Platform.Profile.Api.Domain.Models;
+using WordGame.API.Application.Services;
 
 namespace Platform.Profile.Api.Controllers
 {
+	[Authorize]
 	[ApiController]
 	[Route("api/profile")]
 	[Produces("application/json"), Consumes("application/json")]
 	public class ProfileController : ControllerBase
 	{
 		protected ProfileService _service;
+		protected INameGenerator _nameGenerator;
 
 		public ProfileController(
-			ProfileService service)
+			ProfileService service, INameGenerator nameGenerator)
 		{
 			_service = service ?? throw new ArgumentNullException(nameof(service));
+			_nameGenerator = nameGenerator ?? throw new ArgumentNullException(nameof(nameGenerator));
 		}
 
 		[HttpGet]
 		public async Task<ProfileModel> GetProfile()
 		{
-			return await _service.GetProfileById(User.Identity?.Name);
+			var profile = await _service.GetProfileById(User.Identity?.Name);
+			if(profile == null)
+			{
+				profile = new ProfileModel { };
+			}
+			return profile;
 		}
 
 		[HttpGet("{id}")]
@@ -32,15 +42,15 @@ namespace Platform.Profile.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<bool> AddProfile(ProfileModel profile)
+		public async Task<ProfileModel> AddProfile(ProfileModel profile)
 		{
-			await _service.AddProfile(new ProfileModel
+			var newProfile = new ProfileModel
 			{
 				Auth0Id = User.Identity?.Name,
-				Username = profile.Username
-			}
-			);
-			return true;
+				Username = _nameGenerator.GetRandomName()
+			};
+			await _service.AddProfile(newProfile);
+			return newProfile;
 		}
 	}
 }

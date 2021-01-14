@@ -14,10 +14,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Driver;
 using Platform.Profile.Api.Auth;
 using Platform.Profile.Api.Configuration;
 using Platform.Profile.Api.Data.Repositories;
+using WordGame.API.Application.Services;
 
 namespace Platform.Profile.Api
 {
@@ -100,6 +100,9 @@ namespace Platform.Profile.Api
 				sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
 
 			services.AddSingleton<ProfileService>();
+
+			services.AddScoped<IRandomAccessor, RandomAccessor>();
+			services.AddScoped<INameGenerator, NameGenerator>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
