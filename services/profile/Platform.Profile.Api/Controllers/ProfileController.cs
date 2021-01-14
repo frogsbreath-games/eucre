@@ -28,7 +28,7 @@ namespace Platform.Profile.Api.Controllers
 		public async Task<ProfileModel> GetProfile()
 		{
 			var profile = await _service.GetProfileById(User.Identity?.Name);
-			if(profile == null)
+			if (profile == null)
 			{
 				profile = new ProfileModel { };
 			}
