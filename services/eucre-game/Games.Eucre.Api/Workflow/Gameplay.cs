@@ -68,10 +68,11 @@ namespace Games.Eucre.Api.Workflow
 			game.RightOpponentHand.Cards.Remove(card);
 			game.Pile.Add(card);
 
-			game.BoardStatus = BoardStatus.Playing;
-			game.Description = $"{user.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}";
-
-			return game;
+			return game with
+			{
+				BoardStatus = BoardStatus.Playing,
+				Description = $"{user.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}"
+			};
 		}
 	}
 }

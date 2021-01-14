@@ -3,24 +3,24 @@ using Games.Eucre.Api.Enums;
 
 namespace Games.Eucre.Api.Models
 {
-	public class GameModel
+	public record GameModel
 	{
-		public BoardStatus BoardStatus { get; set; }
-		public string Description { get; set; } = string.Empty;
-		public List<CardModel> Deck { get; set; } = new List<CardModel>();
-		public int CurrentPlayerNumber { get; set; }
-		public int TeamScore { get; set; }
-		public int OpponentScore { get; set; }
-		public int RoundNumber { get; set; }
-		public int? TrickNumber { get; set; }
-		public int Dealer { get; set; }
-		public Suit? Trump { get; set; }
-		public CardModel? PickupCard { get; set; }
-		public int? LeadPlayer { get; set; }
-		public HandModel PlayerHand { get; set; } = new HandModel(new List<CardModel>());
-		public HandModel PartnerHand { get; set; } = new HandModel(new List<CardModel>());
-		public HandModel LeftOpponentHand { get; set; } = new HandModel(new List<CardModel>());
-		public HandModel RightOpponentHand { get; set; } = new HandModel(new List<CardModel>());
-		public List<CardModel> Pile { get; set; } = new List<CardModel>();
+		public BoardStatus BoardStatus { get; init; }
+		public string Description { get; init; } = string.Empty;
+		public List<CardModel> Deck { get; init; } = new List<CardModel>();
+		public int CurrentPlayerNumber { get; init; }
+		public int TeamScore { get; init; }
+		public int OpponentScore { get; init; }
+		public int RoundNumber { get; init; }
+		public int? TrickNumber { get; init; }
+		public int Dealer { get; init; }
+		public Suit? Trump { get; init; }
+		public CardModel? PickupCard { get; init; }
+		public int? LeadPlayer { get; init; }
+		public HandModel PlayerHand { get; init; } = new HandModel(new List<CardModel>());
+		public HandModel PartnerHand { get; init; } = new HandModel(new List<CardModel>());
+		public HandModel LeftOpponentHand { get; init; } = new HandModel(new List<CardModel>());
+		public HandModel RightOpponentHand { get; init; } = new HandModel(new List<CardModel>());
+		public List<CardModel> Pile { get; init; } = new List<CardModel>();
 	}
 }
