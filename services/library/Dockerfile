@@ -11,6 +11,9 @@ COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Platform.Library.Api
 COPY library/Platform.Library.Api/*.csproj .
 RUN dotnet restore
+WORKDIR /common/Platform.Common
+COPY common/Platform.Common/. .
+WORKDIR /src/Platform.Library.Api
 COPY library/Platform.Library.Api/. .
 RUN dotnet build -c Release -o /app/build
 

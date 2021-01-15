@@ -11,6 +11,9 @@ COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Weather.Api
 COPY weather/Weather.Api/*.csproj .
 RUN dotnet restore
+WORKDIR /common/Platform.Common
+COPY common/Platform.Common/. .
+WORKDIR /src/Weather.Api
 COPY weather/Weather.Api/. .
 RUN dotnet build -c Release -o /app/build
 

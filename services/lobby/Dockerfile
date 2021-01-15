@@ -11,6 +11,9 @@ COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Platform.Lobby.Api
 COPY lobby/Platform.Lobby.Api/*.csproj .
 RUN dotnet restore
+WORKDIR /common/Platform.Common
+COPY common/Platform.Common/. .
+WORKDIR /src/Platform.Lobby.Api
 COPY lobby/Platform.Lobby.Api/. .
 RUN dotnet build -c Release -o /app/build
 

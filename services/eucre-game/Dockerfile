@@ -11,6 +11,9 @@ COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Games.Eucre.Api
 COPY eucre-game/Games.Eucre.Api/*.csproj .
 RUN dotnet restore
+WORKDIR /common/Platform.Common
+COPY common/Platform.Common/. .
+WORKDIR /src/Games.Eucre.Api
 COPY eucre-game/Games.Eucre.Api/. .
 RUN dotnet build -c Release -o /app/build
 
