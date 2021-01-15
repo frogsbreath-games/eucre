@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using Platform.Common.Extensions;
 using Platform.Lobby.Api.Auth;
 using Platform.Lobby.Api.Hubs;
 
@@ -34,7 +34,7 @@ namespace Platform.Lobby.Api
 			services.AddCors();
 			services.AddControllers().AddJsonOptions(c =>
 			{
-				c.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+				c.JsonSerializerOptions.ConfigureJson();
 			});
 
 			services.AddSwaggerGen(c =>
@@ -44,7 +44,7 @@ namespace Platform.Lobby.Api
 
 			services.AddSignalR().AddJsonProtocol(c =>
 			{
-				c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+				c.PayloadSerializerOptions.ConfigureJson();
 			});
 
 			services.AddScoped<IMongoClient, MongoClient>(provider =>

@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Games.Eucre.Api.Auth;
 using Games.Eucre.Api.Hubs;
@@ -18,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using Platform.Common.Extensions;
 
 namespace Games.Eucre.Api
 {
@@ -36,7 +36,7 @@ namespace Games.Eucre.Api
 			services.AddCors();
 			services.AddControllers().AddJsonOptions(c =>
 			{
-				c.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+				c.JsonSerializerOptions.ConfigureJson();
 			});
 
 			services.AddSwaggerGen(c =>
@@ -46,7 +46,7 @@ namespace Games.Eucre.Api
 
 			services.AddSignalR().AddJsonProtocol(c =>
 			{
-				c.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+				c.PayloadSerializerOptions.ConfigureJson();
 			});
 
 			services.AddScoped<IMongoClient, MongoClient>(provider =>
