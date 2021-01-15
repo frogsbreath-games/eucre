@@ -18,8 +18,8 @@ services:
   weather-service:
     container_name: weather-service
     build:
-      context: ./services/weather
-      dockerfile: Dockerfile
+      context: ./services
+      dockerfile: weather/Dockerfile
     depends_on:
       - mongodb
     ports:
@@ -32,8 +32,8 @@ services:
   eucre-game:
     container_name: eucre-game
     build:
-      context: ./services/eucre-game
-      dockerfile: Dockerfile
+      context: ./services
+      dockerfile: eucre-game/Dockerfile
     depends_on:
       - mongodb
     ports:
@@ -46,8 +46,8 @@ services:
   library-service:
     container_name: library-service
     build:
-      context: ./services/library
-      dockerfile: Dockerfile
+      context: ./services
+      dockerfile: library/Dockerfile
     depends_on:
       - mongodb
     ports:
@@ -60,8 +60,8 @@ services:
   lobby-service:
     container_name: lobby-service
     build:
-      context: ./services/lobby
-      dockerfile: Dockerfile
+      context: ./services
+      dockerfile: lobby/Dockerfile
     depends_on:
       - mongodb
     ports:
@@ -74,8 +74,8 @@ services:
   profile-service:
     container_name: profile-service
     build:
-      context: ./services/profile
-      dockerfile: Dockerfile
+      context: ./services
+      dockerfile: profile/Dockerfile
     depends_on:
       - mongodb
     ports:

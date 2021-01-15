@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/weather-service.yml"
       - "docker-compose.yml"
+      - "services/common/**"
       - "services/weather/**"
   pull_request:
     branches: [master]

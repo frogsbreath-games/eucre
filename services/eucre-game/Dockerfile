@@ -6,18 +6,20 @@ EXPOSE 443
 
 # Configure build image from sdk
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /common/Platform.Common
+COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Games.Eucre.Api
-COPY Games.Eucre.Api/*.csproj .
+COPY eucre-game/Games.Eucre.Api/*.csproj .
 RUN dotnet restore
-COPY Games.Eucre.Api/. .
+COPY eucre-game/Games.Eucre.Api/. .
 RUN dotnet build -c Release -o /app/build
 
 # Configure testing image from build image
 FROM build AS testing
 WORKDIR /src/Games.Eucre.Tests
-COPY Games.Eucre.Tests/*.csproj .
+COPY eucre-game/Games.Eucre.Tests/*.csproj .
 RUN dotnet restore
-COPY Games.Eucre.Tests/. .
+COPY eucre-game/Games.Eucre.Tests/. .
 RUN dotnet test
 
 # Configure publishing image from build image

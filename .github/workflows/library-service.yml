@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/library-service.yml"
       - "docker-compose.yml"
+      - "services/common/**"
       - "services/library/**"
   pull_request:
     branches: [master]

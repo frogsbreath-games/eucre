@@ -2,6 +2,13 @@
 
 version: 2
 updates:
+
+    #platform common nuget updates
+  - package-ecosystem: "nuget"
+    directory: "services/common/Platform.Common/"
+    schedule:
+      interval: "daily"
+
     #weather-api nuget updates
   - package-ecosystem: "nuget"
     directory: "services/weather/Weather.Api/"

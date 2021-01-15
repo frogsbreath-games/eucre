@@ -6,18 +6,20 @@ EXPOSE 443
 
 # Configure build image from sdk
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /common/Platform.Common
+COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Platform.Profile.Api
-COPY Platform.Profile.Api/*.csproj .
+COPY profile/Platform.Profile.Api/*.csproj .
 RUN dotnet restore
-COPY Platform.Profile.Api/. .
+COPY profile/Platform.Profile.Api/. .
 RUN dotnet build -c Release -o /app/build
 
 # Configure testing image from build image
 FROM build AS testing
 WORKDIR /src/Platform.Profile.Tests
-COPY Platform.Profile.Tests/*.csproj .
+COPY profile/Platform.Profile.Tests/*.csproj .
 RUN dotnet restore
-COPY Platform.Profile.Tests/. .
+COPY profile/Platform.Profile.Tests/. .
 RUN dotnet test
 
 # Configure publishing image from build image

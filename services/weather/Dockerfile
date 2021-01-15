@@ -6,18 +6,20 @@ EXPOSE 443
 
 # Configure build image from sdk
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /common/Platform.Common
+COPY /common/Platform.Common/*.csproj .
 WORKDIR /src/Weather.Api
-COPY Weather.Api/*.csproj .
+COPY weather/Weather.Api/*.csproj .
 RUN dotnet restore
-COPY Weather.Api/. .
+COPY weather/Weather.Api/. .
 RUN dotnet build -c Release -o /app/build
 
 # Configure testing image from build image
 FROM build AS testing
 WORKDIR /src/Weather.Tests
-COPY Weather.Tests/*.csproj .
+COPY weather/Weather.Tests/*.csproj .
 RUN dotnet restore
-COPY Weather.Tests/. .
+COPY weather/Weather.Tests/. .
 RUN dotnet test
 
 # Configure publishing image from build image
