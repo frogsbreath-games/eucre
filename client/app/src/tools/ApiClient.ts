@@ -52,7 +52,7 @@ export default class ApiClient {
   }
 
   public async fetchRaw(
-    relativePath: string,
+    relativePath: string | undefined,
     init: FetchRequestInit
   ): Promise<Response> {
     const getToken = this._getToken;
@@ -63,11 +63,15 @@ export default class ApiClient {
       init.headers = headers;
     }
 
-    return await fetch(this._baseUrl + relativePath, init);
+    let path = this._baseUrl;
+
+    if (relativePath) path += relativePath;
+
+    return await fetch(path, init);
   }
 
   public fetch<TResponseJson>(
-    relativePath: string,
+    relativePath: string | undefined,
     init: FetchRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {
@@ -78,7 +82,7 @@ export default class ApiClient {
   }
 
   public get<TResponseJson>(
-    relativePath: string,
+    relativePath?: string | undefined,
     init?: GetRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {
@@ -90,7 +94,7 @@ export default class ApiClient {
   }
 
   public delete<TResponseJson>(
-    relativePath: string,
+    relativePath?: string | undefined,
     init?: DeleteRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {
@@ -102,7 +106,7 @@ export default class ApiClient {
   }
 
   public post<TResponseJson>(
-    relativePath: string,
+    relativePath?: string | undefined,
     init?: PostRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {
@@ -114,7 +118,7 @@ export default class ApiClient {
   }
 
   public patch<TResponseJson>(
-    relativePath: string,
+    relativePath?: string | undefined,
     init?: PatchRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {
@@ -126,7 +130,7 @@ export default class ApiClient {
   }
 
   public put<TResponseJson>(
-    relativePath: string,
+    relativePath?: string | undefined,
     init?: PutRequestInit,
     onrejected?: (response: any) => never
   ): Promise<TResponseJson> {

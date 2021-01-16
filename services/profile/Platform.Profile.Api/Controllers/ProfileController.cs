@@ -25,21 +25,21 @@ namespace Platform.Profile.Api.Controllers
 			_nameGenerator = nameGenerator ?? throw new ArgumentNullException(nameof(nameGenerator));
 		}
 
-		[HttpGet]
-		public async Task<ProfileModel> GetProfile()
+		[HttpGet("self")]
+		public async Task<ProfileModel> GetSelf()
 		{
 			return await _service.GetProfileByAuth0Id(User.Identity!.Name!)
 				?? new ProfileModel();
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ProfileModel?> GetProfileById([FromRoute] string id)
+		public async Task<ProfileModel?> GetById([FromRoute] string id)
 		{
 			return await _service.GetProfileById(id);
 		}
 
 		[AllowAnonymous]
-		[HttpGet("all")]
+		[HttpGet]
 		public async Task<List<ProfileModel>> GetAll(
 			[FromQuery] int skip = 0,
 			[FromQuery] int take = 100)
@@ -48,7 +48,7 @@ namespace Platform.Profile.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ProfileModel> AddProfile()
+		public async Task<ProfileModel> Add()
 		{
 			var profile = new ProfileModel
 			{
@@ -58,8 +58,8 @@ namespace Platform.Profile.Api.Controllers
 			return await _service.AddProfile(profile);
 		}
 
-		[HttpPost("{id}")]
-		public async Task<bool> UpdateProfile([FromRoute] string id, ProfileModel profile)
+		[HttpPut("{id}")]
+		public async Task<bool> Update([FromRoute] string id, ProfileModel profile)
 		{
 			await _service.UpdateProfile(id, profile);
 			return true;
@@ -67,7 +67,7 @@ namespace Platform.Profile.Api.Controllers
 
 		[AllowAnonymous]
 		[HttpDelete("{id}")]
-		public async Task<bool> DeleteProfile([FromRoute] string id)
+		public async Task<bool> Delete([FromRoute] string id)
 		{
 			await _service.DeleteProfile(id);
 			return true;

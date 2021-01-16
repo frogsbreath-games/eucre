@@ -10,15 +10,15 @@ export class ProfileService implements IProfileService {
   }
 
   public getProfile(): Promise<Profile> {
-    return this._apiClient.get<Profile>(``);
+    return this._apiClient.get<Profile>(`self`);
   }
 
   public addProfile(): Promise<Profile> {
-    return this._apiClient.post<Profile>(``, {});
+    return this._apiClient.post<Profile>();
   }
 
   public updateProfile(profile: Profile): Promise<Profile> {
-    return this._apiClient.post<Profile>(`${profile.id}`, {
+    return this._apiClient.put<Profile>(`${profile.id}`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
