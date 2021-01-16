@@ -7,7 +7,7 @@ namespace Platform.Profile.Api.Domain.Models
 	{
 		[JsonIgnore]
 		public ObjectId Id { get; set; }
-		public string Auth0Id { get; set; }
-		public string Username { get; set; }
+		public string? Auth0Id { get; set; }
+		public string? Username { get; set; }
 	}
 }

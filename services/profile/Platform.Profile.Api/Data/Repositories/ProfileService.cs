@@ -23,7 +23,7 @@ namespace Platform.Profile.Api.Data.Repositories
 			await _profiles.InsertOneAsync(profile);
 		}
 
-		public async Task<ProfileModel> GetProfileById(string code)
+		public async Task<ProfileModel?> GetProfileById(string code)
 		{
 			//Temporary First will return back to single or default
 			return await _profiles.Find(x => x.Auth0Id == code)

@@ -30,7 +30,7 @@ namespace Platform.Lobby.Api.Controllers
 			return new LobbyModel
 			{
 				Code = Guid.NewGuid().ToString().Substring(0, 6).ToUpper(),
-				Players = new List<PlayerModel> { new PlayerModel { Id = User.Identity?.Name, Role = Enums.Role.Owner } },
+				Players = new List<PlayerModel> { new PlayerModel { Id = User.Identity!.Name!, Role = Enums.Role.Owner } },
 				Visibility = Enums.Visibility.Public,
 				Status = Enums.Status.InLobby
 			};
