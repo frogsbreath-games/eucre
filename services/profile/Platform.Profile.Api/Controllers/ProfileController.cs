@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace Platform.Profile.Api.Controllers
 		[HttpGet]
 		public async Task<ProfileModel> GetProfile()
 		{
-			return await _service.GetProfileById(User.Identity!.Name!)
+			return await _service.GetProfileByAuth0Id(User.Identity!.Name!)
 				?? new ProfileModel();
 		}
 
@@ -37,16 +38,39 @@ namespace Platform.Profile.Api.Controllers
 			return await _service.GetProfileById(id);
 		}
 
-		[HttpPost]
-		public async Task<ProfileModel> AddProfile(ProfileModel profile)
+		[AllowAnonymous]
+		[HttpGet("all")]
+		public async Task<List<ProfileModel>> GetAll(
+			[FromQuery] int skip = 0,
+			[FromQuery] int take = 100)
 		{
-			var newProfile = new ProfileModel
+			return await _service.GetProfiles(skip, take);
+		}
+
+		[HttpPost]
+		public async Task<ProfileModel> AddProfile()
+		{
+			var profile = new ProfileModel
 			{
 				Auth0Id = User.Identity?.Name,
 				Username = _nameGenerator.GetRandomName()
 			};
-			await _service.AddProfile(newProfile);
-			return newProfile;
+			return await _service.AddProfile(profile);
+		}
+
+		[HttpPost("{id}")]
+		public async Task<bool> UpdateProfile([FromRoute] string id, ProfileModel profile)
+		{
+			await _service.UpdateProfile(id, profile);
+			return true;
+		}
+
+		[AllowAnonymous]
+		[HttpDelete("{id}")]
+		public async Task<bool> DeleteProfile([FromRoute] string id)
+		{
+			await _service.DeleteProfile(id);
+			return true;
 		}
 	}
 }

@@ -19,6 +19,7 @@ class Profile extends React.PureComponent<ProfileProps> {
     return (
       <React.Fragment>
         <ProfileIcon />
+        <h3>{this.props.profile.username}</h3>
       </React.Fragment>
     );
   }

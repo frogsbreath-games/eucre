@@ -13,8 +13,12 @@ export class ProfileService implements IProfileService {
     return this._apiClient.get<Profile>(``);
   }
 
-  public addProfile(profile: Profile): Promise<Profile> {
-    return this._apiClient.post<Profile>(``, {
+  public addProfile(): Promise<Profile> {
+    return this._apiClient.post<Profile>(``, {});
+  }
+
+  public updateProfile(profile: Profile): Promise<Profile> {
+    return this._apiClient.post<Profile>(`${profile.id}`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

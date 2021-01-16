@@ -34,10 +34,15 @@ export const actionCreators = {
     const appState = getState();
     if (appState && appState.lobby) {
       appState.services.profile.getProfile().then((data: Profile) => {
-        console.log("Profile Recieved");
+        let prof = data;
+        if (prof.id === null) {
+          appState.services.profile.addProfile().then((data: Profile) => {
+            prof = data;
+          });
+        }
         dispatch({
           type: "RECEIVE_PROFILE",
-          profile: data,
+          profile: prof,
         });
       });
       dispatch({

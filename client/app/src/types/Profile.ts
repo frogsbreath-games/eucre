@@ -1,4 +1,4 @@
 export interface Profile {
-  auth0Id?: string;
+  id?: string;
   username?: string;
 }
