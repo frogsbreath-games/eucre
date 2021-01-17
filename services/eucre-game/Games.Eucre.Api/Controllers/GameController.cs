@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Games.Eucre.Api.Models;
 using Games.Eucre.Api.Services;
-using Games.Eucre.Api.Utilities;
 using Games.Eucre.Api.Workflow;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Platform.Common.Utilities;
 
 namespace Games.Eucre.Api.Controllers
 {
@@ -15,11 +15,11 @@ namespace Games.Eucre.Api.Controllers
 	[Produces("application/json"), Consumes("application/json")]
 	public class GameController : ControllerBase
 	{
-		private readonly RandomAccessor _randomAccessor;
+		private readonly IRandomAccessor _randomAccessor;
 		private readonly GameUpdater _gameUpdater;
 
 		public GameController(
-			RandomAccessor randomAccessor,
+			IRandomAccessor randomAccessor,
 			GameUpdater gameUpdater)
 		{
 			_randomAccessor = randomAccessor ?? throw new ArgumentNullException(nameof(randomAccessor));

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
+using Platform.Common.Utilities;
 using WordGame.API.Application.Configuration;
 using WordGame.API.Application.Resources;
 using WordGame.API.Domain;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 
-namespace Games.Eucre.Api.Utilities
+namespace Platform.Common.Utilities
 {
-	public class RandomAccessor
+	internal class RandomAccessor : IRandomAccessor
 	{
 		private readonly Random _random;
 

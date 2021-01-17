@@ -101,7 +101,7 @@ namespace Platform.Profile.Api
 
 			services.AddSingleton<ProfileService>();
 
-			services.AddScoped<IRandomAccessor, RandomAccessor>();
+			services.AddRandomAccessor();
 			services.AddScoped<INameGenerator, NameGenerator>();
 		}
 

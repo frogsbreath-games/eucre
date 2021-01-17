@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,8 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using System.Net;
-using System.Threading.Tasks;
+using Platform.Common.Extensions;
 using WordGame.API.Application.Configuration;
 using WordGame.API.Application.Services;
 using WordGame.API.Data.Repositories;
@@ -70,7 +71,7 @@ namespace WordGame.API
 
 			services.Configure<BotSettings>(Configuration.GetSection(nameof(BotSettings)));
 			services.AddMongo(Configuration);
-			services.AddScoped<IRandomAccessor, RandomAccessor>();
+			services.AddRandomAccessor();
 			services.AddScoped<IGameRepository, GameRepository>();
 			services.AddScoped<INameGenerator, NameGenerator>();
 			services.AddScoped<IGameBoardGenerator, GameBoardGenerator>();

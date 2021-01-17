@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Platform.Common.Utilities;
 using WordGame.API.Application.Authorization;
 using WordGame.API.Application.Exceptions;
 using WordGame.API.Application.Resources;
@@ -19,7 +18,6 @@ using WordGame.API.Domain.Enums;
 using WordGame.API.Domain.Models;
 using WordGame.API.Domain.Repositories;
 using WordGame.API.Extensions;
-using WordGame.API.Hubs;
 using WordGame.API.Models;
 
 namespace WordGame.API.Controllers

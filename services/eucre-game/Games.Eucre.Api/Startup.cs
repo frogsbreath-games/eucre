@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Games.Eucre.Api.Auth;
 using Games.Eucre.Api.Hubs;
 using Games.Eucre.Api.Services;
-using Games.Eucre.Api.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -96,7 +95,7 @@ namespace Games.Eucre.Api
 
 			services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
-			services.AddScoped<RandomAccessor>();
+			services.AddRandomAccessor();
 			services.AddSingleton<GameUpdater>();
 		}
 
