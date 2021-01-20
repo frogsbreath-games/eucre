@@ -1,6 +1,7 @@
 import * as React from "react";
 import styles from "./NavMenu.module.scss";
 import NavButton from "./NavButton/NavButton";
+import ProfileIcon from "../ProfileIcon/ProfileIcon";
 
 export default class NavMenu extends React.PureComponent<{}> {
   public render() {
@@ -56,7 +57,7 @@ export default class NavMenu extends React.PureComponent<{}> {
                 Lobby
               </a>
             </li>
-            <li className={styles.navItem}>
+            <li className={styles.profileItem}>
               <a
                 className={
                   window.location.pathname == "/games/profile"
@@ -65,7 +66,7 @@ export default class NavMenu extends React.PureComponent<{}> {
                 }
                 href="/games/profile"
               >
-                Profile
+                <ProfileIcon />
               </a>
             </li>
             <li className={styles.navButton}>

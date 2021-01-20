@@ -1,15 +1,12 @@
 import * as React from "react";
+import styles from "./ProfileIcon.module.scss";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 const ProfileIcon = () => {
   const { user } = useAuth0();
   return (
     <div>
-      <img
-        src={user.picture}
-        style={{ maxHeight: "100%", maxWidth: "100%" }}
-        alt="profile"
-      />
+      <img src={user.picture} alt="profile" className={styles.image} />
     </div>
   );
 };

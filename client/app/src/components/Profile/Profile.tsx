@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "app/store";
 import styles from "./Profile.module.scss";
-import ProfileIcon from "./ProfileIcon/ProfileIcon";
 import * as ProfileStore from "app/store/Profile";
 
 // At runtime, Redux will merge together...
@@ -18,8 +17,8 @@ class Profile extends React.PureComponent<ProfileProps> {
     console.log(this.props.profile);
     return (
       <React.Fragment>
-        <ProfileIcon />
-        <h3>{this.props.profile.username}</h3>
+        <h1>Profile</h1>
+        <h3>Username: {this.props.profile.username}</h3>
       </React.Fragment>
     );
   }
