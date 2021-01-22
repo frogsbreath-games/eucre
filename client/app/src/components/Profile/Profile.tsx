@@ -13,12 +13,25 @@ class Profile extends React.PureComponent<ProfileProps> {
   public componentDidMount() {
     this.props.requestProfile();
   }
+
+  private loadingProfile() {
+    return <div>Loading...</div>;
+  }
+
+  private renderProfile() {
+    return (
+      <div>
+        <h1>Profile</h1>
+        <h3>Username: {this.props.profile.username}</h3>
+      </div>
+    );
+  }
+
   public render() {
     console.log(this.props.profile);
     return (
       <React.Fragment>
-        <h1>Profile</h1>
-        <h3>Username: {this.props.profile.username}</h3>
+        {this.props.isLoading ? this.loadingProfile() : this.renderProfile()}
       </React.Fragment>
     );
   }
