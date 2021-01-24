@@ -39,25 +39,35 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
     this.props.chat(message);
   }
 
+  private loadingLobby() {
+    return <div>Loading...</div>;
+  }
+
+  private renderLobby() {
+    return (
+      <div className={styles.lobby}>
+        {this.props.chatMessage.message && (
+          <div>
+            <span>{this.props.chatMessage.message}</span>
+          </div>
+        )}
+        <Input
+          type="text"
+          placeholder="Message something..."
+          value={this.state.input}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        />
+      </div>
+    );
+  }
+
   public render() {
     console.log(this.props.room);
     console.log(this.props.chatMessage);
     return (
       <React.Fragment>
-        <div className={styles.lobby}>
-          {this.props.chatMessage.message && (
-            <div>
-              <span>{this.props.chatMessage.message}</span>
-            </div>
-          )}
-          <Input
-            type="text"
-            placeholder="Message something..."
-            value={this.state.input}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
-        </div>
+        {this.props.isLoading ? this.loadingLobby() : this.renderLobby()}
       </React.Fragment>
     );
   }
