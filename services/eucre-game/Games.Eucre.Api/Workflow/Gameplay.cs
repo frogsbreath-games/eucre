@@ -31,13 +31,16 @@ namespace Games.Eucre.Api.Workflow
 		{
 			return new GameModel
 			{
-				BoardStatus = status,
-				Description = description,
-				Deck = cards.ToList(),
-				PlayerHand = new HandModel(cards[..5].ToList()),
-				PartnerHand = new HandModel(cards[5..10].ToList()),
-				LeftOpponentHand = new HandModel(cards[10..15].ToList()),
-				RightOpponentHand = new HandModel(cards[15..20].ToList())
+				Board = new BoardModel
+				{
+					BoardStatus = status,
+					Description = description,
+					Deck = cards.ToList(),
+					PlayerHand = new HandModel(cards[..5].ToList()),
+					PartnerHand = new HandModel(cards[5..10].ToList()),
+					LeftOpponentHand = new HandModel(cards[10..15].ToList()),
+					RightOpponentHand = new HandModel(cards[15..20].ToList())
+				}
 			};
 		}
 
@@ -61,18 +64,22 @@ namespace Games.Eucre.Api.Workflow
 				throw new ArgumentNullException(nameof(card));
 			}
 
-			game.Deck.Remove(card);
-			game.PlayerHand.Cards.Remove(card);
-			game.PartnerHand.Cards.Remove(card);
-			game.LeftOpponentHand.Cards.Remove(card);
-			game.RightOpponentHand.Cards.Remove(card);
-			game.Pile.Add(card);
+			var board = game.Board;
 
-			return game with
+			board.Deck.Remove(card);
+			board.PlayerHand.Cards.Remove(card);
+			board.PartnerHand.Cards.Remove(card);
+			board.LeftOpponentHand.Cards.Remove(card);
+			board.RightOpponentHand.Cards.Remove(card);
+			board.Pile.Add(card);
+
+			board = board with
 			{
 				BoardStatus = BoardStatus.Playing,
 				Description = $"{user.Identity?.Name ?? "Anonymous"} played a card! {card.Value} of {card.Suit}"
 			};
+
+			return game with { Board = board };
 		}
 	}
 }

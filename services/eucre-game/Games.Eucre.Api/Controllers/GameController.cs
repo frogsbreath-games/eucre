@@ -11,7 +11,7 @@ namespace Games.Eucre.Api.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("api/eucre/game")]
+	[Route("api/eucre/games")]
 	[Produces("application/json"), Consumes("application/json")]
 	public class GameController : ControllerBase
 	{
@@ -26,8 +26,8 @@ namespace Games.Eucre.Api.Controllers
 			_gameUpdater = gameUpdater ?? throw new ArgumentNullException(nameof(gameUpdater));
 		}
 
-		[HttpGet]
-		public async Task<GameModel> GetEucreGame()
+		[HttpGet("current")]
+		public async Task<GameModel> GetCurrentGame()
 		{
 			GameModel? maybeGame = await _gameUpdater.GetGameModel();
 
@@ -41,7 +41,7 @@ namespace Games.Eucre.Api.Controllers
 			return game;
 		}
 
-		[HttpPost("shuffle")]
+		[HttpPost("current/shuffle")]
 		public async Task<bool> Shuffle()
 		{
 			GameModel? maybeGame = await _gameUpdater.GetGameModel();
@@ -56,7 +56,7 @@ namespace Games.Eucre.Api.Controllers
 			return true;
 		}
 
-		[HttpPost("play")]
+		[HttpPost("current/play")]
 		public async Task<bool> Play(CardModel card)
 		{
 			GameModel? maybeGame = await _gameUpdater.GetGameModel();

@@ -36,7 +36,7 @@ class Game extends React.PureComponent<GameProps> {
       <React.Fragment>
         <div className={styles.gameBody}>
           <div className={styles.descriptionPanel}>
-            <h4>{this.props.game.description}</h4>
+            <h4>{this.props.game.board.description}</h4>
           </div>
           <div className={styles.controlPanel}>
             <Button
@@ -52,32 +52,32 @@ class Game extends React.PureComponent<GameProps> {
           </div>
           <div className={styles.northPlayer}>
             <Hand
-              hand={this.props.game.partnerHand.cards}
+              hand={this.props.game.board.partnerHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>
           <div className={styles.play}>
             <label>Drag a card onto me!</label>
             <DropWrapper name="pile" accept={DragTypes.CARD}>
-              <Stack cards={this.props.game.pile} />
+              <Stack cards={this.props.game.board.pile} />
             </DropWrapper>
           </div>
           <div className={styles.eastPlayer}>
             <Hand
-              hand={this.props.game.leftOpponentHand.cards}
+              hand={this.props.game.board.leftOpponentHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>
           <div className={styles.southPlayer}>
             <Hand
-              hand={this.props.game.playerHand.cards}
+              hand={this.props.game.board.playerHand.cards}
               cardAction={this.handleStackDrop}
               revealed={true}
             />
           </div>
           <div className={styles.westPlayer}>
             <Hand
-              hand={this.props.game.rightOpponentHand.cards}
+              hand={this.props.game.board.rightOpponentHand.cards}
               cardAction={this.handleStackDrop}
             />
           </div>

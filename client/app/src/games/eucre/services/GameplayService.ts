@@ -4,7 +4,6 @@ import { GameplayEventHandlers } from "./GameplayEventHandlers";
 import ApiClient from "app/tools/ApiClient";
 import HubClient from "app/tools/HubClient";
 
-
 export class GameplayService implements IGameplayService {
   private readonly _apiClient: ApiClient;
   private readonly _hubClient: HubClient;
@@ -14,16 +13,18 @@ export class GameplayService implements IGameplayService {
     this._hubClient = new HubClient([baseUrl, `hub/eucre/`], tokenAudience);
   }
 
-  public getEucreGame(): Promise<Game> {
-    return this._apiClient.get<Game>(`game`);
+  public getCurrentGame(): Promise<Game> {
+    return this._apiClient.get<Game>(`games/current`);
   }
 
   public shuffleDeck(): Promise<boolean> {
-    return this._apiClient.post<boolean>(`game/shuffle`, { body: null });
+    return this._apiClient.post<boolean>(`games/current/shuffle`, {
+      body: null,
+    });
   }
 
   public playCard(card: Card): Promise<boolean> {
-    return this._apiClient.post<boolean>(`game/play`, {
+    return this._apiClient.post<boolean>(`games/current/play`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -33,6 +34,8 @@ export class GameplayService implements IGameplayService {
   }
 
   public connectToGameHub(handlers: GameplayEventHandlers) {
-    this._hubClient.setupHub(`game`, [[`gameUpdated`, handlers.gameUpdated]]);
+    this._hubClient.setupHub(`games/current`, [
+      [`gameUpdated`, handlers.gameUpdated],
+    ]);
   }
 }

@@ -1,4 +1,5 @@
 export type BoardStatus =
+  | `Orgainizing`
   | `GameStarting`
   | `RoundStarting`
   | `Shuffling`
@@ -10,4 +11,5 @@ export type BoardStatus =
   | `Calculating`
   | `TrickEnding`
   | `RoundEnding`
-  | `GameEnding`;
+  | `GameEnding`
+  | `Leaving`;

@@ -54,7 +54,7 @@ export const actionCreators = {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.eucre) {
-      appState.services.eucre.getEucreGame().then((data: EucreTypes.Game) => {
+      appState.services.eucre.getCurrentGame().then((data: EucreTypes.Game) => {
         dispatch({
           type: "RECEIVE_EUCRE_GAME",
           game: data,
@@ -96,14 +96,16 @@ export const actionCreators = {
 
 const unloadedState: EucreState = {
   game: {
-    boardStatus: `GameStarting`,
-    description: ``,
-    deck: [],
-    pile: [],
-    playerHand: { cards: [] },
-    partnerHand: { cards: [] },
-    leftOpponentHand: { cards: [] },
-    rightOpponentHand: { cards: [] }
+    board: {
+      boardStatus: `GameStarting`,
+      description: ``,
+      deck: [],
+      pile: [],
+      playerHand: { cards: [] },
+      partnerHand: { cards: [] },
+      leftOpponentHand: { cards: [] },
+      rightOpponentHand: { cards: [] },
+    },
   },
   isLoading: false,
 };

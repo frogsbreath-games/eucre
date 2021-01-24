@@ -129,7 +129,7 @@ namespace Games.Eucre.Api
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapHub<GameplayHub>("hub/eucre/game");
+				endpoints.MapHub<GameplayHub>("hub/eucre/games/current");
 				endpoints.MapControllers();
 			});
 		}

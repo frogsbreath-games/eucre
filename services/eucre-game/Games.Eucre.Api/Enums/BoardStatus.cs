@@ -2,6 +2,7 @@
 {
 	public enum BoardStatus
 	{
+		Organizing,
 		GameStarting,
 		RoundStarting,
 		Shuffling,
@@ -13,6 +14,7 @@
 		Calculating,
 		TrickEnding,
 		RoundEnding,
-		GameEnding
+		GameEnding,
+		Leaving
 	}
 }
