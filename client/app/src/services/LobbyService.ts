@@ -14,7 +14,15 @@ export class LobbyService implements ILobbyService {
   }
 
   public getLobby(): Promise<Lobby> {
-    return this._apiClient.get<Lobby>(`lobby`);
+    return this._apiClient.get<Lobby>(`current`);
+  }
+
+  public createLobby(): Promise<Lobby> {
+    return this._apiClient.post<Lobby>();
+  }
+
+  public closeLobby(code: string): Promise<Lobby> {
+    return this._apiClient.post<Lobby>(`${code}/close`);
   }
 
   public sendChat(message: string): Promise<boolean> {

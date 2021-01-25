@@ -3,6 +3,7 @@
 	public enum Status
 	{
 		InLobby,
-		InGame
+		InGame,
+		Closed
 	}
 }

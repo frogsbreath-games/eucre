@@ -4,7 +4,12 @@ namespace Platform.Lobby.Api.Models
 {
 	public class PlayerModel
 	{
-		public string Id { get; set; } = null!;
+		public PlayerModel(Data.Models.Player player)
+		{
+			Auth0Id = player.Auth0Id;
+			Role = player.Role;
+		}
+		public string? Auth0Id { get; set; }
 		public Role Role { get; set; }
 	}
 }

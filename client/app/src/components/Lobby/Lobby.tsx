@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ApplicationState } from "app/store";
 import styles from "./Lobby.module.scss";
 import * as LobbyStore from "app/store/Lobby";
-import { Input } from "app/ui";
+import { Input, Button } from "app/ui";
 
 // At runtime, Redux will merge together...
 type LobbyProps = LobbyStore.LobbyState & // ... state we've requested from the Redux store
@@ -16,12 +16,22 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
     this.state = { input: "" };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.createLobby = this.createLobby.bind(this);
+    this.closeLobby = this.closeLobby.bind(this);
     this.chat = this.chat.bind(this);
   }
   // This method is called when the component is first added to the document
   public componentDidMount() {
     this.props.enterLobby();
-    this.props.requestLobby();
+    this.props.getLobby();
+  }
+
+  public createLobby() {
+    this.props.createLobby();
+  }
+
+  public closeLobby() {
+    this.props.closeLobby(this.props.room.code ? this.props.room.code : "");
   }
 
   public handleKeyPress(event: React.KeyboardEvent) {
@@ -58,6 +68,21 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
+        {this.props.room.code && (
+          <div>
+            <h3>Lobby Code: {this.props.room.code}</h3>
+            <h3>Lobby Status: {this.props.room.status}</h3>
+          </div>
+        )}
+        {this.props.room.code && this.props.room.status !== "Closed" ? (
+          <Button onClick={this.closeLobby} variant="red">
+            Close Lobby
+          </Button>
+        ) : (
+          <Button onClick={this.createLobby} variant="green">
+            Create Lobby
+          </Button>
+        )}
       </div>
     );
   }

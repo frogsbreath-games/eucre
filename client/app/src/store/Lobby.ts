@@ -49,11 +49,47 @@ export const actionCreators = {
       });
     }
   },
-  requestLobby: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+  getLobby: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.lobby) {
       appState.services.lobby.getLobby().then((data: Lobby) => {
+        console.log("Lobby Recieved");
+        dispatch({
+          type: "RECEIVE_LOBBY",
+          lobby: data,
+        });
+      });
+      dispatch({
+        type: "REQUEST_LOBBY",
+      });
+    }
+  },
+  createLobby: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    // Only load data if it's something we don't already have (and are not already loading)
+    const appState = getState();
+    if (appState && appState.lobby) {
+      appState.services.lobby.createLobby().then((data: Lobby) => {
+        console.log("Lobby Recieved");
+        dispatch({
+          type: "RECEIVE_LOBBY",
+          lobby: data,
+        });
+      });
+      dispatch({
+        type: "REQUEST_LOBBY",
+      });
+    }
+  },
+
+  closeLobby: (code: string): AppThunkAction<KnownAction> => (
+    dispatch,
+    getState
+  ) => {
+    // Only load data if it's something we don't already have (and are not already loading)
+    const appState = getState();
+    if (appState && appState.lobby) {
+      appState.services.lobby.closeLobby(code).then((data: Lobby) => {
         console.log("Lobby Recieved");
         dispatch({
           type: "RECEIVE_LOBBY",

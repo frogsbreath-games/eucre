@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
@@ -15,7 +16,9 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using Platform.Common.Extensions;
 using Platform.Lobby.Api.Auth;
+using Platform.Lobby.Api.Configuration;
 using Platform.Lobby.Api.Hubs;
+using Platform.Lobby.Api.Services;
 
 namespace Platform.Lobby.Api
 {
@@ -91,6 +94,14 @@ namespace Platform.Lobby.Api
 			});
 
 			services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
+			services.Configure<MongoDbSettings>(
+				Configuration.GetSection(nameof(MongoDbSettings)));
+
+			services.AddSingleton<IMongoDbSettings>(sp =>
+				sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+
+			services.AddSingleton<LobbyService>();
 
 			services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 		}
