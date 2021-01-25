@@ -1,5 +1,5 @@
 export type BoardStatus =
-  | `Orgainizing`
+  | `Organizing`
   | `GameStarting`
   | `RoundStarting`
   | `Shuffling`
