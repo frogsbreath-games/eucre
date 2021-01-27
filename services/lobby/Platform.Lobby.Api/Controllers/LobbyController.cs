@@ -84,6 +84,12 @@ namespace Platform.Lobby.Api.Controllers
 				TimeStamp = DateTimeOffset.UtcNow
 			};
 
+			Data.Models.Lobby lobby = await _service.GetOpenLobbyForPlayer(User?.Identity!.Name!) ?? new Data.Models.Lobby();
+
+			lobby.LobbyMessages.Add(new ChatMessage { AuthorId = User.Identity!.Name, TimeStamp = message.TimeStamp, Message = message.Message });
+
+			await _service.UpdateLobby(lobby.Id, lobby);
+
 			await _hubContext.Clients.All.ChatSent(new ChatModel { AuthorID = chat.AuthorId, TimeStamp = chat.TimeStamp, Message = chat.Message });
 
 			return true;

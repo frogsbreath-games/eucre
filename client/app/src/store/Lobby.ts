@@ -5,7 +5,7 @@ import { ChatMessage } from "app/types/ChatMessage";
 
 export interface LobbyState {
   room: Lobby;
-  chatMessage: ChatMessage;
+  chatMessages: ChatMessage[];
   isLoading: boolean;
 }
 
@@ -120,8 +120,8 @@ export const actionCreators = {
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
 const unloadedState: LobbyState = {
-  room: {},
-  chatMessage: {},
+  room: { lobbyMessages: [] },
+  chatMessages: [],
   isLoading: false,
 };
 
@@ -138,19 +138,19 @@ export const reducer: Reducer<LobbyState> = (
     case "REQUEST_LOBBY":
       return {
         room: state.room,
-        chatMessage: state.chatMessage,
+        chatMessages: state.chatMessages,
         isLoading: true,
       };
     case "RECEIVE_LOBBY":
       return {
         room: action.lobby,
-        chatMessage: state.chatMessage,
+        chatMessages: action.lobby.lobbyMessages,
         isLoading: false,
       };
     case "CHAT_SENT":
       return {
         room: state.room,
-        chatMessage: action.message,
+        chatMessages: [...state.chatMessages, action.message],
         isLoading: false,
       };
     default:

@@ -56,11 +56,12 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
   private renderLobby() {
     return (
       <div className={styles.lobby}>
-        {this.props.chatMessage.message && (
-          <div>
-            <span>{this.props.chatMessage.message}</span>
+        {this.props.chatMessages.map((c, index) => (
+          <div key={index}>
+            <span>{c.message}</span>
+            <span>{c.timeStamp}</span>
           </div>
-        )}
+        ))}
         <Input
           type="text"
           placeholder="Message something..."
@@ -89,7 +90,6 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
 
   public render() {
     console.log(this.props.room);
-    console.log(this.props.chatMessage);
     return (
       <React.Fragment>
         {this.props.isLoading ? this.loadingLobby() : this.renderLobby()}

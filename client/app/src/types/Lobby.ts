@@ -1,4 +1,5 @@
 import { Status, Visibility } from "app/types/enums";
+import { ChatMessage } from "./ChatMessage";
 import { Player } from "./Player";
 
 export interface Lobby {
@@ -7,4 +8,5 @@ export interface Lobby {
   visibility?: Visibility;
   status?: Status;
   players?: Player[];
+  lobbyMessages: ChatMessage[];
 }
