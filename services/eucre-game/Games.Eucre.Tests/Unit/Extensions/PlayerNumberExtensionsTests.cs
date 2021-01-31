@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Games.Eucre.Api.Enums;
+﻿using Games.Eucre.Api.Enums;
 using Games.Eucre.Api.Extensions;
 using Xunit;
 

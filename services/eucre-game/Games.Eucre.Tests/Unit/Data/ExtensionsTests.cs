@@ -13,7 +13,7 @@ namespace Games.Eucre.Tests.Unit.Data
 		{
 			Player player = new Player(
 				PlayerNumber.Black1,
-				new User("testId"),
+				new User("testId", "testUser"),
 				Array.Empty<Card>());
 
 			Assert.False(player.IsBot());
