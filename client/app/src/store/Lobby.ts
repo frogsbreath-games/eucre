@@ -107,11 +107,14 @@ export const actionCreators = {
     getState
   ) => {
     const appState = getState();
-    if (appState && appState.lobby) {
-      appState.services.lobby.sendChat(message).then((data: boolean) => {
-        console.log("chatted");
-        console.log(data);
-      });
+    if (appState && appState.lobby && appState.profile) {
+      let profile = appState.profile.profile;
+      appState.services.lobby
+        .sendChat({ authorName: profile.username, message: message })
+        .then((data: boolean) => {
+          console.log("chatted");
+          console.log(data);
+        });
     }
   },
 };

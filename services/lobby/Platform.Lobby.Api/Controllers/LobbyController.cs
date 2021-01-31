@@ -79,6 +79,7 @@ namespace Platform.Lobby.Api.Controllers
 		{
 			var chat = new ChatMessage
 			{
+				AuthorName = message.AuthorName,
 				AuthorId = User?.Identity?.Name ?? "Anonymous",
 				Message = message.Message,
 				TimeStamp = DateTimeOffset.UtcNow
@@ -86,11 +87,11 @@ namespace Platform.Lobby.Api.Controllers
 
 			Data.Models.Lobby lobby = await _service.GetOpenLobbyForPlayer(User?.Identity!.Name!) ?? new Data.Models.Lobby();
 
-			lobby.LobbyMessages.Add(new ChatMessage { AuthorId = User.Identity!.Name, TimeStamp = message.TimeStamp, Message = message.Message });
+			lobby.LobbyMessages.Add(new ChatMessage { AuthorName = message.AuthorName, AuthorId = User!.Identity!.Name, TimeStamp = message.TimeStamp, Message = message.Message });
 
 			await _service.UpdateLobby(lobby.Id, lobby);
 
-			await _hubContext.Clients.All.ChatSent(new ChatModel { AuthorID = chat.AuthorId, TimeStamp = chat.TimeStamp, Message = chat.Message });
+			await _hubContext.Clients.All.ChatSent(new ChatModel { AuthorName = chat.AuthorName, AuthorId = chat.AuthorId, TimeStamp = chat.TimeStamp, Message = chat.Message });
 
 			return true;
 		}
@@ -121,7 +122,7 @@ namespace Platform.Lobby.Api.Controllers
 				Players = lobby.Players.Select(p => new Player { Auth0Id = p.Auth0Id, Role = p.Role }).ToList(),
 				Visibility = lobby.Visibility,
 				Status = lobby.Status,
-				LobbyMessages = lobby.LobbyMessages.Select(c => new ChatMessage { AuthorId = c.AuthorID, Message = c.Message, TimeStamp = c.TimeStamp }).ToList()
+				LobbyMessages = lobby.LobbyMessages.Select(c => new ChatMessage { AuthorName = c.AuthorName, AuthorId = c.AuthorId, Message = c.Message, TimeStamp = c.TimeStamp }).ToList()
 			};
 
 			await _service.UpdateLobby(id, updateLobby);

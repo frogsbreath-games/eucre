@@ -58,8 +58,8 @@ class Lobby extends React.PureComponent<LobbyProps, State> {
       <div className={styles.lobby}>
         {this.props.chatMessages.map((c, index) => (
           <div key={index}>
+            <span>{c.authorName}: </span>
             <span>{c.message}</span>
-            <span>{c.timeStamp}</span>
           </div>
         ))}
         <Input

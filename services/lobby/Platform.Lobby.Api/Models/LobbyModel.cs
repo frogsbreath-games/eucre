@@ -12,7 +12,7 @@ namespace Platform.Lobby.Api.Models
 			Status = lobby.Status;
 			Visibility = lobby.Visibility;
 			Players = lobby.Players.Select(p => new PlayerModel(p)).ToList();
-			LobbyMessages = lobby.LobbyMessages.Select(m => new ChatModel { AuthorID = m.AuthorId, Message = m.Message, TimeStamp = m.TimeStamp }).ToList();
+			LobbyMessages = lobby.LobbyMessages.Select(m => new ChatModel { AuthorName = m.AuthorName, AuthorId = m.AuthorId, Message = m.Message, TimeStamp = m.TimeStamp }).ToList();
 		}
 		public string? Code { get; set; }
 		public string? Name { get; set; }
