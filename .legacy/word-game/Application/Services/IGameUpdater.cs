@@ -101,7 +101,9 @@ namespace WordGame.API.Application.Services
 				if (game.Cultists.FilterByRole(UserRole.Bot)
 					.FilterByTeam(game.CurrentTurn.Team)
 					.SingleOrDefault() is Player p)
+				{
 					return ((game) => ExecutePlanningCultistBotJob(game, p), _botDelay);
+				}
 			}
 
 			if (game.CurrentTurn.Status == TurnStatus.PendingApproval)
@@ -109,7 +111,9 @@ namespace WordGame.API.Application.Services
 				if (game.Cultists.FilterByRole(UserRole.Bot)
 					.FilterByTeam(game.CurrentTurn.Team.GetOpposingTeam())
 					.SingleOrDefault() is Player p)
+				{
 					return ((game) => ExecuteApprovingCultistBotJob(game, p), _botDelay);
+				}
 			}
 
 			if (game.CurrentTurn.Status == TurnStatus.Guessing)
@@ -117,13 +121,13 @@ namespace WordGame.API.Application.Services
 				var guessingPlayers = game.Researchers.Where(p => p.Team == game.CurrentTurn.Team);
 				var botPlayers = guessingPlayers.FilterByRole(UserRole.Bot);
 
-				if (game.WordTiles.FirstOrDefault(wt => wt.Votes.Any()) is WordTile tile)
+				if (game.WordTiles.Find(wt => wt.Votes.Count > 0) is WordTile tile)
 				{
 					if (botPlayers.FirstOrDefault(p => !tile.Votes.Select(x => x.Number).Contains(p.Number)) is Player p)
 						return ((game) => ExecuteConformingResearcherBotJob(game, p), _botDelay);
 				}
 
-				if (game.CurrentTurn.EndTurnVotes.Any())
+				if (game.CurrentTurn.EndTurnVotes.Count > 0)
 				{
 					if (botPlayers.FirstOrDefault(p => !game.CurrentTurn.EndTurnVotes.Select(x => x.Number).Contains(p.Number)) is Player p)
 						return ((game) => ExecuteConformingResearcherBotJob(game, p), _botDelay);
@@ -171,7 +175,7 @@ namespace WordGame.API.Application.Services
 		{
 			var availableTiles = game.WordTiles.Where(x => !x.IsRevealed).ToList();
 
-			if (game.WordTiles.FirstOrDefault(wt => wt.Votes.Any()) is WordTile tile)
+			if (game.WordTiles.Find(wt => wt.Votes.Count > 0) is WordTile tile)
 			{
 				game.SetPlayerVote(player, tile);
 			}

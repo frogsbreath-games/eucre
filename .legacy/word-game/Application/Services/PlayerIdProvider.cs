@@ -5,9 +5,9 @@ namespace WordGame.API.Application.Services
 {
 	public class PlayerIdProvider : IUserIdProvider
 	{
-		public string GetUserId(HubConnectionContext connection)
+		public string? GetUserId(HubConnectionContext connection)
 		{
-			return connection.User.GetPlayerId().ToString();
+			return connection.User?.GetPlayerId().ToString();
 		}
 	}
 }

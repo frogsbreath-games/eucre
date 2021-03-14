@@ -50,7 +50,7 @@ namespace WordGame.API.Domain.Models
 		[JsonIgnore]
 		public List<Turn> Turns { get; protected set; } = new List<Turn>();
 
-		public Turn CurrentTurn => Turns.OrderBy(x => x.TurnNumber).LastOrDefault();
+		public Turn CurrentTurn => Turns.OrderBy(x => x.TurnNumber).Last();
 
 		public Game(
 			string code,
@@ -268,9 +268,13 @@ namespace WordGame.API.Domain.Models
 
 					if (CurrentTurn.GuessesRemaining <= 0
 						|| GetTilesRemaining(CurrentTurn.Team) <= 0)
+					{
 						EndCurrentTurn();
+					}
 					else
+					{
 						CurrentTurn.GuessAgain();
+					}
 				}
 				else
 				{
@@ -279,7 +283,9 @@ namespace WordGame.API.Domain.Models
 				}
 			}
 			else
+			{
 				throw new InvalidOperationException();
+			}
 		}
 
 		public void RemovePlayerVote(Player player)

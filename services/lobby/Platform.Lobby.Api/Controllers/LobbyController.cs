@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +32,6 @@ namespace Platform.Lobby.Api.Controllers
 		[HttpGet("current")]
 		public async Task<LobbyModel> GetCurrentLobby()
 		{
-
 			Data.Models.Lobby? lobby = await _service.GetOpenLobbyForPlayer(User.Identity!.Name! ?? throw new ArgumentNullException("Not Authorized"));
 
 			return new LobbyModel(lobby ?? new Data.Models.Lobby());
@@ -42,7 +40,6 @@ namespace Platform.Lobby.Api.Controllers
 		[HttpPost]
 		public async Task<LobbyModel> Add()
 		{
-
 			Data.Models.Lobby lobby = new Data.Models.Lobby
 			{
 				Code = Guid.NewGuid().ToString().Substring(0, 6).ToUpper(),
@@ -85,7 +82,7 @@ namespace Platform.Lobby.Api.Controllers
 				TimeStamp = DateTimeOffset.UtcNow
 			};
 
-			Data.Models.Lobby lobby = await _service.GetOpenLobbyForPlayer(User?.Identity!.Name!) ?? new Data.Models.Lobby();
+			Data.Models.Lobby lobby = await _service.GetOpenLobbyForPlayer((User?.Identity!.Name)!) ?? new Data.Models.Lobby();
 
 			lobby.LobbyMessages.Add(new ChatMessage { AuthorName = message.AuthorName, AuthorId = User!.Identity!.Name, TimeStamp = message.TimeStamp, Message = message.Message });
 
@@ -110,7 +107,7 @@ namespace Platform.Lobby.Api.Controllers
 			[FromQuery] int take = 100)
 		{
 			List<Data.Models.Lobby> lobbies = await _service.GetLobbies(skip, take);
-			return lobbies.Select(l => new LobbyModel(l)).ToList();
+			return lobbies.ConvertAll(l => new LobbyModel(l));
 		}
 
 		[HttpPut("{id}")]
@@ -119,10 +116,20 @@ namespace Platform.Lobby.Api.Controllers
 			Data.Models.Lobby updateLobby = new Data.Models.Lobby
 			{
 				Code = Guid.NewGuid().ToString().Substring(0, 6).ToUpper(),
-				Players = lobby.Players.Select(p => new Player { Auth0Id = p.Auth0Id, Role = p.Role }).ToList(),
+				Players = lobby.Players.ConvertAll(p => new Player
+				{
+					Auth0Id = p.Auth0Id,
+					Role = p.Role
+				}),
 				Visibility = lobby.Visibility,
 				Status = lobby.Status,
-				LobbyMessages = lobby.LobbyMessages.Select(c => new ChatMessage { AuthorName = c.AuthorName, AuthorId = c.AuthorId, Message = c.Message, TimeStamp = c.TimeStamp }).ToList()
+				LobbyMessages = lobby.LobbyMessages.ConvertAll(c => new ChatMessage
+				{
+					AuthorName = c.AuthorName,
+					AuthorId = c.AuthorId,
+					Message = c.Message,
+					TimeStamp = c.TimeStamp
+				})
 			};
 
 			await _service.UpdateLobby(id, updateLobby);

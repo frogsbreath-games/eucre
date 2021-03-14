@@ -8,7 +8,6 @@ namespace Platform.Profile.Api.Data.Repositories
 {
 	public class ProfileService
 	{
-
 		protected IMongoCollection<ProfileModel> _profiles;
 
 		public ProfileService(IMongoDbSettings settings)

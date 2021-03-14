@@ -149,7 +149,7 @@ namespace WordGame.API.Controllers
 		[Creates(typeof(GameModel))]
 		public async Task<ApiResponse<GameModel>> CreateGame()
 		{
-			if (User.Identity.IsAuthenticated)
+			if (User.Identity?.IsAuthenticated == true)
 				return BadRequest("User is already in a game.");
 
 			var game = new Game(
@@ -159,7 +159,7 @@ namespace WordGame.API.Controllers
 
 			await _repository.AddGame(game);
 
-			var player = game.Players.First();
+			var player = game.Players[0];
 
 			await SignInAsPlayer(player, game.Code);
 
@@ -323,7 +323,7 @@ namespace WordGame.API.Controllers
 			if (game.CanReplaceWord(localPlayer).IsFailure(out string message))
 				return BadRequest(message);
 
-			if (!(game.WordTiles.SingleOrDefault(t => t.Word == replaceWordModel.Word) is WordTile tile))
+			if (game.WordTiles.SingleOrDefault(t => t.Word == replaceWordModel.Word) is not WordTile tile)
 				return NotFound($"{replaceWordModel.Word} is not on the game board.");
 
 			string word = string.Empty;
@@ -401,7 +401,7 @@ namespace WordGame.API.Controllers
 		public async Task<ApiResponse<GameModel>> JoinGame(
 			[FromRoute] string code)
 		{
-			if (User.Identity.IsAuthenticated)
+			if (User.Identity?.IsAuthenticated == true)
 				return BadRequest("User is already in a game.");
 
 			var game = await GetGame(code);
@@ -515,7 +515,7 @@ namespace WordGame.API.Controllers
 
 			if (player is null)
 				return NotFound($"Cannot find player with number: [{number}] in game with code: [{code}]");
-			
+
 			if (playerModel.Team is Team team)
 			{
 				game.UpdatePlayerTeam(player, team);
@@ -635,7 +635,7 @@ namespace WordGame.API.Controllers
 			if (game.CanVote(localPlayer).IsFailure(out string message))
 				return BadRequest(message);
 
-			if (!(game.WordTiles.SingleOrDefault(t => t.Word == voteModel.Word) is WordTile tile))
+			if (game.WordTiles.SingleOrDefault(t => t.Word == voteModel.Word) is not WordTile tile)
 				return NotFound($"{voteModel.Word} is not on the game board.");
 
 			if (tile.IsRevealed)

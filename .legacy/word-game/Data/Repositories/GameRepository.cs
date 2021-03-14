@@ -45,7 +45,8 @@ namespace WordGame.API.Data.Repositories
 		{
 			return await Games.Find(x => x.Code == code.ToUpper()
 					&& x.Status != GameStatus.Archived)
-				.SingleOrDefaultAsync();
+				.SingleOrDefaultAsync()
+				.ConfigureAwait(false);
 		}
 
 		public async Task<DeleteResult> DeleteGame(string code)

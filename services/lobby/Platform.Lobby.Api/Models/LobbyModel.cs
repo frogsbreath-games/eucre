@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Platform.Lobby.Api.Enums;
 
 namespace Platform.Lobby.Api.Models
@@ -11,8 +10,14 @@ namespace Platform.Lobby.Api.Models
 			Code = lobby.Code;
 			Status = lobby.Status;
 			Visibility = lobby.Visibility;
-			Players = lobby.Players.Select(p => new PlayerModel(p)).ToList();
-			LobbyMessages = lobby.LobbyMessages.Select(m => new ChatModel { AuthorName = m.AuthorName, AuthorId = m.AuthorId, Message = m.Message, TimeStamp = m.TimeStamp }).ToList();
+			Players = lobby.Players.ConvertAll(p => new PlayerModel(p));
+			LobbyMessages = lobby.LobbyMessages.ConvertAll(m => new ChatModel
+			{
+				AuthorName = m.AuthorName,
+				AuthorId = m.AuthorId,
+				Message = m.Message,
+				TimeStamp = m.TimeStamp
+			});
 		}
 		public string? Code { get; set; }
 		public string? Name { get; set; }

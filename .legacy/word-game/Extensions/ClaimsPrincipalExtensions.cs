@@ -23,6 +23,5 @@ namespace WordGame.API.Extensions
 		{
 			return principal.Claims.Single(x => x.Type == "Game").Value;
 		}
-
 	}
 }

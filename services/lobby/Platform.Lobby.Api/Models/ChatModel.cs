@@ -10,5 +10,4 @@ namespace Platform.Lobby.Api.Models
 		public DateTimeOffset? TimeStamp { get; set; }
 		public string? Message { get; set; }
     }
-
 }
