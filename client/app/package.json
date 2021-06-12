@@ -40,7 +40,7 @@
     "popper.js": "^1.16.0",
     "postcss": "^8.3.2",
     "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
+    "postcss-loader": "4.3.0",
     "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
