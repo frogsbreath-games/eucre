@@ -2,6 +2,7 @@
 FROM node:current-buster-slim as build
 WORKDIR /usr/src/app
 COPY client/app/package*.json ./
+RUN npm install -g npm@7.17.0
 RUN npm install --silent
 COPY client/app/. .
 ARG WEATHER_URL=/
